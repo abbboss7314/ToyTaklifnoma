@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Azizullox &amp; Muxlisaxon — To'y taklifnomasi</title>
+<style>
+  :root{
+    --pink-light:#fbe9ea;
+    --cream:#fdf6ee;
+    --pink:#e8b4bc;
+    --pink-deep:#d98fa0;
+    --gold:#c9a24b;
+    --gold-light:#e6c789;
+    --text-dark:#5a4038;
+    --text-soft:#8a6f66;
+    --white-flower:#ffffff;
+    --shadow:0 10px 30px rgba(150,90,100,0.15);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:var(--cream);
+    color:var(--text-dark);
+    font-family:Georgia,'Times New Roman',serif;
+  }
+
+  h1,h2,h3,.serif-italic{
+    font-family:Georgia,'Times New Roman',serif;
+    font-style:italic;
+    font-weight:400;
+    color:var(--text-dark);
+  }
+
+  .sans{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-style:normal;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+
+  /* ---------- DECOR ---------- */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin:18px auto 26px;
+    width:80%;
+    max-width:260px;
+  }
+  .divider::before,.divider::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  .divider span{
+    font-size:1.1rem;
+    color:var(--gold);
+  }
+
+  /* ---------- TOP CONTROLS ---------- */
+  .top-controls{
+    position:fixed;
+    top:14px;
+    right:14px;
+    z-index:500;
+    display:flex;
+    gap:8px;
+  }
+  .control-btn{
+    background:rgba(255,255,255,0.85);
+    border:1px solid var(--gold-light);
+    color:var(--text-dark);
+    border-radius:20px;
+    padding:8px 14px;
+    font-size:0.78rem;
+    letter-spacing:0.5px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(4px);
+    transition:transform 0.2s ease,background 0.2s ease;
+  }
+  .control-btn:hover{transform:translateY(-2px);background:#fff;}
+  .control-btn:active{transform:translateY(0);}
+
+  /* ================= ENVELOPE SCREEN ================= */
+  #envelope-screen{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle at 50% 20%,#fff9f4 0%,var(--pink-light) 55%,#f3d3d9 100%);
+    transition:opacity 0.9s ease, visibility 0.9s ease;
+    overflow:hidden;
+  }
+  #envelope-screen.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+
+  #envelope-screen .intro-text{
+    text-align:center;
+    margin-bottom:34px;
+    animation:floatIn 1.2s ease both;
+  }
+  #envelope-screen .intro-text .names{
+    font-size:1.9rem;
+    color:var(--text-dark);
+  }
+  #envelope-screen .intro-text .sub{
+    font-family:inherit;
+    font-style:normal;
+    font-size:0.78rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--text-soft);
+    margin-top:6px;
+  }
+
+  .envelope{
+    position:relative;
+    width:280px;
+    height:190px;
+    max-width:80vw;
+    perspective:1200px;
+    animation:floatIn 1.4s ease both;
+  }
+
+  .envelope-shadow{
+    position:absolute;
+    bottom:-22px;
+    left:8%;
+    width:84%;
+    height:22px;
+    background:radial-gradient(ellipse at center,rgba(120,70,80,0.28) 0%,transparent 75%);
+    border-radius:50%;
+  }
+
+  .envelope-body{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg,#fffaf5,#fbeee5);
+    border:1px solid var(--gold-light);
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  /* side + bottom flap creases drawn with gradients */
+  .envelope-body::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(135deg,transparent 49.6%,rgba(201,162,75,0.28) 50%,transparent 50.4%),
+      linear-gradient(-135deg,transparent 49.6%,rgba(201,162,75,0.28) 50%,transparent 50.4%);
+    background-size:100% 60%,100% 60%;
+    background-position:top left, top right;
+    background-repeat:no-repeat;
+  }
+  .envelope-flower{
+    position:absolute;
+    font-size:0.95rem;
+    opacity:0.55;
+    z-index:2;
+    pointer-events:none;
+  }
+  .envelope-flower.tl{top:10px;left:14px;}
+  .envelope-flower.tr{top:10px;right:14px;transform:scaleX(-1);}
+  .envelope-flower.bl{bottom:10px;left:16px;}
+  .envelope-flower.br{bottom:10px;right:16px;transform:scaleX(-1);}
+
+  .envelope-letter{
+    position:absolute;
+    left:6%;
+    right:6%;
+    top:10%;
+    bottom:4%;
+    background:linear-gradient(180deg,#ffffff,#fdf3ee);
+    border:1px solid #f0d9cd;
+    border-radius:4px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.06);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:10px;
+    z-index:2;
+    transition:transform 1s cubic-bezier(.2,.8,.2,1);
+  }
+  .envelope-letter .peek{
+    font-size:1rem;
+    color:var(--pink-deep);
+    line-height:1.5;
+  }
+  .envelope-letter .peek small{
+    display:block;
+    font-family:inherit;
+    font-style:normal;
+    font-size:0.62rem;
+    letter-spacing:2px;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-top:4px;
+  }
+
+  .envelope-flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    clip-path:polygon(0 0,100% 0,50% 62%);
+    background:linear-gradient(160deg,#f6d8c9,#eab8c4);
+    transform-origin:top center;
+    transition:transform 1s cubic-bezier(.4,0,.2,1);
+    z-index:3;
+    box-shadow:inset 0 -2px 6px rgba(0,0,0,0.05);
+  }
+
+  .wax-seal{
+    position:absolute;
+    top:34%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#d98fa0,#b3536a 70%);
+    box-shadow:0 4px 10px rgba(120,40,60,0.4), inset 0 -3px 6px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff5ee;
+    font-size:1.05rem;
+    letter-spacing:1px;
+    z-index:4;
+    cursor:pointer;
+    animation:pulseSeal 2.4s ease-in-out infinite;
+    border:2px solid rgba(255,255,255,0.25);
+  }
+  .wax-seal:active{transform:translate(-50%,-50%) scale(0.94);}
+
+  @keyframes pulseSeal{
+    0%,100%{box-shadow:0 4px 10px rgba(120,40,60,0.4), inset 0 -3px 6px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.35), 0 0 0 0 rgba(217,143,160,0.5);}
+    50%{box-shadow:0 4px 14px rgba(120,40,60,0.45), inset 0 -3px 6px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.35), 0 0 0 10px rgba(217,143,160,0);}
+  }
+
+  @keyframes floatIn{
+    from{opacity:0;transform:translateY(18px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  .tap-hint{
+    margin-top:30px;
+    font-size:0.78rem;
+    letter-spacing:1px;
+    color:var(--text-soft);
+    animation:blinkHint 1.8s ease-in-out infinite;
+  }
+  @keyframes blinkHint{0%,100%{opacity:0.4;}50%{opacity:1;}}
+
+  /* open states */
+  .envelope.is-open .envelope-flap{
+    transform:rotateX(180deg);
+    z-index:1;
+  }
+  .envelope.is-open .envelope-letter{
+    transform:translateY(-46%);
+    z-index:5;
+  }
+
+  /* ================= MAIN CONTENT / BOOK ================= */
+  #main-content{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    overflow:hidden;
+    perspective:1800px;
+  }
+
+  .page{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:70px 20px;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    transform-origin:top center;
+    backface-visibility:hidden;
+    box-shadow:0 10px 40px rgba(90,50,60,0.22);
+    transition:transform 0.9s cubic-bezier(.55,.06,.28,1), box-shadow 0.9s ease;
+  }
+  .page::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(60,25,30,0.4) 0%,rgba(60,25,30,0.12) 18%,transparent 45%);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.9s ease;
+  }
+  .page.flip-out{
+    transform:rotateX(-120deg);
+    box-shadow:0 20px 50px rgba(60,25,30,0.35);
+    pointer-events:none;
+  }
+  .page.flip-out::after{
+    opacity:1;
+  }
+
+  /* HERO / ARCH */
+  #hero{
+    gap:26px;
+    background:
+      radial-gradient(circle at 15% 15%,rgba(255,255,255,0.6),transparent 40%),
+      radial-gradient(circle at 85% 85%,rgba(255,255,255,0.5),transparent 45%),
+      linear-gradient(160deg,var(--pink-light),var(--cream));
+  }
+
+  .arch-frame{
+    position:relative;
+    width:min(300px,80vw);
+    padding:52px 24px 40px;
+    border:1.5px solid var(--gold-light);
+    border-radius:150px 150px 12px 12px;
+    background:linear-gradient(180deg,#fffdfa,#fdf1ea);
+    box-shadow:var(--shadow);
+  }
+  .arch-frame::before,
+  .arch-frame::after{
+    content:'✿';
+    position:absolute;
+    top:14px;
+    font-size:1rem;
+    color:var(--pink-deep);
+    opacity:0.75;
+  }
+  .arch-frame::before{left:22px;}
+  .arch-frame::after{right:22px;transform:scaleX(-1);}
+
+  .hero-label{
+    font-family:inherit;font-style:normal;
+    font-size:0.72rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .hero-date{
+    font-size:0.95rem;
+    letter-spacing:1px;
+    color:var(--text-soft);
+    margin-bottom:18px;
+  }
+  .couple-names{
+    font-size:clamp(2.2rem,8vw,3.4rem);
+    color:var(--text-dark);
+    line-height:1.25;
+  }
+  .amp{
+    display:block;
+    color:var(--pink-deep);
+    font-size:0.6em;
+    margin:2px 0;
+  }
+
+  .scroll-hint{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    color:var(--text-soft);
+    font-size:0.75rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    animation:bounceArrow 2s ease-in-out infinite;
+  }
+  .scroll-hint .arrow{font-size:1.3rem;color:var(--gold);}
+  @keyframes bounceArrow{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(10px);}
+  }
+
+  .swans-decor{
+    font-size:1.7rem;
+    letter-spacing:10px;
+    opacity:0.9;
+  }
+  .swans-decor .flip{display:inline-block;transform:scaleX(-1);}
+  .swans-decor .heart{font-size:1rem;vertical-align:middle;margin:0 4px;}
+
+  /* BLESSING */
+  #blessing{
+    background:linear-gradient(180deg,var(--cream),var(--pink-light));
+  }
+  .blessing-arabic{
+    font-size:1.6rem;
+    color:var(--gold);
+    margin-bottom:22px;
+  }
+  .blessing-lines{
+    font-size:1.35rem;
+    line-height:1.8;
+    color:var(--text-dark);
+    margin-bottom:22px;
+  }
+  .welcome-message{
+    max-width:420px;
+    margin:0 auto;
+    font-family:inherit;font-style:normal;
+    font-size:0.95rem;
+    line-height:1.8;
+    color:var(--text-soft);
+  }
+
+  /* COUNTDOWN */
+  #countdown{
+    background:var(--pink-light);
+  }
+  .countdown-row{
+    display:flex;
+    justify-content:center;
+    align-items:baseline;
+    gap:8px;
+    flex-wrap:wrap;
+    max-width:520px;
+    margin:0 auto;
+  }
+  .countdown-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-width:60px;
+  }
+  .countdown-item .num{
+    font-size:clamp(1.8rem,7vw,2.6rem);
+    font-weight:600;
+    color:var(--pink-deep);
+    font-family:inherit;
+    font-style:normal;
+  }
+  .countdown-item .label{
+    margin-top:4px;
+    font-size:0.65rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--text-soft);
+  }
+  .countdown-colon{
+    font-size:clamp(1.8rem,7vw,2.6rem);
+    color:var(--gold);
+    transform:translateY(-8px);
+  }
+
+  /* LOCATION */
+  #location{
+    background:var(--cream);
+  }
+  .venue-card{
+    max-width:420px;
+    margin:0 auto;
+    background:linear-gradient(160deg,#ffffff,#fbeee5);
+    border:1px solid var(--gold-light);
+    border-radius:18px;
+    padding:34px 26px;
+    box-shadow:var(--shadow);
+  }
+  .venue-icon{
+    font-size:2.4rem;
+    margin-bottom:14px;
+  }
+  .venue-card .venue-name{
+    font-size:1.4rem;
+    color:var(--text-dark);
+  }
+  .venue-card .venue-address{
+    margin-top:12px;
+    font-family:inherit;font-style:normal;
+    font-size:0.95rem;
+    color:var(--text-soft);
+    line-height:1.6;
+  }
+  .map-embed{
+    margin-top:20px;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid var(--gold-light);
+  }
+  .map-embed iframe{
+    display:block;
+    width:100%;
+    height:200px;
+    border:0;
+  }
+  .maps-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 30px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:#fff;
+    border:none;
+    border-radius:30px;
+    font-size:0.85rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    box-shadow:0 6px 16px rgba(201,162,75,0.4);
+    transition:transform 0.2s ease;
+  }
+  .maps-btn:hover{transform:translateY(-3px);}
+
+  /* DRESS CODE / GIFT */
+  #notes{
+    background:linear-gradient(180deg,var(--pink-light),var(--cream));
+  }
+  .note-cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .note-card{
+    position:relative;
+    flex:1 1 260px;
+    max-width:300px;
+    background:#fffefb;
+    border:1px solid var(--gold-light);
+    border-radius:16px;
+    padding:32px 22px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .note-card::before,
+  .note-card::after{
+    content:'🌸';
+    position:absolute;
+    font-size:1.3rem;
+    opacity:0.5;
+  }
+  .note-card::before{top:8px;left:10px;}
+  .note-card::after{bottom:8px;right:10px;transform:scaleX(-1);}
+  .note-card .icon{font-size:1.8rem;margin-bottom:10px;}
+  .note-card h3{font-size:1.2rem;margin-bottom:10px;}
+  .note-card p{
+    font-family:inherit;font-style:normal;
+    font-size:0.92rem;
+    color:var(--text-soft);
+    line-height:1.6;
+  }
+
+  /* FOOTER */
+  footer{
+    margin-top:40px;
+    text-align:center;
+  }
+  footer .foot-names{font-size:1.3rem;margin-bottom:8px;}
+  footer p{
+    font-family:inherit;font-style:normal;
+    font-size:0.85rem;
+    color:var(--text-soft);
+  }
+
+  h2.section-title{
+    font-size:clamp(1.6rem,5vw,2.2rem);
+    margin-bottom:6px;
+  }
+
+  @media (max-width:480px){
+    .page{padding:56px 16px;}
+    .envelope{width:250px;height:170px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP CONTROLS ============ -->
+<div class="top-controls">
+  <button class="control-btn sans" id="lang-btn">UZ</button>
+  <button class="control-btn sans" id="music-btn">🔇</button>
+</div>
+
+<!-- ============ ENVELOPE SCREEN ============ -->
+<div id="envelope-screen">
+  <div class="intro-text">
+    <div class="names serif-italic" id="envelope-names">Azizullox &amp; Muxlisaxon</div>
+    <div class="sub" id="envelope-sub">SIZNI TO'YIMIZGA TAKLIF ETAMIZ</div>
+  </div>
+
+  <div class="envelope" id="envelope">
+    <div class="envelope-shadow"></div>
+    <div class="envelope-body"></div>
+    <span class="envelope-flower tl">🌿</span>
+    <span class="envelope-flower tr">🌿</span>
+    <span class="envelope-flower bl">🌸</span>
+    <span class="envelope-flower br">🌸</span>
+    <div class="envelope-letter">
+      <div class="peek serif-italic" id="peek-initials">A &amp; M
+        <small id="peek-sub">2026</small>
+      </div>
+    </div>
+    <div class="envelope-flap"></div>
+    <div class="wax-seal" id="wax-seal">A&amp;M </div>
+  </div>
+
+  <div class="tap-hint sans" id="tap-hint">Ochish uchun muhrga bosing</div>
+</div>
+
+<!-- ============ MAIN CONTENT ============ -->
+<div id="main-content">
+
+  <!-- HERO / ARCH -->
+  <section id="hero" class="page">
+    <div class="arch-frame">
+      <div class="hero-label sans" id="hero-label">TO'Y KUNI</div>
+      <div class="hero-date sans" id="hero-date">2026-yil 12-sentyabr, shanba</div>
+      <h1 class="couple-names serif-italic">
+        <span id="hero-groom">Ali</span><span class="amp">&amp;</span><span id="hero-bride">Malika</span>
+      </h1>
+    </div>
+    <div class="scroll-hint sans">
+      <span id="scroll-text">Pastga aylantiring</span>
+      <span class="arrow">&#8595;</span>
+    </div>
+    <div class="swans-decor">🦢<span class="heart">💗</span><span class="flip">🦢</span></div>
+  </section>
+
+  <!-- BLESSING -->
+  <section id="blessing" class="page">
+    <div class="blessing-arabic serif-italic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="blessing-lines serif-italic" id="blessing-lines">
+      Ikki qalb, bitta taqdir.<br>Alloh yozgan umr yo'li.
+    </div>
+    <p class="welcome-message" id="welcome-message">
+      Aziz do'stlar va oila a'zolari! Sevgi, kulgi, duo va unutilmas xotiralarga to'la kechada biz bilan bo'ling.
+    </p>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section id="countdown" class="page">
+    <h2 class="section-title serif-italic" id="countdown-title">To'yimiz boshlanishiga</h2>
+    <div class="divider"><span>&#10047;</span></div>
+    <div class="countdown-row">
+      <div class="countdown-item">
+        <div class="num" id="cd-days">00</div>
+        <div class="label sans" id="cd-days-label">kun</div>
+      </div>
+      <div class="countdown-colon">:</div>
+      <div class="countdown-item">
+        <div class="num" id="cd-hours">00</div>
+        <div class="label sans" id="cd-hours-label">soat</div>
+      </div>
+      <div class="countdown-colon">:</div>
+      <div class="countdown-item">
+        <div class="num" id="cd-minutes">00</div>
+        <div class="label sans" id="cd-minutes-label">daqiqa</div>
+      </div>
+      <div class="countdown-colon">:</div>
+      <div class="countdown-item">
+        <div class="num" id="cd-seconds">00</div>
+        <div class="label sans" id="cd-seconds-label">soniya</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location" class="page">
+    <h2 class="section-title serif-italic" id="location-title">Manzil</h2>
+    <div class="divider"><span>&#10047;</span></div>
+    <div class="venue-card">
+      <div class="venue-icon">🕌</div>
+      <div class="venue-name serif-italic" id="venue-name">"Taraqqiyot" tantanalar saroyi</div>
+      <div class="venue-address" id="venue-address">Farg'ona viloyati, O'zbekiston tumani, "Taraqqiyot" tantanalar saroyi</div>
+      <div class="map-embed">
+        <iframe id="map-frame" src="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a class="maps-btn sans" id="maps-link" href="#" target="_blank" rel="noopener">Xaritada ochish</a>
+    </div>
+  </section>
+
+  <!-- DRESS CODE / GIFT -->
+  <section id="notes" class="page">
+    <h2 class="section-title serif-italic" id="notes-title">Muhim eslatmalar</h2>
+    <div class="divider"><span>&#10047;</span></div>
+    <div class="note-cards">
+      <div class="note-card">
+        <div class="icon">&#128092;</div>
+        <h3 class="serif-italic" id="dresscode-title">Dress-kod</h3>
+        <p id="dresscode-text">Tadbir rangi: pushti va oltin tuslar. Iltimos, oq rangdan saqlaning.</p>
+      </div>
+      <div class="note-card">
+        <div class="icon">&#127873;</div>
+        <h3 class="serif-italic" id="gift-title">Sovg'a haqida</h3>
+        <p id="gift-text">Sizning kelishingiz biz uchun eng katta sovg'a.</p>
+      </div>
+    </div>
+
+    <footer>
+      <div class="foot-names serif-italic" id="footer-names">Azizullox &amp; Muxlisaxon</div>
+      <p id="footer-text">Sizni to'yimizda ko'rishdan mamnunmiz!</p>
+    </footer>
+  </section>
+
+</div>
+
+<!-- background music placeholder: replace src with your own audio file -->
+<audio id="bg-music" loop preload="none">
+  <source src="audio/background-music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* =========================================================================
+   EDIT ONLY THIS OBJECT — barcha o'zgaruvchi ma'lumotlar shu yerda joylashgan.
+   To'y ma'lumotlarini (ism, sana, manzil, dastur) shu yerdan tahrirlang.
+   ========================================================================= */
+const weddingData = {
+  groomName: "Azizullox",
+  brideName: "Muxlisaxon",
+
+  // ISO format: YYYY-MM-DDTHH:MM:SS — countdown va sana shu yerdan olinadi
+  weddingDateISO: "2026-08-08T17:00:00",
+
+  dateText: {
+    uz: "2026-yil 8-avgust, shanba",
+    ru: "8 августа 2026, суббота",
+    en: "August 8, 2026, Saturday"
+  },
+
+  venueName: {
+    uz: "“Taraqqiyot” tantanalar saroyi",
+    ru: "Дворец торжеств «Тараққиёт»",
+    en: "“Taraqqiyot” Wedding Hall"
+  },
+
+  venueAddress: {
+    uz: "Farg'ona viloyati, O'zbekiston tumani, \"Taraqqiyot\" tantanalar saroyi",
+    ru: "Ферганская область, Узбекистанский район, дворец торжеств «Тараққиёт»",
+    en: "\"Taraqqiyot\" Wedding Hall, Uzbekiston district, Fergana region"
+  },
+
+  // "Ikki qalb, bitta taqdir..." kabi she'riy satrlar (har til uchun 2 qator)
+  blessingLines: {
+    uz: ["Ikki qalb, bitta taqdir.", "Alloh yozgan umr yo'li."],
+    ru: ["Два сердца — одна судьба.", "Путь длиною в жизнь, написанный Всевышним."],
+    en: ["Two souls, one destiny.", "A lifetime written by Allah."]
+  },
+
+  welcomeMessage: {
+    uz: "Aziz do'stlar va oila a'zolari! Sevgi, kulgi, duo va unutilmas xotiralarga to'la kechada biz bilan bo'ling — biz umr yo'limizni boshlaymiz.",
+    ru: "Дорогие друзья и родные! Присоединяйтесь к нам в вечер любви, смеха, молитв и незабываемых воспоминаний — мы начинаем наш путь вместе.",
+    en: "Dear friends and family, join us for an evening of love, laughter, duas, and unforgettable memories as we begin our forever."
+  },
+
+  dressCode: {
+    uz: "Tadbir rangi: pushti va oltin tuslar. Iltimos, oq rangdan saqlaning (kelinning rangi).",
+    ru: "Цвет мероприятия: розовые и золотые тона. Просьба избегать белого цвета (это цвет невесты).",
+    en: "Event colors: pink and gold tones. Please avoid wearing white (the bride's color)."
+  },
+
+  giftNote: {
+    uz: "Sizning kelishingiz biz uchun eng katta sovg'a. Agar sovg'a bermoqchi bo'lsangiz, konvert shaklida qabul qilinadi.",
+    ru: "Ваше присутствие — самый ценный для нас подарок. При желании подарки принимаются в виде конверта.",
+    en: "Your presence is the greatest gift to us. If you'd like to give a gift, envelopes are gladly accepted."
+  },
+
+  // Fon musiqasi manbai — o'zingizning audio faylingiz yo'lini shu yerga qo'ying
+  musicSrc: "audio/background-music.mp3"
+};
+/* ========================================================================= */
+
+
+/* ---------------- UI TARJIMALARI (statik matnlar) ---------------- */
+const i18n = {
+  uz: {
+    langCode: "UZ",
+    envelopeSub: "SIZNI TO'YIMIZGA TAKLIF ETAMIZ",
+    tapHint: "Ochish uchun muhrga bosing",
+    heroLabel: "TO'Y KUNI",
+    scrollText: "Pastga aylantiring",
+    countdownTitle: "To'yimiz boshlanishiga",
+    days: "kun", hours: "soat", minutes: "daqiqa", seconds: "soniya",
+    locationTitle: "Manzil",
+    openMaps: "Xaritada ochish",
+    notesTitle: "Muhim eslatmalar",
+    dresscodeTitle: "Dress-kod",
+    giftTitle: "Sovg'a haqida",
+    footerText: "Sizni to'yimizda ko'rishdan mamnunmiz!",
+    musicOn: "🔊", musicOff: "🔇"
+  },
+  ru: {
+    langCode: "RU",
+    envelopeSub: "ПРИГЛАШАЕМ ВАС НА НАШУ СВАДЬБУ",
+    tapHint: "Нажмите на печать, чтобы открыть",
+    heroLabel: "ДЕНЬ СВАДЬБЫ",
+    scrollText: "Листайте вниз",
+    countdownTitle: "До начала торжества",
+    days: "дней", hours: "часов", minutes: "минут", seconds: "секунд",
+    locationTitle: "Место проведения",
+    openMaps: "Открыть на карте",
+    notesTitle: "Важная информация",
+    dresscodeTitle: "Дресс-код",
+    giftTitle: "О подарках",
+    footerText: "Будем рады видеть вас на нашей свадьбе!",
+    musicOn: "🔊", musicOff: "🔇"
+  },
+  en: {
+    langCode: "EN",
+    envelopeSub: "YOU ARE INVITED TO OUR WEDDING",
+    tapHint: "Tap the seal to open",
+    heroLabel: "WEDDING DAY",
+    scrollText: "Scroll down",
+    countdownTitle: "The celebration begins in",
+    days: "days", hours: "hours", minutes: "minutes", seconds: "seconds",
+    locationTitle: "Location",
+    openMaps: "Open in Maps",
+    notesTitle: "Important Notes",
+    dresscodeTitle: "Dress Code",
+    giftTitle: "About Gifts",
+    footerText: "We look forward to celebrating with you!",
+    musicOn: "🔊", musicOff: "🔇"
+  }
+};
+
+const langOrder = ["uz", "ru", "en"];
+let currentLang = "uz";
+let musicPlaying = false;
+
+function buildMapsLink(){
+  const address = weddingData.venueAddress[currentLang] || weddingData.venueAddress.uz;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}
+
+function buildMapEmbedSrc(){
+  const address = weddingData.venueAddress[currentLang] || weddingData.venueAddress.uz;
+  return `https://www.google.com/maps?q=${encodeURIComponent(address)}&z=15&output=embed`;
+}
+
+function render(lang){
+  currentLang = lang;
+  const t = i18n[lang];
+  document.documentElement.lang = lang;
+
+  const initials = `${weddingData.groomName.charAt(0)} & ${weddingData.brideName.charAt(0)}`.toUpperCase();
+
+  // envelope screen
+  document.getElementById("envelope-names").innerHTML = `${weddingData.groomName} &amp; ${weddingData.brideName}`;
+  document.getElementById("envelope-sub").textContent = t.envelopeSub;
+  document.getElementById("tap-hint").textContent = t.tapHint;
+  document.getElementById("wax-seal").textContent = initials.replace(" ", "");
+  document.getElementById("peek-sub").textContent = weddingData.weddingDateISO.slice(0,4);
+  document.getElementById("peek-initials").firstChild.textContent = initials + " ";
+
+  // hero
+  document.getElementById("hero-label").textContent = t.heroLabel;
+  document.getElementById("hero-groom").textContent = weddingData.groomName;
+  document.getElementById("hero-bride").textContent = weddingData.brideName;
+  document.getElementById("hero-date").textContent = weddingData.dateText[lang];
+  document.getElementById("scroll-text").textContent = t.scrollText;
+
+  // blessing
+  document.getElementById("blessing-lines").innerHTML = weddingData.blessingLines[lang].join("<br>");
+  document.getElementById("welcome-message").textContent = weddingData.welcomeMessage[lang];
+
+  // countdown
+  document.getElementById("countdown-title").textContent = t.countdownTitle;
+  document.getElementById("cd-days-label").textContent = t.days;
+  document.getElementById("cd-hours-label").textContent = t.hours;
+  document.getElementById("cd-minutes-label").textContent = t.minutes;
+  document.getElementById("cd-seconds-label").textContent = t.seconds;
+
+  // location
+  document.getElementById("location-title").textContent = t.locationTitle;
+  document.getElementById("venue-name").textContent = weddingData.venueName[lang];
+  document.getElementById("venue-address").textContent = weddingData.venueAddress[lang];
+  const mapsLink = document.getElementById("maps-link");
+  mapsLink.textContent = t.openMaps;
+  mapsLink.href = buildMapsLink();
+
+  // notes
+  document.getElementById("notes-title").textContent = t.notesTitle;
+  document.getElementById("dresscode-title").textContent = t.dresscodeTitle;
+  document.getElementById("dresscode-text").textContent = weddingData.dressCode[lang];
+  document.getElementById("gift-title").textContent = t.giftTitle;
+  document.getElementById("gift-text").textContent = weddingData.giftNote[lang];
+
+  // footer
+  document.getElementById("footer-names").innerHTML = `${weddingData.groomName} &amp; ${weddingData.brideName}`;
+  document.getElementById("footer-text").textContent = t.footerText;
+
+  // lang button
+  document.getElementById("lang-btn").textContent = t.langCode;
+
+  // music button icon (keep current state)
+  document.getElementById("music-btn").textContent = musicPlaying ? t.musicOn : t.musicOff;
+}
+
+function cycleLanguage(){
+  const idx = langOrder.indexOf(currentLang);
+  const next = langOrder[(idx + 1) % langOrder.length];
+  render(next);
+}
+
+/* ---------------- ENVELOPE OPEN ---------------- */
+function openEnvelope(){
+  const envelope = document.getElementById("envelope");
+  const screen = document.getElementById("envelope-screen");
+  if (envelope.classList.contains("is-open")) return;
+
+  envelope.classList.add("is-open");
+
+  setTimeout(() => {
+    screen.classList.add("hidden");
+    bookActive = true;
+  }, 1100);
+}
+
+/* ---------------- BOOK (page-flip navigation) ---------------- */
+const pages = Array.from(document.querySelectorAll("#main-content .page"));
+let currentPage = 0;
+let pageAnimating = false;
+let bookActive = false;
+
+function isAtBottom(el){
+  return el.scrollHeight - el.scrollTop - el.clientHeight <= 2;
+}
+function isAtTop(el){
+  return el.scrollTop <= 2;
+}
+
+function initBook(){
+  pages.forEach((p, i) => {
+    p.style.display = i === 0 ? "flex" : "none";
+  });
+}
+
+function goNextPage(){
+  if (pageAnimating || currentPage >= pages.length - 1) return;
+  pageAnimating = true;
+
+  const leaving = pages[currentPage];
+  const entering = pages[currentPage + 1];
+  const targetIndex = currentPage + 1;
+
+  entering.scrollTop = 0;
+  entering.style.display = "flex";
+  entering.style.zIndex = "1";
+  entering.style.transform = "";
+  entering.style.opacity = "1";
+
+  leaving.style.transform = "";
+  leaving.style.zIndex = "2";
+  void leaving.offsetHeight; // reflow, so transition triggers
+  leaving.classList.add("flip-out");
+
+  let finished = false;
+  function finish(){
+    if (finished) return;
+    finished = true;
+    leaving.removeEventListener("transitionend", onEnd);
+    leaving.style.display = "none";
+    leaving.classList.remove("flip-out");
+    leaving.style.transform = "";
+    leaving.style.opacity = "";
+    leaving.style.zIndex = "";
+    currentPage = targetIndex;
+    pageAnimating = false;
+  }
+  function onEnd(ev){
+    if (ev.target !== leaving || ev.propertyName !== "transform") return;
+    finish();
+  }
+  leaving.addEventListener("transitionend", onEnd);
+  setTimeout(finish, 950); // fallback in case transitionend doesn't fire
+}
+
+function goPrevPage(){
+  if (pageAnimating || currentPage <= 0) return;
+  pageAnimating = true;
+
+  const leaving = pages[currentPage];
+  const entering = pages[currentPage - 1];
+  const targetIndex = currentPage - 1;
+
+  // put entering in its "already flipped away" state instantly (no transition),
+  // then release it so it flips back into place — the exact reverse of goNextPage.
+  entering.scrollTop = 0;
+  entering.style.transition = "none";
+  entering.style.display = "flex";
+  entering.style.zIndex = "2";
+  entering.classList.add("flip-out");
+  void entering.offsetHeight;
+
+  leaving.style.zIndex = "1";
+
+  entering.style.transition = "";
+  void entering.offsetHeight;
+  entering.classList.remove("flip-out");
+
+  let finished = false;
+  function finish(){
+    if (finished) return;
+    finished = true;
+    entering.removeEventListener("transitionend", onEnd);
+    leaving.style.display = "none";
+    leaving.style.transform = "";
+    leaving.style.zIndex = "";
+    entering.style.zIndex = "";
+    currentPage = targetIndex;
+    pageAnimating = false;
+  }
+  function onEnd(ev){
+    if (ev.target !== entering || ev.propertyName !== "transform") return;
+    finish();
+  }
+  entering.addEventListener("transitionend", onEnd);
+  setTimeout(finish, 950); // fallback in case transitionend doesn't fire
+}
+
+function handlePageIntent(direction){
+  if (!bookActive || pageAnimating) return;
+  const active = pages[currentPage];
+  if (direction === 1){
+    if (!isAtBottom(active)) return;
+    goNextPage();
+  } else {
+    if (!isAtTop(active)) return;
+    goPrevPage();
+  }
+}
+
+window.addEventListener("wheel", function(e){
+  if (!bookActive) return;
+  const dir = e.deltaY > 0 ? 1 : -1;
+  const active = pages[currentPage];
+  const atEdge = dir === 1 ? isAtBottom(active) : isAtTop(active);
+  if (!atEdge) return;
+  e.preventDefault();
+  handlePageIntent(dir);
+}, { passive: false });
+
+let touchStartY = null;
+document.addEventListener("touchstart", function(e){
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener("touchend", function(e){
+  if (touchStartY === null || !bookActive) return;
+  const dy = touchStartY - e.changedTouches[0].clientY;
+  touchStartY = null;
+  if (Math.abs(dy) < 40) return;
+  handlePageIntent(dy > 0 ? 1 : -1);
+}, { passive: true });
+
+window.addEventListener("keydown", function(e){
+  if (!bookActive) return;
+  if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " "){
+    e.preventDefault();
+    handlePageIntent(1);
+  } else if (e.key === "ArrowUp" || e.key === "PageUp"){
+    e.preventDefault();
+    handlePageIntent(-1);
+  }
+});
+
+/* ---------------- COUNTDOWN ---------------- */
+function startCountdown(){
+  const target = new Date(weddingData.weddingDateISO).getTime();
+
+  function tick(){
+    const now = Date.now();
+    let diff = target - now;
+    if (diff < 0) diff = 0;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("cd-days").textContent = String(days).padStart(2, "0");
+    document.getElementById("cd-hours").textContent = String(hours).padStart(2, "0");
+    document.getElementById("cd-minutes").textContent = String(minutes).padStart(2, "0");
+    document.getElementById("cd-seconds").textContent = String(seconds).padStart(2, "0");
+  }
+
+  tick();
+  setInterval(tick, 1000);
+}
+
+/* ---------------- MUSIC TOGGLE ---------------- */
+function toggleMusic(){
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-btn");
+  const t = i18n[currentLang];
+
+  if (musicPlaying){
+    audio.pause();
+    musicPlaying = false;
+    btn.textContent = t.musicOff;
+  } else {
+    audio.play().then(() => {
+      musicPlaying = true;
+      btn.textContent = t.musicOn;
+    }).catch(() => {
+      // audio manbai topilmadi yoki brauzer bloklagan bo'lishi mumkin
+      musicPlaying = false;
+      btn.textContent = t.musicOff;
+    });
+  }
+}
+
+/* ---------------- BUTTON BINDINGS ---------------- */
+document.getElementById("lang-btn").addEventListener("click", cycleLanguage);
+document.getElementById("music-btn").addEventListener("click", toggleMusic);
+document.getElementById("wax-seal").addEventListener("click", openEnvelope);
+
+/* ---------------- INIT ---------------- */
+document.getElementById("bg-music").querySelector("source").src = weddingData.musicSrc;
+document.getElementById("map-frame").src = buildMapEmbedSrc();
+render(currentLang);
+startCountdown();
+initBook();
+</script>
+</body>
+</html>
