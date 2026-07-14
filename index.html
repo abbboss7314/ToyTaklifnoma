@@ -6,16 +6,16 @@
 <title>Azizullox &amp; Muxlisaxon — To'y taklifnomasi</title>
 <style>
   :root{
-    --pink-light:#fbe9ea;
-    --cream:#fdf6ee;
-    --pink:#e8b4bc;
-    --pink-deep:#d98fa0;
+    --pink-light:#6b1119;
+    --cream:#3d0a0e;
+    --pink:#8a2530;
+    --pink-deep:#e3c26f;
     --gold:#c9a24b;
     --gold-light:#e6c789;
-    --text-dark:#5a4038;
-    --text-soft:#8a6f66;
-    --white-flower:#ffffff;
-    --shadow:0 10px 30px rgba(150,90,100,0.15);
+    --text-dark:#f1dfae;
+    --text-soft:#c9a875;
+    --white-flower:#f1dfae;
+    --shadow:0 10px 30px rgba(0,0,0,0.45);
   }
 
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -75,7 +75,7 @@
     gap:8px;
   }
   .control-btn{
-    background:rgba(255,255,255,0.85);
+    background:rgba(61,10,14,0.85);
     border:1px solid var(--gold-light);
     color:var(--text-dark);
     border-radius:20px;
@@ -86,7 +86,7 @@
     backdrop-filter:blur(4px);
     transition:transform 0.2s ease,background 0.2s ease;
   }
-  .control-btn:hover{transform:translateY(-2px);background:#fff;}
+  .control-btn:hover{transform:translateY(-2px);background:#7a1a22;}
   .control-btn:active{transform:translateY(0);}
 
   /* ================= ENVELOPE SCREEN ================= */
@@ -98,7 +98,7 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    background:radial-gradient(circle at 50% 20%,#fff9f4 0%,var(--pink-light) 55%,#f3d3d9 100%);
+    background:radial-gradient(circle at 50% 20%,#7a1a22 0%,var(--pink-light) 55%,#2e0709 100%);
     transition:opacity 0.9s ease, visibility 0.9s ease;
     overflow:hidden;
   }
@@ -142,14 +142,14 @@
     left:8%;
     width:84%;
     height:22px;
-    background:radial-gradient(ellipse at center,rgba(120,70,80,0.28) 0%,transparent 75%);
+    background:radial-gradient(ellipse at center,rgba(0,0,0,0.45) 0%,transparent 75%);
     border-radius:50%;
   }
 
   .envelope-body{
     position:absolute;
     inset:0;
-    background:linear-gradient(160deg,#fffaf5,#fbeee5);
+    background:linear-gradient(160deg,#5a1219,#3d0a0e);
     border:1px solid var(--gold-light);
     border-radius:6px;
     box-shadow:var(--shadow);
@@ -185,8 +185,8 @@
     right:6%;
     top:10%;
     bottom:4%;
-    background:linear-gradient(180deg,#ffffff,#fdf3ee);
-    border:1px solid #f0d9cd;
+    background:linear-gradient(180deg,#6b1119,#4a0e12);
+    border:1px solid var(--gold);
     border-radius:4px;
     box-shadow:0 4px 10px rgba(0,0,0,0.06);
     display:flex;
@@ -220,7 +220,7 @@
     width:100%;
     height:100%;
     clip-path:polygon(0 0,100% 0,50% 62%);
-    background:linear-gradient(160deg,#f6d8c9,#eab8c4);
+    background:linear-gradient(160deg,#7a1a22,#5a1219);
     transform-origin:top center;
     transition:transform 1s cubic-bezier(.4,0,.2,1);
     z-index:3;
@@ -235,24 +235,24 @@
     width:62px;
     height:62px;
     border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,#d98fa0,#b3536a 70%);
-    box-shadow:0 4px 10px rgba(120,40,60,0.4), inset 0 -3px 6px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.35);
+    background:radial-gradient(circle at 35% 30%,#e6c789,#a8791f 70%);
+    box-shadow:0 4px 10px rgba(0,0,0,0.5), inset 0 -3px 6px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.35);
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#fff5ee;
+    color:#3d0a0e;
     font-size:1.05rem;
     letter-spacing:1px;
     z-index:4;
     cursor:pointer;
     animation:pulseSeal 2.4s ease-in-out infinite;
-    border:2px solid rgba(255,255,255,0.25);
+    border:2px solid rgba(230,199,137,0.4);
   }
   .wax-seal:active{transform:translate(-50%,-50%) scale(0.94);}
 
   @keyframes pulseSeal{
-    0%,100%{box-shadow:0 4px 10px rgba(120,40,60,0.4), inset 0 -3px 6px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.35), 0 0 0 0 rgba(217,143,160,0.5);}
-    50%{box-shadow:0 4px 14px rgba(120,40,60,0.45), inset 0 -3px 6px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.35), 0 0 0 10px rgba(217,143,160,0);}
+    0%,100%{box-shadow:0 4px 10px rgba(0,0,0,0.5), inset 0 -3px 6px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.35), 0 0 0 0 rgba(230,199,137,0.5);}
+    50%{box-shadow:0 4px 14px rgba(0,0,0,0.55), inset 0 -3px 6px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.35), 0 0 0 10px rgba(230,199,137,0);}
   }
 
   @keyframes floatIn{
@@ -328,8 +328,8 @@
   #hero{
     gap:26px;
     background:
-      radial-gradient(circle at 15% 15%,rgba(255,255,255,0.6),transparent 40%),
-      radial-gradient(circle at 85% 85%,rgba(255,255,255,0.5),transparent 45%),
+      radial-gradient(circle at 15% 15%,rgba(230,199,137,0.18),transparent 40%),
+      radial-gradient(circle at 85% 85%,rgba(230,199,137,0.14),transparent 45%),
       linear-gradient(160deg,var(--pink-light),var(--cream));
   }
 
@@ -339,7 +339,7 @@
     padding:52px 24px 40px;
     border:1.5px solid var(--gold-light);
     border-radius:150px 150px 12px 12px;
-    background:linear-gradient(180deg,#fffdfa,#fdf1ea);
+    background:linear-gradient(180deg,#5a1219,#3d0a0e);
     box-shadow:var(--shadow);
   }
   .arch-frame::before,
@@ -475,7 +475,7 @@
   .venue-card{
     max-width:420px;
     margin:0 auto;
-    background:linear-gradient(160deg,#ffffff,#fbeee5);
+    background:linear-gradient(160deg,#5a1219,#3d0a0e);
     border:1px solid var(--gold-light);
     border-radius:18px;
     padding:34px 26px;
@@ -513,7 +513,7 @@
     margin-top:20px;
     padding:12px 30px;
     background:linear-gradient(135deg,var(--gold),var(--gold-light));
-    color:#fff;
+    color:var(--cream);
     border:none;
     border-radius:30px;
     font-size:0.85rem;
@@ -540,7 +540,7 @@
     position:relative;
     flex:1 1 260px;
     max-width:300px;
-    background:#fffefb;
+    background:#4a0e12;
     border:1px solid var(--gold-light);
     border-radius:16px;
     padding:32px 22px;
@@ -575,11 +575,6 @@
     font-family:inherit;font-style:normal;
     font-size:0.85rem;
     color:var(--text-soft);
-  }
-  footer .music-credit{
-    margin-top:14px;
-    font-size:0.68rem;
-    opacity:0.55;
   }
 
   h2.section-title{
@@ -705,11 +700,6 @@
     <div class="divider"><span>&#10047;</span></div>
     <div class="note-cards">
       <div class="note-card">
-        <div class="icon">&#128092;</div>
-        <h3 class="serif-italic" id="dresscode-title">Dress-kod</h3>
-        <p id="dresscode-text">Tadbir rangi: pushti va oltin tuslar. Iltimos, oq rangdan saqlaning.</p>
-      </div>
-      <div class="note-card">
         <div class="icon">&#127873;</div>
         <h3 class="serif-italic" id="gift-title">Sovg'a haqida</h3>
         <p id="gift-text">Sizning kelishingiz biz uchun eng katta sovg'a.</p>
@@ -719,7 +709,6 @@
     <footer>
       <div class="foot-names serif-italic" id="footer-names">Azizullox &amp; Muxlisaxon</div>
       <p id="footer-text">Sizni to'yimizda ko'rishdan mamnunmiz!</p>
-      <p class="music-credit sans">Musiqa: E. Grieg — "Wedding Day at Troldhaugen" (piano-midi.de, CC BY-SA 3.0)</p>
     </footer>
   </section>
 
@@ -773,12 +762,6 @@ const weddingData = {
     en: "Dear friends and family, join us for an evening of love, laughter, duas, and unforgettable memories as we begin our forever."
   },
 
-  dressCode: {
-    uz: "Tadbir rangi: pushti va oltin tuslar. Iltimos, oq rangdan saqlaning (kelinning rangi).",
-    ru: "Цвет мероприятия: розовые и золотые тона. Просьба избегать белого цвета (это цвет невесты).",
-    en: "Event colors: pink and gold tones. Please avoid wearing white (the bride's color)."
-  },
-
   giftNote: {
     uz: "Sizning kelishingiz biz uchun eng katta sovg'a. Agar sovg'a bermoqchi bo'lsangiz, konvert shaklida qabul qilinadi.",
     ru: "Ваше присутствие — самый ценный для нас подарок. При желании подарки принимаются в виде конверта.",
@@ -804,7 +787,6 @@ const i18n = {
     locationTitle: "Manzil",
     openMaps: "Xaritada ochish",
     notesTitle: "Muhim eslatmalar",
-    dresscodeTitle: "Dress-kod",
     giftTitle: "Sovg'a haqida",
     footerText: "Sizni to'yimizda ko'rishdan mamnunmiz!",
     musicOn: "🔊", musicOff: "🔇"
@@ -820,7 +802,6 @@ const i18n = {
     locationTitle: "Место проведения",
     openMaps: "Открыть на карте",
     notesTitle: "Важная информация",
-    dresscodeTitle: "Дресс-код",
     giftTitle: "О подарках",
     footerText: "Будем рады видеть вас на нашей свадьбе!",
     musicOn: "🔊", musicOff: "🔇"
@@ -836,7 +817,6 @@ const i18n = {
     locationTitle: "Location",
     openMaps: "Open in Maps",
     notesTitle: "Important Notes",
-    dresscodeTitle: "Dress Code",
     giftTitle: "About Gifts",
     footerText: "We look forward to celebrating with you!",
     musicOn: "🔊", musicOff: "🔇"
@@ -900,8 +880,6 @@ function render(lang){
 
   // notes
   document.getElementById("notes-title").textContent = t.notesTitle;
-  document.getElementById("dresscode-title").textContent = t.dresscodeTitle;
-  document.getElementById("dresscode-text").textContent = weddingData.dressCode[lang];
   document.getElementById("gift-title").textContent = t.giftTitle;
   document.getElementById("gift-text").textContent = weddingData.giftNote[lang];
 
