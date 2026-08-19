@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muhammad & Umida — Taklifnoma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf3e8;
+    --ink:#6c6355;
+    --ink2:#877c6b;
+    --muted:#a4977f;
+    --gold:#c0a575;
+    --gold-d:#a98b58;
+    --line:rgba(184,158,113,.45);
+    --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+    --script:'Great Vibes','Cormorant Garamond',cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:#d9ccb6;color:var(--ink);
+    display:grid;place-items:center;overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .phone{
+    position:relative;width:min(440px,100vw);height:100dvh;
+    overflow:hidden;background:var(--paper);
+    box-shadow:0 40px 90px -40px rgba(90,70,40,.6);
+  }
+
+  /* ============ MUQOVA ============ */
+  .cover{position:absolute;inset:0;z-index:40}
+  .door{
+    position:absolute;top:0;bottom:0;width:50.5%;overflow:hidden;
+    background:radial-gradient(120% 90% at 50% 35%,#fffdf8 0%,#f9f2e6 55%,#efe4d0 100%);
+    transition:transform 1.9s cubic-bezier(.62,0,.16,1);backface-visibility:hidden;
+  }
+  .door.l{left:0;transform-origin:left center;box-shadow:inset -24px 0 36px -18px rgba(150,122,80,.42)}
+  .door.r{right:0;transform-origin:right center;box-shadow:inset 24px 0 36px -18px rgba(150,122,80,.42)}
+  .door svg{position:absolute;inset:0;width:100%;height:100%}
+  .door.r > svg{transform:scaleX(-1)}
+  .cover.open .door.l{transform:perspective(1900px) rotateY(-112deg)}
+  .cover.open .door.r{transform:perspective(1900px) rotateY(112deg)}
+  .seam{position:absolute;left:50%;top:0;bottom:0;width:1px;z-index:5;transition:opacity .5s;
+    background:linear-gradient(to bottom,transparent,rgba(184,158,113,.5) 12%,rgba(184,158,113,.5) 88%,transparent)}
+  .cover.open .seam{opacity:0}
+  .cover.gone{opacity:0;pointer-events:none;transition:opacity .6s}
+
+  .medal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;
+    width:104px;transition:opacity .55s,transform .9s}
+  .cover.open .medal{opacity:0;transform:translate(-50%,-50%) scale(.86)}
+  .cover .cta{position:absolute;left:0;right:0;bottom:10.5%;z-index:6;text-align:center;transition:opacity .5s}
+  .cover.open .cta{opacity:0}
+  .cta button{background:none;border:none;cursor:pointer;color:var(--gold-d);
+    font-size:9.5px;letter-spacing:.46em;text-transform:uppercase;padding:10px 6px;font-family:inherit}
+  .cta .ln{width:54px;height:1px;background:var(--gold);opacity:.6;margin:9px auto 0;
+    animation:breathe 2.6s ease-in-out infinite}
+  @keyframes breathe{0%,100%{width:32px;opacity:.3}50%{width:76px;opacity:.85}}
+
+  /* ============ TAKLIFNOMA ============ */
+  .invite{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;
+    padding:22px 18px;background:radial-gradient(120% 80% at 50% 20%,#fdf9f1 0%,#f8f1e5 50%,#f1e7d6 100%)}
+  .invite::before{content:"";position:absolute;inset:0;opacity:.45;pointer-events:none;
+    background-image:radial-gradient(rgba(160,135,95,.10) .6px,transparent .6px);background-size:4px 4px}
+  .fl{position:absolute;z-index:2;pointer-events:none}
+  .fl.tl{top:-4%;left:-15%;width:72%}
+  .fl.br{bottom:-4%;right:-15%;width:72%;transform:rotate(180deg)}
+
+  .arch{
+    position:relative;z-index:3;width:100%;max-width:334px;
+    height:calc(100dvh - 44px);max-height:770px;
+    border:1px solid var(--line);
+    border-radius:168px 168px 6px 6px / 200px 200px 4px 4px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:54px 22px 34px;text-align:center;
+  }
+  .arch::before{content:"";position:absolute;inset:7px;border:1px solid rgba(184,158,113,.2);
+    border-radius:162px 162px 4px 4px / 194px 194px 3px 3px;pointer-events:none}
+
+  .rv{opacity:0;transform:translateY(12px);transition:opacity 1s,transform 1.2s}
+  .go .rv{opacity:1;transform:none}
+  .go .d1{transition-delay:.15s}.go .d2{transition-delay:.4s}.go .d3{transition-delay:.65s}
+  .go .d4{transition-delay:.9s}.go .d5{transition-delay:1.15s}.go .d6{transition-delay:1.4s}
+  .go .d7{transition-delay:1.65s}.go .d8{transition-delay:1.9s}
+
+  .eyebrow{font-size:8.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--muted);line-height:2.3}
+  .dv{display:block;width:82px;height:10px;flex:0 0 auto;margin:14px 0}
+  .names{font-family:var(--serif);line-height:1;color:#675d50}
+  .names .n{display:block;font-size:clamp(34px,10.6vw,47px);font-weight:500;letter-spacing:.008em}
+  .names .amp{display:block;font-family:var(--script);font-weight:400;
+    font-size:clamp(27px,8.4vw,35px);color:var(--gold-d);margin:1px 0 -1px;line-height:1}
+  .msg{font-family:var(--serif);font-weight:400;font-size:clamp(15px,4.3vw,17.5px);
+    line-height:1.7;color:#6f6658;max-width:30ch}
+  .fam{font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink2);line-height:2.2}
+
+  .datewrap{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:14px}
+  .side{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2);white-space:nowrap;flex:1}
+  .side.l{text-align:right}.side.r{text-align:left}
+  .cart{position:relative;width:92px;height:126px;flex:0 0 auto}
+  .cart svg{position:absolute;inset:0;width:100%;height:100%}
+  .cart .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .cart .dd{font-family:var(--serif);font-size:38px;font-weight:400;line-height:1;color:#675d50}
+  .cart .mm{font-size:7.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink2);margin-top:6px}
+  .cart .di{display:block;width:4px;height:4px;background:var(--gold);transform:rotate(45deg);margin:6px auto 4px;opacity:.7}
+  .cart .yy{font-size:7.5px;letter-spacing:.3em;color:var(--ink2)}
+
+  /* ---- vaqt sanog'i ---- */
+  .cd{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-top:16px}
+  .cd .u{flex:1;position:relative;padding:0 2px}
+  .cd .u + .u::before{content:"";position:absolute;left:0;top:4px;bottom:6px;width:1px;
+    background:linear-gradient(to bottom,transparent,rgba(184,158,113,.45),transparent)}
+  .cd .v{font-family:var(--serif);font-size:25px;font-weight:400;line-height:1;color:#675d50;
+    font-variant-numeric:tabular-nums}
+  .cd .k{font-size:6.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+  .cd.done{gap:0}
+  .cd-msg{font-family:var(--script);font-size:22px;color:var(--gold-d);margin-top:14px}
+
+  .venue{font-family:var(--serif);font-size:clamp(18px,5.4vw,22px);font-weight:500;color:#675d50;margin-top:18px}
+  .addr{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:8px;line-height:1.9}
+  .pill{display:inline-flex;align-items:center;gap:7px;margin-top:15px;padding:9px 17px;
+    border:1px solid var(--line);border-radius:40px;background:rgba(255,255,255,.55);
+    text-decoration:none;color:var(--gold-d);font-size:8px;letter-spacing:.28em;text-transform:uppercase}
+  .pill svg{width:10px;height:10px}
+  .sig{font-family:var(--script);font-size:19px;color:var(--gold-d);opacity:.7;margin-top:18px;margin-bottom:4px}
+
+  @media (max-height:720px){
+    .arch{padding:40px 20px 26px}
+    .dv{margin:9px 0}
+    .cart{width:80px;height:110px}.cart .dd{font-size:32px}
+    .sig{margin-top:12px;font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- ===== SVG kutubxona (gullar) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="p1" cx="34%" cy="28%">
+        <stop offset="0" stop-color="#ffffff"/><stop offset="55%" stop-color="#fdf9f2"/><stop offset="100%" stop-color="#e9ddc7"/>
+      </radialGradient>
+      <radialGradient id="p2" cx="36%" cy="30%">
+        <stop offset="0" stop-color="#fffefc"/><stop offset="100%" stop-color="#efe5d2"/>
+      </radialGradient>
+      <filter id="sh" x="-45%" y="-45%" width="190%" height="190%">
+        <feDropShadow dx="0" dy="1.1" stdDeviation="1.1" flood-color="#b89c78" flood-opacity=".5"/>
+      </filter>
+
+      <g id="rose">
+        <g filter="url(#sh)">
+          <ellipse rx="15" ry="9" cx="0" cy="-13" fill="url(#p1)" stroke="#e7dbc6" stroke-width=".6"/>
+          <ellipse rx="15" ry="9" cx="12" cy="-6" fill="url(#p1)" stroke="#e7dbc6" stroke-width=".6" transform="rotate(60 12 -6)"/>
+          <ellipse rx="15" ry="9" cx="12" cy="8" fill="url(#p1)" stroke="#e7dbc6" stroke-width=".6" transform="rotate(120 12 8)"/>
+          <ellipse rx="15" ry="9" cx="0" cy="14" fill="url(#p1)" stroke="#e7dbc6" stroke-width=".6"/>
+          <ellipse rx="15" ry="9" cx="-12" cy="8" fill="url(#p1)" stroke="#e7dbc6" stroke-width=".6" transform="rotate(60 -12 8)"/>
+          <ellipse rx="15" ry="9" cx="-12" cy="-6" fill="url(#p1)" stroke="#e7dbc6" stroke-width=".6" transform="rotate(120 -12 -6)"/>
+          <ellipse rx="9" ry="5.6" cx="0" cy="-6" fill="url(#p2)" stroke="#e7dbc6" stroke-width=".5"/>
+          <ellipse rx="9" ry="5.6" cx="5" cy="4" fill="url(#p2)" stroke="#e7dbc6" stroke-width=".5" transform="rotate(70 5 4)"/>
+          <ellipse rx="9" ry="5.6" cx="-5" cy="4" fill="url(#p2)" stroke="#e7dbc6" stroke-width=".5" transform="rotate(-70 -5 4)"/>
+          <circle r="3.2" fill="#f0e5cf"/>
+          <circle r="1.3" cx="-1.8" cy="-.8" fill="#e2d2b6"/><circle r="1.1" cx="2.2" cy="1.5" fill="#e2d2b6"/>
+        </g>
+      </g>
+
+      <g id="bud">
+        <g filter="url(#sh)">
+          <ellipse rx="7" ry="10" fill="url(#p1)" stroke="#e7dbc6" stroke-width=".5"/>
+          <ellipse rx="4" ry="7" cx="-1.5" fill="url(#p2)" stroke="#e7dbc6" stroke-width=".45"/>
+        </g>
+      </g>
+
+      <g id="leaf">
+        <path d="M0 0 C 12 -7.5 26 -5.5 33 0 C 26 5.5 12 7.5 0 0 Z" fill="url(#p2)" stroke="#e3d6be" stroke-width=".55" filter="url(#sh)"/>
+        <path d="M2 0 H31" stroke="#e0d1b4" stroke-width=".45"/>
+      </g>
+
+      <g id="pearl"><circle r="3" fill="#fffefb" stroke="#e9ddc8" stroke-width=".45" filter="url(#sh)"/></g>
+
+      <!-- zich gul to'plami: 300x300 -->
+      <g id="cluster">
+        <g stroke="#e1d4bb" stroke-width="1" fill="none" opacity=".9">
+          <path d="M-6 44 C 46 54 88 92 108 148"/>
+          <path d="M44 -6 C 56 46 90 86 142 116"/>
+          <path d="M-6 116 C 40 122 76 152 96 200"/>
+          <path d="M104 26 C 116 62 140 88 178 104"/>
+          <path d="M18 176 C 58 186 92 214 110 252"/>
+          <path d="M150 150 C 180 164 202 188 214 218"/>
+          <path d="M74 78 C 96 96 112 118 122 146"/>
+        </g>
+        <use href="#leaf" transform="translate(16,44) rotate(30) scale(.8)"/>
+        <use href="#leaf" transform="translate(74,16) rotate(66) scale(.72)"/>
+        <use href="#leaf" transform="translate(8,104) rotate(10) scale(.7)"/>
+        <use href="#leaf" transform="translate(104,124) rotate(44) scale(.82)"/>
+        <use href="#leaf" transform="translate(134,72) rotate(-16) scale(.62)"/>
+        <use href="#leaf" transform="translate(58,116) rotate(22) scale(.6)"/>
+        <use href="#leaf" transform="translate(150,110) rotate(38) scale(.55)"/>
+        <use href="#leaf" transform="translate(6,18) rotate(52) scale(.62)"/>
+        <use href="#leaf" transform="translate(30,168) rotate(16) scale(.66)"/>
+        <use href="#leaf" transform="translate(118,190) rotate(50) scale(.58)"/>
+        <use href="#leaf" transform="translate(178,150) rotate(-8) scale(.5)"/>
+        <use href="#leaf" transform="translate(66,206) rotate(34) scale(.5)"/>
+        <use href="#leaf" transform="translate(196,196) rotate(28) scale(.45)"/>
+        <use href="#bud" transform="translate(96,52) rotate(28) scale(.9)"/>
+        <use href="#bud" transform="translate(22,132) rotate(-22) scale(.8)"/>
+        <use href="#bud" transform="translate(158,58) rotate(38) scale(.7)"/>
+        <use href="#bud" transform="translate(134,206) rotate(14) scale(.72)"/>
+        <use href="#bud" transform="translate(60,232) rotate(-30) scale(.62)"/>
+        <use href="#rose" transform="translate(40,36) scale(.95)"/>
+        <use href="#rose" transform="translate(94,90) scale(.78) rotate(20)"/>
+        <use href="#rose" transform="translate(18,86) scale(.6) rotate(-15)"/>
+        <use href="#rose" transform="translate(70,150) scale(.86) rotate(30)"/>
+        <use href="#rose" transform="translate(128,34) scale(.55) rotate(10)"/>
+        <use href="#rose" transform="translate(140,158) scale(.68) rotate(-20)"/>
+        <use href="#rose" transform="translate(30,196) scale(.52) rotate(25)"/>
+        <use href="#rose" transform="translate(172,110) scale(.46)"/>
+        <use href="#rose" transform="translate(96,224) scale(.58) rotate(-12)"/>
+        <use href="#rose" transform="translate(196,58) scale(.4) rotate(18)"/>
+        <use href="#rose" transform="translate(184,232) scale(.42) rotate(-8)"/>
+        <use href="#rose" transform="translate(8,148) scale(.44) rotate(12)"/>
+        <g opacity=".95">
+          <use href="#pearl" transform="translate(62,22) scale(.8)"/><use href="#pearl" transform="translate(112,74) scale(.65)"/>
+          <use href="#pearl" transform="translate(46,78) scale(.6)"/><use href="#pearl" transform="translate(146,126) scale(.62)"/>
+          <use href="#pearl" transform="translate(10,124) scale(.55)"/><use href="#pearl" transform="translate(98,170) scale(.58)"/>
+          <use href="#pearl" transform="translate(168,84) scale(.5)"/><use href="#pearl" transform="translate(64,190) scale(.5)"/>
+          <use href="#pearl" transform="translate(182,178) scale(.45)"/><use href="#pearl" transform="translate(120,242) scale(.45)"/>
+          <use href="#pearl" transform="translate(22,60) scale(.5)"/><use href="#pearl" transform="translate(150,222) scale(.4)"/>
+          <use href="#pearl" transform="translate(216,140) scale(.4)"/><use href="#pearl" transform="translate(44,252) scale(.4)"/>
+        </g>
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ===== TAKLIFNOMA ===== -->
+  <div class="invite" id="invite">
+    <svg class="fl tl" viewBox="0 0 300 300"><use href="#cluster"/></svg>
+    <svg class="fl br" viewBox="0 0 300 300"><use href="#cluster"/></svg>
+
+    <div class="arch">
+      <p class="eyebrow rv d1">To‘yimizga<br>taklif etamiz</p>
+
+      <svg class="dv rv d1" viewBox="0 0 100 10" fill="none"><path d="M4 5h34M62 5h34" stroke="#c2a87f" stroke-width=".9"/><path d="M50 1.2l3.4 3.8L50 8.8 46.6 5 50 1.2z" fill="#eadec4" stroke="#bfa478" stroke-width=".7"/></svg>
+
+      <h1 class="names rv d2">
+        <span class="n">Muhammad</span>
+        <span class="amp">va</span>
+        <span class="n">Umida</span>
+      </h1>
+
+      <svg class="dv rv d3" viewBox="0 0 100 10" fill="none"><path d="M4 5h34M62 5h34" stroke="#c2a87f" stroke-width=".9"/><path d="M50 1.2l3.4 3.8L50 8.8 46.6 5 50 1.2z" fill="#eadec4" stroke="#bfa478" stroke-width=".7"/></svg>
+
+      <p class="msg rv d3">Eng baxtli kunimizda Sizni davramizda ko‘rishdan mamnun bo‘lamiz.</p>
+
+      <svg class="dv rv d4" viewBox="0 0 100 10" fill="none"><path d="M4 5h34M62 5h34" stroke="#c2a87f" stroke-width=".9"/><path d="M50 1.2l3.4 3.8L50 8.8 46.6 5 50 1.2z" fill="#eadec4" stroke="#bfa478" stroke-width=".7"/></svg>
+
+      <p class="fam rv d4">Barcha qadrdon<br>mehmonlar uchun</p>
+
+      <div class="datewrap rv d5">
+        <span class="side l">Juma</span>
+        <div class="cart">
+          <svg viewBox="0 0 92 126" fill="none">
+            <path d="M46 3 C71 15 86 42 86 63 C86 84 71 111 46 123 C21 111 6 84 6 63 C6 42 21 15 46 3 Z"
+                  fill="rgba(255,255,255,.5)" stroke="#c2a87f" stroke-width="1"/>
+            <path d="M46 10 C67 21 80 44 80 63 C80 82 67 105 46 116 C25 105 12 82 12 63 C12 44 25 21 46 10 Z"
+                  fill="none" stroke="#dcc8a5" stroke-width=".7"/>
+          </svg>
+          <div class="in">
+            <span class="dd">30</span>
+            <span class="mm">Oktabr</span>
+            <i class="di"></i>
+            <span class="yy">2026</span>
+          </div>
+        </div>
+        <span class="side r">19:00</span>
+      </div>
+
+      <div class="cd rv d6" id="cd">
+        <div class="u"><div class="v" id="cdD">—</div><div class="k">Kun</div></div>
+        <div class="u"><div class="v" id="cdH">—</div><div class="k">Soat</div></div>
+        <div class="u"><div class="v" id="cdM">—</div><div class="k">Daqiqa</div></div>
+        <div class="u"><div class="v" id="cdS">—</div><div class="k">Soniya</div></div>
+      </div>
+
+      <p class="venue rv d6">“Ilashbobo” to‘yxonasi</p>
+      <p class="addr rv d6">Samarqand viloyati · Pastarg‘om tumani</p>
+
+      <a class="pill rv d7" href="https://www.google.com/maps/search/?api=1&query=Ilashbobo%20to%27yxonasi%20Pastarg%27om%20Samarqand" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Yo‘l ko‘rsatkichi
+      </a>
+
+      <p class="sig rv d8">Muhammad &amp; Umida</p>
+    </div>
+  </div>
+
+  <!-- ===== MUQOVA ===== -->
+  <div class="cover" id="cover">
+    <div class="door l">
+      <svg viewBox="0 0 220 620" preserveAspectRatio="xMidYMid slice">
+        <use href="#cluster" transform="translate(-40,-30) scale(.95)"/>
+        <use href="#cluster" transform="translate(-30,180) scale(.9) rotate(6 150 150)"/>
+        <use href="#cluster" transform="translate(-45,375) scale(.98) rotate(-5 150 150)"/>
+        <use href="#cluster" transform="translate(60,110) scale(.6) rotate(14 150 150)"/>
+        <use href="#cluster" transform="translate(50,470) scale(.62) rotate(-10 150 150)"/>
+      </svg>
+    </div>
+    <div class="door r">
+      <svg viewBox="0 0 220 620" preserveAspectRatio="xMidYMid slice">
+        <use href="#cluster" transform="translate(-40,-30) scale(.95)"/>
+        <use href="#cluster" transform="translate(-30,180) scale(.9) rotate(6 150 150)"/>
+        <use href="#cluster" transform="translate(-45,375) scale(.98) rotate(-5 150 150)"/>
+        <use href="#cluster" transform="translate(60,110) scale(.6) rotate(14 150 150)"/>
+        <use href="#cluster" transform="translate(50,470) scale(.62) rotate(-10 150 150)"/>
+      </svg>
+    </div>
+
+    <div class="seam"></div>
+
+    <div class="medal">
+      <svg viewBox="0 0 92 118" fill="none">
+        <path d="M46 3 C70 14 86 40 86 59 C86 78 70 104 46 115 C22 104 6 78 6 59 C6 40 22 14 46 3 Z"
+              fill="url(#p2)" stroke="#c8ae83" stroke-width="1" filter="url(#sh)"/>
+        <path d="M46 9 C67 19 80 42 80 59 C80 76 67 99 46 109 C25 99 12 76 12 59 C12 42 25 19 46 9 Z"
+              fill="none" stroke="#dfd1b3" stroke-width=".7"/>
+        <g stroke="#c9b28a" stroke-width=".85" fill="none">
+          <path d="M46 95 V46"/>
+          <path d="M46 70 C39 67 35 60 34.5 52 M46 70 C53 67 57 60 57.5 52"/>
+          <path d="M46 84 C40 82 37 76 36.5 70 M46 84 C52 82 55 76 55.5 70"/>
+        </g>
+        <g fill="#f4ebda" stroke="#dccdaf" stroke-width=".55">
+          <ellipse cx="34" cy="50" rx="5.2" ry="3" transform="rotate(-42 34 50)"/>
+          <ellipse cx="58" cy="50" rx="5.2" ry="3" transform="rotate(42 58 50)"/>
+          <ellipse cx="36" cy="68" rx="4.4" ry="2.6" transform="rotate(-36 36 68)"/>
+          <ellipse cx="56" cy="68" rx="4.4" ry="2.6" transform="rotate(36 56 68)"/>
+          <ellipse cx="40" cy="36" rx="4" ry="2.6" transform="rotate(-55 40 36)"/>
+          <ellipse cx="52" cy="36" rx="4" ry="2.6" transform="rotate(55 52 36)"/>
+          <circle cx="46" cy="30" r="3.6"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cta">
+      <button id="openBtn">Taklifnomani ochish</button>
+      <div class="ln"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /* ===== To'y kunigacha qolgan vaqt (Samarqand vaqti, UTC+5) ===== */
+  const TARGET = new Date('2026-10-30T19:00:00+05:00').getTime();
+  const cdEl = document.getElementById('cd');
+  const p2 = n => String(n).padStart(2,'0');
+  function tick(){
+    const diff = TARGET - Date.now();
+    if(diff <= 0){
+      cdEl.outerHTML = '<p class="cd-msg rv d6" style="opacity:1;transform:none">Bugun — quvonchli kunimiz!</p>';
+      clearInterval(timer);
+      return;
+    }
+    const s = Math.floor(diff/1000);
+    document.getElementById('cdD').textContent = Math.floor(s/86400);
+    document.getElementById('cdH').textContent = p2(Math.floor(s%86400/3600));
+    document.getElementById('cdM').textContent = p2(Math.floor(s%3600/60));
+    document.getElementById('cdS').textContent = p2(s%60);
+  }
+  tick();
+  const timer = setInterval(tick,1000);
+
+  const cover = document.getElementById('cover');
+  const invite = document.getElementById('invite');
+  document.getElementById('openBtn').addEventListener('click', ()=>{
+    cover.classList.add('open');
+    setTimeout(()=>invite.classList.add('go'), 700);
+    setTimeout(()=>cover.classList.add('gone'), 1700);
+    setTimeout(()=>cover.style.display='none', 2400);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muhammad & Umida — Taklifnoma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbf7f0;
+    --paper2:#f4ede1;
+    --ink:#3a352e;
+    --muted:#9b9184;
+    --line:#e3d9c8;
+    --gold:#b79b6e;
+    --gold-d:#9a7f52;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(120% 90% at 50% 0%, #efe6d7 0%, #e4d8c5 45%, #d8cab4 100%);
+    display:grid;
+    place-items:center;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ================= COVER (kitob muqovasi) ================= */
+  .cover{position:fixed;inset:0;z-index:60}
+  .door{
+    position:absolute;top:0;bottom:0;width:50.4%;
+    background:
+      radial-gradient(140% 100% at 50% 40%, #fdfaf4 0%, #f6efe2 55%, #eee3d0 100%);
+    transition:transform 1.9s cubic-bezier(.66,0,.18,1);
+    overflow:hidden;
+    box-shadow:0 0 60px rgba(120,98,64,.18) inset;
+  }
+  .door.l{left:0;transform-origin:left center}
+  .door.r{right:0;transform-origin:right center}
+  .door::after{ /* markaziy chok soyasi */
+    content:"";position:absolute;top:0;bottom:0;width:26px;
+    background:linear-gradient(to right,rgba(140,115,75,0),rgba(140,115,75,.18));
+  }
+  .door.l::after{right:0}
+  .door.r::after{left:0;transform:scaleX(-1)}
+
+  .cover.open .door.l{transform:perspective(2200px) rotateY(-108deg)}
+  .cover.open .door.r{transform:perspective(2200px) rotateY(108deg)}
+  .cover.gone{opacity:0;pointer-events:none;transition:opacity .5s .9s}
+
+  .flora{position:absolute;opacity:.9}
+  .flora.tl{top:-4%;left:-8%;width:78%}
+  .flora.br{bottom:-4%;right:-8%;width:78%;transform:rotate(180deg)}
+  .flora.tr{top:-4%;right:-8%;width:78%;transform:scaleX(-1)}
+  .flora.bl{bottom:-4%;left:-8%;width:78%;transform:rotate(180deg) scaleX(-1)}
+
+  .seal{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    z-index:5;text-align:center;transition:opacity .6s,transform .8s;
+  }
+  .cover.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.82)}
+  .seal .oval{
+    width:112px;height:146px;border-radius:50%;
+    background:radial-gradient(120% 120% at 40% 30%,#fffdf8,#f2e9d8);
+    border:1.5px solid rgba(183,155,110,.55);
+    box-shadow:0 10px 30px -12px rgba(120,95,55,.45);
+    display:grid;place-items:center;margin:0 auto;
+  }
+  .seal .mono{
+    font-family:'Cormorant Garamond',serif;font-weight:400;
+    font-size:30px;letter-spacing:.06em;color:var(--gold-d);
+  }
+  .seal .mono span{opacity:.5;margin:0 5px;font-weight:300}
+  .open-btn{
+    margin-top:26px;background:none;border:none;cursor:pointer;
+    font-family:'Inter',sans-serif;font-size:9.5px;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--gold-d);
+    padding:11px 4px 9px;position:relative;
+  }
+  .open-btn::after{
+    content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    width:0;height:1px;background:var(--gold);transition:width .6s .4s;
+  }
+  .loaded .open-btn::after{width:100%}
+  .open-btn .pulse{
+    display:block;width:5px;height:5px;border-radius:50%;background:var(--gold);
+    margin:14px auto 0;animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.25;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+
+  /* ================= BOOK ================= */
+  .stage{
+    position:relative;display:grid;place-items:center;gap:18px;
+    padding:16px 0 8px;
+    opacity:0;transform:translateY(14px);
+    transition:opacity 1s .6s,transform 1.2s .6s;
+  }
+  .stage.show{opacity:1;transform:none}
+
+  .book{
+    position:relative;
+    width:min(376px,86vw);
+    height:min(586px,70dvh);
+    perspective:2000px;
+  }
+  /* orqa muqova / kitob tanasi */
+  .book::before{
+    content:"";position:absolute;inset:-7px -8px -9px -7px;
+    background:linear-gradient(135deg,#e8dcc7,#dccdb2);
+    border-radius:2px 6px 6px 2px;
+    box-shadow:0 30px 60px -26px rgba(80,62,35,.55);
+  }
+  .book::after{ /* umurtqa */
+    content:"";position:absolute;left:-7px;top:-7px;bottom:-9px;width:12px;
+    background:linear-gradient(to right,#c9b795,#e6dac4);
+    border-radius:2px 0 0 2px;
+  }
+
+  .leaf{
+    position:absolute;inset:0;
+    transform-origin:left center;
+    transform-style:preserve-3d;
+    transition:transform 1.15s cubic-bezier(.46,.03,.28,1), opacity .4s .5s linear;
+  }
+  .leaf.flipped{transform:rotateY(-172deg);opacity:0}
+  /* ag'darilayotgan varaq: ustida turadi + haqiqiy qog'oz soyasi */
+  .leaf.turning{filter:drop-shadow(-14px 8px 22px rgba(85,64,32,.34))}
+  /* varaq burilganda yuzasiga tushadigan yorug'lik/soya */
+  .face::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to right,rgba(90,68,34,.30),rgba(90,68,34,0) 42%);
+    opacity:0;transition:opacity .5s ease;
+  }
+  .leaf.turning .face::after{opacity:1}
+
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    background:
+      linear-gradient(to right,rgba(120,95,55,.16),rgba(120,95,55,0) 9%),
+      radial-gradient(130% 100% at 60% 30%,#fdfaf4,#f5eee1);
+    border:1px solid rgba(214,199,172,.8);
+    border-left:none;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:44px 26px;text-align:center;overflow:hidden;
+    box-shadow:inset 0 0 40px rgba(180,155,110,.10);
+  }
+  .face.back{
+    transform:rotateY(180deg);
+    background:
+      linear-gradient(to left,rgba(120,95,55,.14),rgba(120,95,55,0) 9%),
+      radial-gradient(130% 100% at 40% 30%,#fbf6ee,#f2ebde);
+    border-left:1px solid rgba(214,199,172,.8);border-right:none;
+  }
+  .face .frame{
+    position:absolute;inset:14px;border:1px solid rgba(183,155,110,.28);
+    border-radius:110px 110px 4px 4px;pointer-events:none;
+  }
+  .face .corner{position:absolute;width:52%;opacity:.55;pointer-events:none}
+  .face .corner.a{top:-2%;left:-4%}
+  .face .corner.b{bottom:-2%;right:-4%;transform:rotate(180deg)}
+
+  .pnum{
+    position:absolute;bottom:16px;left:0;right:0;
+    font-size:9px;letter-spacing:.3em;color:var(--muted);
+  }
+
+  /* sahifa ichidagi tipografiya */
+  .kicker{
+    font-size:9px;letter-spacing:.44em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:22px;
+  }
+  .names{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.02}
+  .names .n{display:block;font-size:clamp(38px,11.5vw,52px);letter-spacing:.01em}
+  .names .amp{
+    display:block;font-family:'Great Vibes',cursive;
+    font-size:clamp(30px,9vw,40px);color:var(--gold-d);
+    margin:2px 0 -2px;font-weight:400;
+  }
+  .orn{display:block;margin:24px auto;width:70px;opacity:.75}
+  .lede{
+    font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(18px,5vw,21px);line-height:1.85;color:#544e45;max-width:26ch;
+  }
+  .label{
+    font-size:9px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:20px;
+  }
+  .big{
+    font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(52px,17vw,74px);line-height:1;color:var(--ink);
+  }
+  .sub{
+    font-family:'Cormorant Garamond',serif;font-size:22px;
+    letter-spacing:.14em;text-transform:uppercase;margin-top:12px;color:#5c554a;
+  }
+  .sub2{font-size:11px;letter-spacing:.28em;color:var(--muted);margin-top:14px;text-transform:uppercase}
+  .place{
+    font-family:'Cormorant Garamond',serif;font-size:clamp(24px,7vw,30px);
+    line-height:1.35;font-weight:400;
+  }
+  .addr{font-size:12.5px;line-height:1.9;color:#6d6559;font-weight:300;margin-top:16px;max-width:24ch}
+  .maplink{
+    display:inline-block;margin-top:24px;padding:11px 22px;
+    border:1px solid rgba(183,155,110,.55);border-radius:40px;
+    font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold-d);text-decoration:none;background:rgba(255,255,255,.5);
+  }
+  .dress{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.6;margin-bottom:18px}
+  .dresslist{font-size:13px;line-height:2.1;color:#6d6559;font-weight:300;max-width:25ch}
+  .closing{
+    font-family:'Great Vibes',cursive;font-size:clamp(28px,8vw,36px);
+    color:var(--gold-d);line-height:1.5;
+  }
+  .sign{font-size:9.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--muted);margin-top:28px}
+
+  /* orqa (bo'sh) yuza bezagi */
+  .blank{display:grid;place-items:center;gap:0}
+  .blank svg{width:64px;opacity:.3}
+
+  /* ================= NAV ================= */
+  .nav{display:flex;align-items:center;gap:18px;user-select:none}
+  .arrow{
+    width:40px;height:40px;border-radius:50%;border:1px solid rgba(140,115,75,.32);
+    background:rgba(255,255,255,.45);display:grid;place-items:center;cursor:pointer;
+    transition:opacity .3s,background .3s;color:var(--gold-d);
+  }
+  .arrow:disabled{opacity:.25;cursor:default}
+  .arrow svg{width:13px;height:13px}
+  .dots{display:flex;gap:7px}
+  .dot{width:5px;height:5px;border-radius:50%;background:rgba(120,95,55,.25);transition:.35s}
+  .dot.on{background:var(--gold-d);transform:scale(1.5)}
+
+  .hint{
+    font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(90,75,50,.45);
+    transition:opacity .5s;
+  }
+  .hint.hide{opacity:0}
+
+  @media (max-height:680px){
+    .face{padding:34px 22px}
+    .stage{gap:12px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== MUQOVA ========== -->
+<div class="cover" id="cover">
+  <div class="door l">
+    <svg class="flora tl" viewBox="0 0 200 200" fill="none"><g stroke="#d9c8a8" stroke-width="1.1" opacity=".9"><path d="M10 40c30 6 52 24 66 52M14 78c26 2 46 16 58 38M40 14c8 28 24 48 50 60"/><path d="M76 92c14 8 24 20 30 36M52 46c12 6 22 16 28 28"/></g><g fill="#eee2cc" stroke="#dcc9a6" stroke-width=".8"><ellipse cx="34" cy="30" rx="15" ry="10" transform="rotate(-25 34 30)"/><ellipse cx="58" cy="62" rx="17" ry="11" transform="rotate(20 58 62)"/><ellipse cx="22" cy="66" rx="12" ry="8" transform="rotate(35 22 66)"/><ellipse cx="86" cy="104" rx="14" ry="9" transform="rotate(-15 86 104)"/><ellipse cx="62" cy="20" rx="11" ry="7" transform="rotate(10 62 20)"/><circle cx="46" cy="48" r="7"/><circle cx="80" cy="80" r="6"/><circle cx="16" cy="20" r="5"/></g><g fill="#e6d7ba"><circle cx="46" cy="48" r="2.4"/><circle cx="80" cy="80" r="2"/><circle cx="100" cy="118" r="2"/><circle cx="30" cy="88" r="2"/></g></svg>
+    <svg class="flora bl" viewBox="0 0 200 200" fill="none"><g stroke="#d9c8a8" stroke-width="1.1" opacity=".9"><path d="M10 40c30 6 52 24 66 52M14 78c26 2 46 16 58 38M40 14c8 28 24 48 50 60"/></g><g fill="#eee2cc" stroke="#dcc9a6" stroke-width=".8"><ellipse cx="34" cy="30" rx="15" ry="10" transform="rotate(-25 34 30)"/><ellipse cx="58" cy="62" rx="17" ry="11" transform="rotate(20 58 62)"/><ellipse cx="22" cy="66" rx="12" ry="8" transform="rotate(35 22 66)"/><circle cx="46" cy="48" r="7"/></g></svg>
+  </div>
+  <div class="door r">
+    <svg class="flora tr" viewBox="0 0 200 200" fill="none"><g stroke="#d9c8a8" stroke-width="1.1" opacity=".9"><path d="M10 40c30 6 52 24 66 52M14 78c26 2 46 16 58 38M40 14c8 28 24 48 50 60"/><path d="M76 92c14 8 24 20 30 36M52 46c12 6 22 16 28 28"/></g><g fill="#eee2cc" stroke="#dcc9a6" stroke-width=".8"><ellipse cx="34" cy="30" rx="15" ry="10" transform="rotate(-25 34 30)"/><ellipse cx="58" cy="62" rx="17" ry="11" transform="rotate(20 58 62)"/><ellipse cx="22" cy="66" rx="12" ry="8" transform="rotate(35 22 66)"/><ellipse cx="86" cy="104" rx="14" ry="9" transform="rotate(-15 86 104)"/><ellipse cx="62" cy="20" rx="11" ry="7" transform="rotate(10 62 20)"/><circle cx="46" cy="48" r="7"/><circle cx="80" cy="80" r="6"/></g><g fill="#e6d7ba"><circle cx="46" cy="48" r="2.4"/><circle cx="80" cy="80" r="2"/></g></svg>
+    <svg class="flora br" viewBox="0 0 200 200" fill="none"><g stroke="#d9c8a8" stroke-width="1.1" opacity=".9"><path d="M10 40c30 6 52 24 66 52M14 78c26 2 46 16 58 38M40 14c8 28 24 48 50 60"/></g><g fill="#eee2cc" stroke="#dcc9a6" stroke-width=".8"><ellipse cx="34" cy="30" rx="15" ry="10" transform="rotate(-25 34 30)"/><ellipse cx="58" cy="62" rx="17" ry="11" transform="rotate(20 58 62)"/><ellipse cx="22" cy="66" rx="12" ry="8" transform="rotate(35 22 66)"/><circle cx="46" cy="48" r="7"/></g></svg>
+  </div>
+
+  <div class="seal" id="seal">
+    <div class="oval"><div class="mono">M<span>|</span>U</div></div>
+    <button class="open-btn" id="openBtn">Taklifnomani ochish<span class="pulse"></span></button>
+  </div>
+</div>
+
+<!-- ========== KITOB ========== -->
+<div class="stage" id="stage">
+  <div class="book" id="book"></div>
+
+  <div class="nav">
+    <button class="arrow" id="prev" aria-label="Oldingi sahifa" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="dots" id="dots"></div>
+    <button class="arrow" id="next" aria-label="Keyingi sahifa">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <div class="hint" id="hint">Sahifani suring</div>
+</div>
+
+<script>
+const CORNER = `<svg class="corner a" viewBox="0 0 160 160" fill="none"><g stroke="#ddcdb0" stroke-width="1" opacity=".85"><path d="M6 34c26 5 45 21 57 45M10 66c22 2 39 14 50 33M34 10c7 24 21 41 43 51"/></g><g fill="#f0e6d2" stroke="#e0d0b0" stroke-width=".7"><ellipse cx="28" cy="26" rx="13" ry="8.5" transform="rotate(-25 28 26)"/><ellipse cx="50" cy="54" rx="14" ry="9" transform="rotate(20 50 54)"/><ellipse cx="18" cy="58" rx="10" ry="6.5" transform="rotate(35 18 58)"/><circle cx="39" cy="41" r="5.5"/><circle cx="68" cy="72" r="4.5"/></g></svg>
+<svg class="corner b" viewBox="0 0 160 160" fill="none"><g stroke="#ddcdb0" stroke-width="1" opacity=".85"><path d="M6 34c26 5 45 21 57 45M10 66c22 2 39 14 50 33M34 10c7 24 21 41 43 51"/></g><g fill="#f0e6d2" stroke="#e0d0b0" stroke-width=".7"><ellipse cx="28" cy="26" rx="13" ry="8.5" transform="rotate(-25 28 26)"/><ellipse cx="50" cy="54" rx="14" ry="9" transform="rotate(20 50 54)"/><ellipse cx="18" cy="58" rx="10" ry="6.5" transform="rotate(35 18 58)"/><circle cx="39" cy="41" r="5.5"/></g></svg>`;
+
+const ORN = `<svg class="orn" viewBox="0 0 120 16" fill="none"><path d="M2 8h38M80 8h38" stroke="#c9b28a" stroke-width="1"/><path d="M60 2l4.5 6L60 14l-4.5-6L60 2z" fill="#e6d7ba" stroke="#c9b28a" stroke-width=".8"/><circle cx="46" cy="8" r="1.6" fill="#c9b28a"/><circle cx="74" cy="8" r="1.6" fill="#c9b28a"/></svg>`;
+
+const SPRIG = `<svg viewBox="0 0 60 60" fill="none"><path d="M30 54V16" stroke="#c9b28a" stroke-width="1"/><ellipse cx="21" cy="26" rx="8" ry="4.5" transform="rotate(-30 21 26)" fill="#f0e6d2" stroke="#ddcdb0" stroke-width=".7"/><ellipse cx="39" cy="32" rx="8" ry="4.5" transform="rotate(30 39 32)" fill="#f0e6d2" stroke="#ddcdb0" stroke-width=".7"/><ellipse cx="22" cy="40" rx="7" ry="4" transform="rotate(-25 22 40)" fill="#f0e6d2" stroke="#ddcdb0" stroke-width=".7"/><circle cx="30" cy="13" r="4.5" fill="#f0e6d2" stroke="#ddcdb0" stroke-width=".7"/></svg>`;
+
+const MAPS = "https://www.google.com/maps/search/?api=1&query=Ilashbobo%20to%27yxonasi%20Pastarg%27om%20Samarqand";
+
+/* Har bir sahifa — alohida varaq */
+const pages = [
+  `<p class="kicker">Nikoh to‘yi taklifnomasi</p>
+   <h1 class="names"><span class="n">Muhammad</span><span class="amp">va</span><span class="n">Umida</span></h1>
+   ${ORN}
+   <p class="sub2">30 · 10 · 2026</p>`,
+
+  `<p class="kicker">Assalomu alaykum</p>
+   <p class="lede">Hayotimizdagi eng quvonchli kunni Siz bilan birga nishonlashni orzu qilamiz. Ushbu qutlug‘ kunda davramizda bo‘lishingizni chin dildan so‘raymiz.</p>
+   ${ORN}`,
+
+  `<p class="label">Sana</p>
+   <div class="big">30</div>
+   <p class="sub">Oktabr</p>
+   <p class="sub2">Juma · 2026-yil</p>`,
+
+  `<p class="label">Marosim boshlanishi</p>
+   <div class="big">19:00</div>
+   <p class="sub2">Mehmonlar kutib olinadi</p>
+   ${ORN}`,
+
+  `<p class="label">Manzil</p>
+   <p class="place">“Ilashbobo”<br>to‘yxonasi</p>
+   <p class="addr">Samarqand viloyati,<br>Pastarg‘om tumani</p>
+   <a class="maplink" href="${MAPS}" target="_blank" rel="noopener">Yo‘l ko‘rsatkichi</a>`,
+
+  `<p class="label">Kiyim uslubi</p>
+   <p class="dress">Bosiq va ozoda<br>ko‘rinish</p>
+   <p class="dresslist">Erkaklar — kostyum-shim yoki chopon.<br>Ayollar — uzun ko‘ylak yoxud milliy libos.<br>Yorqin, ochiq kiyimlardan saqlaning.</p>`,
+
+  `<p class="kicker">Barcha qadrdon mehmonlar uchun</p>
+   <p class="closing">Sizni ko‘rish<br>biz uchun katta baxt</p>
+   ${ORN}
+   <p class="sign">Hurmat ila — Muhammad &amp; Umida</p>`
+];
+
+const book = document.getElementById('book');
+const N = pages.length;
+const leaves = [];
+
+for(let i=0;i<N;i++){
+  const leaf = document.createElement('div');
+  leaf.className = 'leaf';
+  leaf.innerHTML = `
+    <div class="face front">
+      <div class="frame"></div>${CORNER}
+      ${pages[i]}
+      <div class="pnum">${i+1} / ${N}</div>
+    </div>
+    <div class="face back">
+      <div class="frame"></div>${CORNER}
+      <div class="blank">${SPRIG}</div>
+    </div>`;
+  book.appendChild(leaf);
+  leaves.push(leaf);
+}
+
+const dotsEl = document.getElementById('dots');
+for(let i=0;i<N;i++){
+  const d = document.createElement('span');
+  d.className = 'dot' + (i===0?' on':'');
+  dotsEl.appendChild(d);
+}
+const dots = [...dotsEl.children];
+
+let cur = 0;
+let moving = -1;          // ayni paytda ag'darilayotgan varaq
+let tmr = null, busy = false;
+
+function render(){
+  leaves.forEach((leaf,i)=>{
+    const flipped = i < cur;
+    leaf.classList.toggle('flipped', flipped);
+    leaf.classList.toggle('turning', i === moving);
+    /* ag'darilayotgan varaq HAMMA varaqdan ustida turishi shart —
+       aks holda u keyingi varaq ostida qolib, animatsiya ko'rinmaydi */
+    leaf.style.zIndex = (i === moving) ? 500 : (flipped ? i : N - i);
+  });
+  dots.forEach((d,i)=>d.classList.toggle('on', i===cur));
+  document.getElementById('prev').disabled = cur===0;
+  document.getElementById('next').disabled = cur===N-1;
+}
+render();
+
+function go(dir){
+  if(busy) return;
+  const n = cur + dir;
+  if(n<0 || n>N-1) return;
+
+  moving = dir > 0 ? cur : n;   // oldinga: hozirgi varaq ag'dariladi; orqaga: n-varaq qaytadi
+  cur = n;
+  busy = true;
+  document.getElementById('hint').classList.add('hide');
+  render();
+
+  const done = ()=>{
+    if(moving === -1) return;
+    leaves[moving].removeEventListener('transitionend', onEnd);
+    clearTimeout(tmr);
+    busy = false; moving = -1; render();
+  };
+  function onEnd(e){ if(e.propertyName === 'transform' && e.target === e.currentTarget) done(); }
+
+  leaves[moving].addEventListener('transitionend', onEnd);
+  clearTimeout(tmr);
+  tmr = setTimeout(done, 1400);   // zaxira: transitionend ishlamasa
+}
+document.getElementById('next').onclick = ()=>go(1);
+document.getElementById('prev').onclick = ()=>go(-1);
+
+/* surish (swipe) */
+let sx=null;
+book.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+book.addEventListener('touchend',e=>{
+  if(sx===null) return;
+  const dx = e.changedTouches[0].clientX - sx;
+  if(Math.abs(dx)>45) go(dx<0?1:-1);
+  sx=null;
+},{passive:true});
+
+/* bosish: o‘ng yarim — oldinga, chap yarim — orqaga */
+book.addEventListener('click',e=>{
+  const r = book.getBoundingClientRect();
+  go(e.clientX - r.left > r.width*0.42 ? 1 : -1);
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight') go(1);
+  if(e.key==='ArrowLeft') go(-1);
+});
+
+/* muqovani ochish */
+const cover = document.getElementById('cover');
+document.getElementById('openBtn').onclick = ()=>{
+  cover.classList.add('open');
+  document.getElementById('stage').classList.add('show');
+  setTimeout(()=>cover.classList.add('gone'), 1200);
+  setTimeout(()=>cover.style.display='none', 2600);
+};
+window.addEventListener('load',()=>document.body.classList.add('loaded'));
+</script>
+</body>
+</html>
