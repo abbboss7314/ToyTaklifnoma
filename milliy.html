@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Otabek & Zulayho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terra:#b8562f;
+    --terra-d:#8e3d1e;
+    --indigo:#1f3557;
+    --indigo-d:#152540;
+    --gold:#d4a03c;
+    --cream:#fbf3e4;
+    --cream-d:#f3e6cf;
+    --ink:#2c2418;
+    --ink2:#6d5f4b;
+    --serif:'Cormorant Garamond',Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:#e3d4b8;font-family:'Inter',-apple-system,sans-serif;color:var(--ink);
+    -webkit-font-smoothing:antialiased}
+  .page{position:relative;width:min(500px,100vw);margin:0 auto;background:var(--cream);overflow:hidden}
+
+  section{position:relative;padding:0 26px;z-index:2}
+  .lab{font-size:8.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--terra-d);font-weight:500}
+
+  .rv{opacity:0;transform:translateY(22px);transition:opacity 1.1s,transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .in .rv{opacity:1;transform:none}
+  .spin{transform:rotate(-32deg) scale(.86);opacity:0;transition:transform 1.5s cubic-bezier(.16,1,.3,1),opacity 1.2s}
+  .in .spin{transform:none;opacity:1}
+  .d1{transition-delay:.12s}.d2{transition-delay:.3s}.d3{transition-delay:.48s}.d4{transition-delay:.66s}
+
+  /* ---- ikat lenta ---- */
+  .ikat{height:26px;width:100%;display:block}
+
+  /* ---- HERO ---- */
+  #hero{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding-top:56px;padding-bottom:44px;
+    background:radial-gradient(120% 70% at 50% 12%,#fffaf0,var(--cream) 55%,var(--cream-d) 100%)}
+  .rosette{width:min(216px,56vw);display:block;margin:0 auto}
+  .nm{font-family:var(--serif);line-height:1.04;color:var(--indigo)}
+  .nm span{display:block;font-size:clamp(34px,10.4vw,46px);font-weight:600;letter-spacing:.005em}
+  .nm em{display:block;font-style:italic;font-size:23px;color:var(--terra);margin:3px 0}
+  .dt{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:38px}
+  .dt .s{font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2)}
+  .dt .n{font-family:var(--serif);font-size:36px;font-weight:600;color:var(--terra);line-height:1;
+    padding:0 13px;border-left:1px solid rgba(184,86,47,.4);border-right:1px solid rgba(184,86,47,.4)}
+  .yr{font-family:var(--serif);font-size:19px;letter-spacing:.3em;color:var(--ink2);margin-top:12px}
+
+  /* ---- MATN ---- */
+  #say{padding-top:80px;padding-bottom:80px;text-align:center;background:var(--cream)}
+  .lede{font-family:var(--serif);font-size:clamp(19px,5.4vw,23px);line-height:1.9;color:#4a3f2e;
+    max-width:27ch;margin:26px auto 0}
+  .bism{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--terra-d);margin-bottom:22px}
+
+  /* ---- TAFSILOT (indigo panel) ---- */
+  #det{padding:0;background:var(--indigo);color:var(--cream)}
+  .det-in{padding:64px 26px 74px;text-align:center;position:relative;overflow:hidden}
+  .det-in .lab{color:var(--gold)}
+  .tile{position:absolute;inset:0;opacity:.10;pointer-events:none}
+  .drow{position:relative;z-index:2;margin-top:34px}
+  .drow .k{font-size:8px;letter-spacing:.34em;text-transform:uppercase;color:#9fb0c9}
+  .drow .v{font-family:var(--serif);font-size:clamp(21px,6.2vw,26px);color:#fdf6e8;margin-top:10px;line-height:1.4}
+  .drow+.drow{margin-top:30px;padding-top:30px;border-top:1px solid rgba(212,160,60,.22)}
+  .btn{display:inline-flex;align-items:center;gap:9px;margin-top:36px;padding:14px 28px;
+    border-radius:2px;background:var(--gold);color:#1f3557;text-decoration:none;
+    font-size:9px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;position:relative;z-index:2}
+  .btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+  /* ---- SANOQ ---- */
+  #cd{padding-top:70px;padding-bottom:76px;text-align:center;background:var(--cream)}
+  .cdrow{display:flex;justify-content:center;gap:7px;margin-top:32px}
+  .cdrow div{flex:1;max-width:86px}
+  .cdrow .box{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+  .cdrow .box svg{position:absolute;inset:0;width:100%;height:100%}
+  .cdrow .v{position:relative;font-family:var(--serif);font-size:clamp(19px,5.6vw,24px);
+    font-weight:600;color:var(--indigo);font-variant-numeric:tabular-nums}
+  .cdrow .k{font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);margin-top:11px}
+
+  /* ---- YAKUN ---- */
+  #end{padding-top:66px;padding-bottom:70px;text-align:center;background:var(--cream)}
+  .fin{font-family:var(--serif);font-size:clamp(24px,7vw,32px);color:var(--terra-d);line-height:1.5;font-weight:500}
+  .sig{font-size:8.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink2);margin-top:30px}
+</style>
+</head>
+<body>
+<div class="page">
+  <svg class="ikat" id="ik1" preserveAspectRatio="none" viewBox="0 0 400 26"></svg>
+
+  <section id="hero">
+    <span class="lab rv d1">Nikoh to‘yi taklifnomasi</span>
+    <svg class="rosette spin d2" id="ros" viewBox="0 0 300 300" style="margin-top:24px"></svg>
+    <h1 class="nm rv d3" style="margin-top:30px">
+      <span>Otabek</span>
+      <em>va</em>
+      <span>Zulayho</span>
+    </h1>
+    <div class="dt rv d4">
+      <span class="s">Shanba</span>
+      <span class="n">12</span>
+      <span class="s">Sentabr</span>
+    </div>
+    <div class="yr rv d4">2026</div>
+  </section>
+
+  <svg class="ikat" id="ik2" preserveAspectRatio="none" viewBox="0 0 400 26"></svg>
+
+  <section id="say">
+    <p class="bism rv">Bismillahir rohmanir rohiym</p>
+    <span class="lab rv d1">Assalomu alaykum</span>
+    <p class="lede rv d2">Ota-onalarimiz duosi bilan qurilayotgan xonadonimizning ilk kunida Sizni dasturxonimiz atrofida ko‘rishni orzu qilamiz.</p>
+    <svg class="rv d3" viewBox="0 0 120 20" style="width:120px;margin:30px auto 0;display:block">
+      <path d="M4 10h40M76 10h40" stroke="#b8562f" stroke-width="1"/>
+      <path d="M60 3 L66 10 L60 17 L54 10 Z" fill="#d4a03c" stroke="#b8562f" stroke-width=".8"/>
+      <circle cx="48" cy="10" r="2" fill="#b8562f"/><circle cx="72" cy="10" r="2" fill="#b8562f"/>
+    </svg>
+  </section>
+
+  <section id="det">
+    <div class="det-in">
+      <svg class="tile" id="tile" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 620"></svg>
+      <span class="lab rv">Marosim</span>
+      <div class="drow rv d1"><div class="k">Sana</div><div class="v">12 Sentabr 2026 · Shanba</div></div>
+      <div class="drow rv d2"><div class="k">Vaqt</div><div class="v">Soat 18:00</div></div>
+      <div class="drow rv d3"><div class="k">Manzil</div><div class="v">“Afrosiyob” to‘yxonasi<br><span style="font-size:.7em;color:#9fb0c9">Samarqand shahri, Afrosiyob mahallasi</span></div></div>
+      <a class="btn rv d4" href="https://www.google.com/maps/search/?api=1&query=Afrosiyob%20to%27yxonasi%20Samarqand" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Xaritani ochish
+      </a>
+    </div>
+  </section>
+
+  <section id="cd">
+    <span class="lab rv">To‘yimizgacha</span>
+    <div class="cdrow rv d1">
+      <div><div class="box"><svg class="oct" viewBox="0 0 100 100"></svg><span class="v" id="D">—</span></div><div class="k">Kun</div></div>
+      <div><div class="box"><svg class="oct" viewBox="0 0 100 100"></svg><span class="v" id="H">—</span></div><div class="k">Soat</div></div>
+      <div><div class="box"><svg class="oct" viewBox="0 0 100 100"></svg><span class="v" id="M">—</span></div><div class="k">Daqiqa</div></div>
+      <div><div class="box"><svg class="oct" viewBox="0 0 100 100"></svg><span class="v" id="S">—</span></div><div class="k">Soniya</div></div>
+    </div>
+  </section>
+
+  <svg class="ikat" id="ik3" preserveAspectRatio="none" viewBox="0 0 400 26"></svg>
+
+  <section id="end">
+    <p class="fin rv">Sizni kutib qolamiz</p>
+    <p class="sig rv d1">Otabek &amp; Zulayho · 12.09.2026</p>
+  </section>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+/* ---------- SUZANI ROZETKA ---------- */
+function petal(cx,cy,r1,r2,ang,w,fill,stroke){
+  const rad=a=>a*Math.PI/180;
+  const p=(r,a)=>[cx+r*Math.cos(rad(a)),cy+r*Math.sin(rad(a))];
+  const [x1,y1]=p(r1,ang-w),[x2,y2]=p(r2,ang),[x3,y3]=p(r1,ang+w);
+  return el('path',{d:`M${cx} ${cy} Q${x1.toFixed(1)} ${y1.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)} Q${x3.toFixed(1)} ${y3.toFixed(1)} ${cx} ${cy} Z`,
+    fill,stroke,'stroke-width':1});
+}
+function rosette(svg,cx,cy,R){
+  // tashqi halqa
+  svg.appendChild(el('circle',{cx,cy,r:R,fill:'none',stroke:'#b8562f','stroke-width':1.4,opacity:.55}));
+  svg.appendChild(el('circle',{cx,cy,r:R-9,fill:'none',stroke:'#d4a03c','stroke-width':.9,opacity:.7}));
+  // tashqi barglar
+  for(let i=0;i<24;i++){
+    const a=i*15;
+    svg.appendChild(petal(cx,cy,R-2,R+13,a,6,i%2?'#d4a03c':'#b8562f','#8e3d1e'));
+  }
+  // ikkinchi qator
+  for(let i=0;i<16;i++) svg.appendChild(petal(cx,cy,R*0.62,R*0.94,i*22.5+11,10,'#1f3557','#152540'));
+  // uchinchi qator
+  for(let i=0;i<12;i++) svg.appendChild(petal(cx,cy,R*0.38,R*0.66,i*30,13,'#b8562f','#8e3d1e'));
+  // ichki
+  for(let i=0;i<8;i++) svg.appendChild(petal(cx,cy,R*0.18,R*0.4,i*45+22,17,'#d4a03c','#b8562f'));
+  svg.appendChild(el('circle',{cx,cy,r:R*0.19,fill:'#fbf3e4',stroke:'#b8562f','stroke-width':1.2}));
+  svg.appendChild(el('circle',{cx,cy,r:R*0.11,fill:'#1f3557'}));
+  svg.appendChild(el('circle',{cx,cy,r:R*0.05,fill:'#d4a03c'}));
+}
+rosette(document.getElementById('ros'),150,150,128);
+
+/* ---------- IKAT LENTA ---------- */
+function ikat(svg){
+  const cols=['#b8562f','#1f3557','#d4a03c','#8e3d1e'];
+  svg.appendChild(el('rect',{x:0,y:0,width:400,height:26,fill:'#fbf3e4'}));
+  for(let x=0;x<400;x+=25){
+    const c=cols[(x/25)%cols.length];
+    svg.appendChild(el('path',{d:`M${x} 13 L${x+6} 3 L${x+12.5} 13 L${x+6} 23 Z`,fill:c,opacity:.9}));
+    svg.appendChild(el('path',{d:`M${x+12.5} 13 L${x+18} 6 L${x+25} 13 L${x+18} 20 Z`,
+      fill:cols[(x/25+2)%cols.length],opacity:.75}));
+    svg.appendChild(el('circle',{cx:x+6,cy:13,r:2.2,fill:'#fbf3e4'}));
+  }
+  svg.appendChild(el('rect',{x:0,y:0,width:400,height:1.4,fill:'#8e3d1e'}));
+  svg.appendChild(el('rect',{x:0,y:24.6,width:400,height:1.4,fill:'#8e3d1e'}));
+}
+['ik1','ik2','ik3'].forEach(id=>ikat(document.getElementById(id)));
+
+/* ---------- indigo panel naqshi ---------- */
+(function(){
+  const s=document.getElementById('tile');
+  for(let y=40;y<620;y+=110)for(let x=40;x<400;x+=110){
+    const g=el('g',{transform:`translate(${x},${y}) scale(.34)`});
+    const tmp=el('g'); rosetteInto(tmp,0,0,90); g.appendChild(tmp); s.appendChild(g);
+  }
+  function rosetteInto(t,cx,cy,R){
+    for(let i=0;i<16;i++) t.appendChild(petal(cx,cy,R*0.5,R,i*22.5,9,'#d4a03c','#d4a03c'));
+    for(let i=0;i<8;i++) t.appendChild(petal(cx,cy,R*0.2,R*0.5,i*45+22,15,'#fbf3e4','#fbf3e4'));
+    t.appendChild(el('circle',{cx,cy,r:R*0.14,fill:'#d4a03c'}));
+  }
+})();
+
+/* ---------- sakkiz burchak ramka ---------- */
+document.querySelectorAll('.oct').forEach(s=>{
+  const r=46,cx=50,cy=50,pts=[];
+  for(let i=0;i<8;i++){const a=(i*45-22.5)*Math.PI/180;
+    pts.push(`${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`);}
+  s.appendChild(el('polygon',{points:pts.join(' '),fill:'#fff9ee',stroke:'#b8562f','stroke-width':1.4}));
+  const p2=[];
+  for(let i=0;i<8;i++){const a=(i*45-22.5)*Math.PI/180;
+    p2.push(`${(cx+(r-6)*Math.cos(a)).toFixed(1)},${(cy+(r-6)*Math.sin(a)).toFixed(1)}`);}
+  s.appendChild(el('polygon',{points:p2.join(' '),fill:'none',stroke:'#d4a03c','stroke-width':.8}));
+});
+
+/* ---------- sanoq ---------- */
+const T=new Date('2026-09-12T18:00:00+05:00').getTime();
+const p2=n=>String(n).padStart(2,'0');
+setInterval(()=>{const d=T-Date.now(); if(d<=0)return; const s=Math.floor(d/1000);
+  D.textContent=Math.floor(s/86400); H.textContent=p2(Math.floor(s%86400/3600));
+  M.textContent=p2(Math.floor(s%3600/60)); S.textContent=p2(s%60);},1000);
+
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

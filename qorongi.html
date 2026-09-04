@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sardor & Malika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500&family=Italiana&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0f0d;
+    --bg2:#121814;
+    --gold:#c9a961;
+    --gold-l:#e6d29b;
+    --emerald:#16302a;
+    --txt:#e8e3d8;
+    --txt2:#8d887c;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --disp:'Italiana','Cormorant Garamond',serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:#070907;font-family:'Inter',-apple-system,sans-serif;color:var(--txt);
+    -webkit-font-smoothing:antialiased}
+  .page{position:relative;width:min(500px,100vw);margin:0 auto;background:var(--bg);overflow:hidden}
+  /* yumshoq yorug'lik */
+  .page::before{content:"";position:absolute;top:-10%;left:50%;transform:translateX(-50%);
+    width:130%;height:70vh;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 30%,rgba(201,169,97,.16),rgba(22,48,42,.10) 42%,transparent 68%)}
+
+  /* yulduzchalar */
+  #stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+  #stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--gold-l);
+    opacity:.25;animation:tw 4s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:.12;transform:scale(.8)}50%{opacity:.7;transform:scale(1.3)}}
+
+  section{position:relative;z-index:2;padding:0 30px}
+  .lab{font-size:8.5px;letter-spacing:.5em;text-transform:uppercase;color:var(--txt2);font-weight:300}
+  .hair{height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,97,.5),transparent)}
+
+  .rv{opacity:0;transform:translateY(24px);transition:opacity 1.4s,transform 1.4s cubic-bezier(.16,1,.3,1)}
+  .in .rv{opacity:1;transform:none}
+  .d1{transition-delay:.15s}.d2{transition-delay:.35s}.d3{transition-delay:.55s}.d4{transition-delay:.75s}
+
+  /* ---- HERO ---- */
+  #hero{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding-top:70px;padding-bottom:60px}
+  .crest{width:56px;margin:0 auto 34px;display:block}
+  .nm{font-family:var(--disp);line-height:1.02;letter-spacing:.02em}
+  .nm span{display:block;font-size:clamp(44px,14vw,66px);
+    background:linear-gradient(100deg,#a98d4f 0%,#e8d5a4 28%,#fff6de 46%,#e2caa0 62%,#a98d4f 100%);
+    background-size:220% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:sheen 7s linear infinite}
+  @keyframes sheen{0%{background-position:180% 0}100%{background-position:-40% 0}}
+  .amp{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--gold);
+    opacity:.75;margin:8px 0 6px;display:block}
+  .dline{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:34px}
+  .dline .s{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--txt2)}
+  .dline .n{font-family:var(--serif);font-size:38px;font-weight:300;color:var(--gold-l);line-height:1;
+    padding:0 16px;border-left:1px solid rgba(201,169,97,.32);border-right:1px solid rgba(201,169,97,.32)}
+  .scroll{margin-top:auto;font-size:8.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--txt2)}
+  .scroll i{display:block;width:1px;height:44px;margin:14px auto 0;
+    background:linear-gradient(180deg,rgba(201,169,97,.6),transparent);animation:drop 2.4s ease-in-out infinite}
+  @keyframes drop{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+  /* ---- MATN ---- */
+  #say{padding-top:110px;padding-bottom:110px;text-align:center}
+  .lede{font-family:var(--serif);font-weight:300;font-size:clamp(20px,5.8vw,25px);
+    line-height:1.85;color:#d8d2c4;max-width:26ch;margin:30px auto 0}
+
+  /* ---- TAFSILOT ---- */
+  #det{padding-top:66px;padding-bottom:96px;text-align:center}
+  .card{border:1px solid rgba(201,169,97,.22);background:linear-gradient(180deg,rgba(201,169,97,.05),rgba(22,48,42,.14));
+    padding:44px 26px;margin-top:34px}
+  .card .k{font-size:8.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--txt2)}
+  .card .v{font-family:var(--serif);font-size:clamp(22px,6.4vw,28px);color:var(--gold-l);margin-top:12px;line-height:1.35}
+  .card .sep{height:1px;background:rgba(201,169,97,.16);margin:28px 0}
+  .btn{display:inline-flex;align-items:center;gap:10px;margin-top:34px;padding:14px 30px;
+    border:1px solid rgba(201,169,97,.45);border-radius:2px;color:var(--gold-l);text-decoration:none;
+    font-size:9px;letter-spacing:.32em;text-transform:uppercase;
+    background:linear-gradient(180deg,rgba(201,169,97,.10),transparent)}
+  .btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6}
+
+  /* ---- SANOQ ---- */
+  #cd{padding-top:20px;padding-bottom:100px;text-align:center}
+  .cdrow{display:flex;justify-content:center;gap:8px;margin-top:34px}
+  .cdrow div{flex:1;max-width:88px}
+  .cdrow .ring{position:relative;aspect-ratio:1;border:1px solid rgba(201,169,97,.28);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 40% 30%,rgba(201,169,97,.09),transparent 70%)}
+  .cdrow .v{font-family:var(--serif);font-size:clamp(20px,6vw,26px);color:var(--gold-l);
+    font-variant-numeric:tabular-nums}
+  .cdrow .k{font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt2);margin-top:12px}
+
+  /* ---- YAKUN ---- */
+  #end{padding-top:0;padding-bottom:80px;text-align:center}
+  .fin{font-family:var(--disp);font-size:clamp(28px,8.4vw,40px);color:var(--gold-l);line-height:1.4}
+  .sig{font-size:8.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--txt2);margin-top:34px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div id="stars"></div>
+
+  <section id="hero">
+    <svg class="crest rv" viewBox="0 0 60 60" fill="none">
+      <circle cx="30" cy="30" r="27" stroke="#c9a961" stroke-width=".8" opacity=".5"/>
+      <path d="M30 8 L34 26 L52 30 L34 34 L30 52 L26 34 L8 30 L26 26 Z" fill="#c9a961" opacity=".85"/>
+      <circle cx="30" cy="30" r="3.4" fill="#0c0f0d"/>
+    </svg>
+    <span class="lab rv d1">Nikoh to‘yi</span>
+    <h1 class="nm rv d2" style="margin-top:22px">
+      <span>Sardor</span>
+      <em class="amp">va</em>
+      <span>Malika</span>
+    </h1>
+    <div class="hair rv d3" style="width:150px;margin:30px auto 0"></div>
+    <div class="dline rv d3">
+      <span class="s">Shanba</span>
+      <span class="n">03</span>
+      <span class="s">Oktabr</span>
+    </div>
+    <div class="rv d4" style="font-family:var(--serif);font-size:20px;letter-spacing:.24em;color:var(--txt2);margin-top:14px">2026</div>
+    <div class="scroll rv d4">Pastga<i></i></div>
+  </section>
+
+  <section id="say">
+    <span class="lab rv">Assalomu alaykum</span>
+    <p class="lede rv d1">Yulduzlar ostida boshlanadigan hayotimizning birinchi kechasini Siz bilan birga o‘tkazishni istaymiz.</p>
+    <div class="hair rv d2" style="width:110px;margin:38px auto 0"></div>
+  </section>
+
+  <section id="det">
+    <span class="lab rv">Marosim</span>
+    <div class="card rv d1">
+      <div class="k">Sana va vaqt</div>
+      <div class="v">3 Oktabr 2026<br>Shanba · 19:00</div>
+      <div class="sep"></div>
+      <div class="k">Manzil</div>
+      <div class="v">“Sohibqiron” banket zali<br><span style="font-size:.72em;color:var(--txt2)">Samarqand shahri, Amir Temur ko‘chasi</span></div>
+      <div class="sep"></div>
+      <div class="k">Kiyim</div>
+      <div class="v">Kechki uslub</div>
+    </div>
+    <a class="btn rv d2" href="https://www.google.com/maps/search/?api=1&query=Sohibqiron%20banket%20zali%20Samarqand" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Xaritani ochish
+    </a>
+  </section>
+
+  <section id="cd">
+    <span class="lab rv">Kechagacha</span>
+    <div class="cdrow rv d1">
+      <div><div class="ring"><span class="v" id="D">—</span></div><div class="k">Kun</div></div>
+      <div><div class="ring"><span class="v" id="H">—</span></div><div class="k">Soat</div></div>
+      <div><div class="ring"><span class="v" id="M">—</span></div><div class="k">Daqiqa</div></div>
+      <div><div class="ring"><span class="v" id="S">—</span></div><div class="k">Soniya</div></div>
+    </div>
+  </section>
+
+  <section id="end">
+    <div class="hair rv" style="width:80px;margin:0 auto 44px"></div>
+    <p class="fin rv d1">Sizni ko‘rish — biz uchun baxt</p>
+    <p class="sig rv d2">Sardor &amp; Malika</p>
+  </section>
+</div>
+
+<script>
+// yulduzlar
+const st=document.getElementById('stars');
+for(let i=0;i<46;i++){const b=document.createElement('i');
+  b.style.left=Math.random()*100+'%'; b.style.top=Math.random()*100+'%';
+  b.style.animationDelay=(Math.random()*4).toFixed(2)+'s';
+  const s=(Math.random()*1.6+.8).toFixed(1); b.style.width=b.style.height=s+'px';
+  st.appendChild(b);}
+
+const T=new Date('2026-10-03T19:00:00+05:00').getTime();
+const p=n=>String(n).padStart(2,'0');
+setInterval(()=>{const d=T-Date.now(); if(d<=0)return; const s=Math.floor(d/1000);
+  D.textContent=Math.floor(s/86400); H.textContent=p(Math.floor(s%86400/3600));
+  M.textContent=p(Math.floor(s%3600/60)); S.textContent=p(s%60);},1000);
+
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

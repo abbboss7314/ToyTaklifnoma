@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aziz & Kamola</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7ecd9;
+    --terra:#d2622f;
+    --mustard:#e2a02c;
+    --olive:#6b7a45;
+    --brown:#5a3a24;
+    --ink:#2e1d12;
+    --disp:'Bricolage Grotesque','Inter',sans-serif;
+    --hand:'Caveat',cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:#e6d5bb;font-family:'Inter',-apple-system,sans-serif;color:var(--ink);
+    -webkit-font-smoothing:antialiased}
+  .page{width:min(500px,100vw);margin:0 auto;background:var(--cream);overflow:hidden;position:relative}
+  .page::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.05;
+    background-image:radial-gradient(#5a3a24 1px,transparent 1px);background-size:3px 3px}
+
+  section{position:relative;padding:0 26px;z-index:2}
+  .lab{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--brown);font-weight:600}
+
+  .rv{opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s cubic-bezier(.34,1.4,.5,1)}
+  .in .rv{opacity:1;transform:none}
+  .d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
+
+  /* ---- marquee ---- */
+  .mq{overflow:hidden;background:var(--terra);color:var(--cream);padding:11px 0;white-space:nowrap}
+  .mq span{display:inline-block;font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    font-weight:600;animation:run 22s linear infinite;padding-right:24px}
+  @keyframes run{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* ---- HERO ---- */
+  #hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;
+    padding-top:66px;padding-bottom:50px;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.9;z-index:-1}
+  .arcbox{position:relative;background:var(--mustard);
+    border-radius:50% 50% 16px 16px / 42% 42% 16px 16px;
+    padding:56px 26px 40px;text-align:center;box-shadow:8px 10px 0 var(--brown)}
+  .kick{font-family:var(--hand);font-size:30px;color:var(--brown);line-height:1;transform:rotate(-4deg)}
+  .nm{font-family:var(--disp);font-weight:800;line-height:.88;letter-spacing:-.035em;color:var(--ink);margin-top:14px}
+  .nm span{display:block;font-size:clamp(46px,15vw,68px);text-transform:uppercase}
+  .amp{font-family:var(--hand);font-weight:600;font-size:34px;color:var(--terra);
+    display:block;line-height:1;margin:4px 0;transform:rotate(-6deg)}
+  .bigdate{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin-top:34px}
+  .bigdate b{font-family:var(--disp);font-weight:800;font-size:clamp(62px,21vw,96px);
+    line-height:.78;color:var(--terra);letter-spacing:-.05em}
+  .bigdate i{font-style:normal;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:600;color:var(--brown);padding-bottom:10px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:26px}
+  .tag{background:var(--olive);color:var(--cream);border-radius:40px;padding:8px 16px;
+    font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+
+  /* ---- MATN ---- */
+  #say{padding-top:76px;padding-bottom:76px;text-align:center}
+  .lede{font-family:var(--disp);font-weight:600;font-size:clamp(24px,7vw,32px);line-height:1.24;
+    letter-spacing:-.02em;max-width:15ch;margin:20px auto 0}
+  .sub{font-size:13px;line-height:1.95;color:#5f5040;max-width:31ch;margin:22px auto 0}
+
+  /* ---- TAFSILOT ---- */
+  #det{padding-top:10px;padding-bottom:80px}
+  .cards{display:grid;gap:12px;margin-top:26px}
+  .cd{border:2px solid var(--ink);border-radius:18px;padding:22px;background:#fff8ec;
+    box-shadow:5px 6px 0 var(--ink);display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .cd:nth-child(2){background:#fdefd6}
+  .cd:nth-child(3){background:#f2f0e0}
+  .cd .k{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--brown);font-weight:600}
+  .cd .v{font-family:var(--disp);font-weight:600;font-size:20px;line-height:1.25;margin-top:6px}
+  .cd .ic{width:38px;height:38px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;
+    background:var(--terra)}
+  .cd .ic svg{width:17px;height:17px;stroke:var(--cream);fill:none;stroke-width:1.9}
+  .btn{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:22px;padding:17px;
+    border:2px solid var(--ink);border-radius:40px;background:var(--terra);color:#fff6e6;
+    text-decoration:none;font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+    box-shadow:5px 6px 0 var(--ink)}
+  .btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* ---- SANOQ ---- */
+  #cd2{padding-top:8px;padding-bottom:80px}
+  .cdrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:24px}
+  .cdrow div{background:var(--olive);color:var(--cream);border-radius:14px;padding:16px 4px;text-align:center;
+    border:2px solid var(--ink);box-shadow:4px 5px 0 var(--ink)}
+  .cdrow div:nth-child(2){background:var(--mustard);color:var(--ink)}
+  .cdrow div:nth-child(3){background:var(--terra)}
+  .cdrow div:nth-child(4){background:var(--brown)}
+  .cdrow .v{font-family:var(--disp);font-weight:800;font-size:clamp(22px,7vw,30px);line-height:1;
+    font-variant-numeric:tabular-nums}
+  .cdrow .k{font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;margin-top:8px;font-weight:600;opacity:.9}
+
+  /* ---- YAKUN ---- */
+  #end{padding-top:56px;padding-bottom:70px;text-align:center}
+  .fin{font-family:var(--hand);font-size:clamp(38px,12vw,54px);color:var(--terra);line-height:1.1;
+    transform:rotate(-3deg)}
+  .sig{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--brown);
+    margin-top:30px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="mq"><span>Aziz &amp; Kamola · 07.11.2026 · Jomboy · Aziz &amp; Kamola · 07.11.2026 · Jomboy · Aziz &amp; Kamola · 07.11.2026 · Jomboy · </span></div>
+
+  <section id="hero">
+    <div class="blob" style="width:200px;height:200px;background:var(--olive);top:6%;left:-16%"></div>
+    <div class="blob" style="width:150px;height:150px;background:var(--terra);bottom:10%;right:-14%;opacity:.55"></div>
+    <div class="arcbox rv">
+      <div class="kick">To‘yga taklif!</div>
+      <h1 class="nm">
+        <span>Aziz</span>
+        <em class="amp">va</em>
+        <span>Kamola</span>
+      </h1>
+      <div class="bigdate">
+        <b>07</b><i>/</i><b>11</b>
+      </div>
+      <div style="font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.34em;color:var(--brown);margin-top:10px">2026</div>
+      <div class="tags">
+        <span class="tag">Shanba</span>
+        <span class="tag">18:00</span>
+        <span class="tag">Jomboy</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="mq"><span>Kelinglar · Raqsga tushamiz · Yeymiz · Kulamiz · Kelinglar · Raqsga tushamiz · Yeymiz · Kulamiz · </span></div>
+
+  <section id="say">
+    <span class="lab rv">Salom!</span>
+    <p class="lede rv d1">Bitta kun. Katta davra. Va juda ko‘p kulgu.</p>
+    <p class="sub rv d2">Rasmiyatchilik kam, quvonch ko‘p bo‘ladi. Kelib, biz bilan birga bu kunni eslarda qoladigan qiling.</p>
+  </section>
+
+  <section id="det">
+    <span class="lab rv">Kerakli ma’lumot</span>
+    <div class="cards">
+      <div class="cd rv d1">
+        <div><div class="k">Qachon</div><div class="v">7-noyabr, shanba<br>soat 18:00</div></div>
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg></span>
+      </div>
+      <div class="cd rv d2">
+        <div><div class="k">Qayerda</div><div class="v">“Guliston” to‘yxonasi<br>Jomboy tumani</div></div>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+      </div>
+      <div class="cd rv d3">
+        <div><div class="k">Kiyim</div><div class="v">Qulay va chiroyli<br>raqsga tayyor</div></div>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg></span>
+      </div>
+    </div>
+    <a class="btn rv d4" href="https://www.google.com/maps/search/?api=1&query=Guliston%20to%27yxonasi%20Jomboy%20Samarqand" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Yo‘lni ko‘rsat
+    </a>
+  </section>
+
+  <section id="cd2">
+    <span class="lab rv">Qancha qoldi?</span>
+    <div class="cdrow rv d1">
+      <div><div class="v" id="D">—</div><div class="k">Kun</div></div>
+      <div><div class="v" id="H">—</div><div class="k">Soat</div></div>
+      <div><div class="v" id="M">—</div><div class="k">Daqiqa</div></div>
+      <div><div class="v" id="S">—</div><div class="k">Soniya</div></div>
+    </div>
+  </section>
+
+  <section id="end">
+    <p class="fin rv">Ko‘rishguncha!</p>
+    <p class="sig rv d1">Aziz &amp; Kamola</p>
+  </section>
+
+  <div class="mq"><span>07.11.2026 · Guliston to‘yxonasi · Jomboy · 07.11.2026 · Guliston to‘yxonasi · Jomboy · </span></div>
+</div>
+
+<script>
+const T=new Date('2026-11-07T18:00:00+05:00').getTime();
+const p=n=>String(n).padStart(2,'0');
+setInterval(()=>{const d=T-Date.now(); if(d<=0)return; const s=Math.floor(d/1000);
+  D.textContent=Math.floor(s/86400); H.textContent=p(Math.floor(s%86400/3600));
+  M.textContent=p(Math.floor(s%3600/60)); S.textContent=p(s%60);},1000);
+// marquee uzluksiz bo'lishi uchun matnni ikkilantiramiz
+document.querySelectorAll('.mq span').forEach(s=>s.textContent=s.textContent+s.textContent);
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.12});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

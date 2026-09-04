@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ilhom & Sevara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#f4efe6;
+    --sand2:#eae2d4;
+    --sage:#8e9c81;
+    --sage-d:#5f6d54;
+    --terra:#c17a5b;
+    --terra-d:#9a5b40;
+    --ink:#3b382f;
+    --ink2:#7b756a;
+    --disp:'Fraunces',Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:#e3dbcb;font-family:'Inter',-apple-system,sans-serif;color:var(--ink);
+    -webkit-font-smoothing:antialiased}
+  .page{position:relative;width:min(500px,100vw);margin:0 auto;background:var(--sand);overflow:hidden}
+
+  section{position:relative;padding:0 28px;z-index:2}
+  .lab{font-size:8.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink2)}
+
+  /* toshsimon shakllar */
+  .pebble{position:absolute;z-index:0;pointer-events:none;
+    animation:morph 18s ease-in-out infinite}
+  @keyframes morph{
+    0%,100%{border-radius:58% 42% 47% 53% / 44% 51% 49% 56%}
+    33%{border-radius:44% 56% 61% 39% / 57% 43% 57% 43%}
+    66%{border-radius:51% 49% 38% 62% / 39% 62% 38% 61%}
+  }
+
+  /* arka */
+  .arch{position:relative;border-radius:999px 999px 10px 10px / 46% 46% 10px 10px;overflow:hidden}
+  .arch-line{border:1px solid rgba(94,109,84,.34)}
+
+  .rv{opacity:0;transform:translateY(24px);transition:opacity 1.15s,transform 1.25s cubic-bezier(.16,1,.3,1)}
+  .in .rv{opacity:1;transform:none}
+  .grow{clip-path:inset(100% 0 0 0);transition:clip-path 1.5s cubic-bezier(.16,1,.3,1)}
+  .in .grow{clip-path:inset(0 0 0 0)}
+  .d1{transition-delay:.12s}.d2{transition-delay:.28s}.d3{transition-delay:.44s}.d4{transition-delay:.6s}
+
+  /* ---- HERO ---- */
+  #hero{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding-top:60px;padding-bottom:48px;text-align:center}
+  .hero-arch{width:min(300px,80vw);aspect-ratio:3/4.1;position:relative;
+    background:linear-gradient(180deg,#e9e4d3 0%,#dcd3bd 60%,#d3c8ae 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:34px 24px;
+    box-shadow:0 22px 44px -26px rgba(80,70,50,.55)}
+  .hero-arch::before{content:"";position:absolute;inset:11px;
+    border:1.4px solid rgba(154,91,64,.5);
+    border-radius:999px 999px 6px 6px / 46% 46% 6px 6px}
+  .nm{font-family:var(--disp);font-weight:300;line-height:1.06;color:var(--ink)}
+  .nm span{display:block;font-size:clamp(34px,10.4vw,46px);letter-spacing:-.015em;color:#312e26}
+  .nm em{display:block;font-style:italic;font-size:22px;color:var(--terra-d);margin:4px 0}
+  .sun{position:absolute;top:9%;left:50%;transform:translateX(-50%);width:104px;height:104px;
+    border-radius:50%;background:radial-gradient(circle at 38% 32%,#efc79b,#d08a63 58%,var(--terra-d));
+    opacity:.92;z-index:0}
+  .hero-arch .nm,.hero-arch>div:not(.sun){position:relative;z-index:1}
+  .hero-meta{display:flex;align-items:center;gap:14px;margin-top:30px}
+  .hero-meta .s{font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink2)}
+  .hero-meta .n{font-family:var(--disp);font-size:34px;font-weight:300;color:var(--terra-d);line-height:1;
+    padding:0 14px;border-left:1px solid rgba(154,91,64,.34);border-right:1px solid rgba(154,91,64,.34)}
+
+  /* ---- MATN ---- */
+  #say{padding-top:96px;padding-bottom:90px;text-align:center}
+  .lede{font-family:var(--disp);font-weight:300;font-size:clamp(21px,6vw,27px);line-height:1.7;
+    max-width:22ch;margin:24px auto 0}
+
+  /* ---- TAFSILOT: uch arka ---- */
+  #det{padding-top:20px;padding-bottom:96px}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:30px}
+  .three .a{aspect-ratio:1/1.62;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:14px 8px;
+    border-radius:999px 999px 8px 8px / 46% 46% 8px 8px}
+  .three .a:nth-child(1){background:var(--sage);color:#f6f3ea}
+  .three .a:nth-child(2){background:var(--terra);color:#fdf4ec}
+  .three .a:nth-child(3){background:var(--sand2);color:var(--ink);border:1px solid rgba(94,109,84,.3)}
+  .three .k{font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  .three .v{font-family:var(--disp);font-size:17px;line-height:1.3;margin-top:9px;font-weight:400}
+  .venue{text-align:center;margin-top:40px}
+  .venue .t{font-family:var(--disp);font-size:clamp(22px,6.4vw,27px);font-weight:400}
+  .venue .s{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);margin-top:12px;line-height:1.9}
+  .btn{display:flex;align-items:center;justify-content:center;gap:9px;width:max-content;margin:26px auto 0;
+    padding:15px 30px;border-radius:999px;background:var(--sage-d);color:#f5f2e9;text-decoration:none;
+    font-size:9px;letter-spacing:.28em;text-transform:uppercase}
+  .btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.7}
+
+  /* ---- SANOQ ---- */
+  #cd{padding-top:0;padding-bottom:92px;text-align:center}
+  .cdrow{display:flex;justify-content:center;gap:9px;margin-top:28px}
+  .cdrow div{flex:1;max-width:82px}
+  .cdrow .p{aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    background:var(--sand2);border:1px solid rgba(94,109,84,.26);
+    border-radius:58% 42% 47% 53% / 44% 51% 49% 56%;animation:morph 16s ease-in-out infinite}
+  .cdrow div:nth-child(2) .p{animation-delay:-4s}
+  .cdrow div:nth-child(3) .p{animation-delay:-8s}
+  .cdrow div:nth-child(4) .p{animation-delay:-12s}
+  .cdrow .v{font-family:var(--disp);font-size:clamp(19px,5.8vw,24px);color:var(--terra-d);
+    font-variant-numeric:tabular-nums}
+  .cdrow .k{font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);margin-top:11px}
+
+  /* ---- YAKUN ---- */
+  #end{padding-top:0;padding-bottom:78px;text-align:center}
+  .end-arch{width:min(260px,72vw);aspect-ratio:3/3.3;margin:0 auto;background:var(--sage);
+    color:#f6f3ea;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:28px 22px;border-radius:999px 999px 10px 10px / 46% 46% 10px 10px}
+  .fin{font-family:var(--disp);font-weight:300;font-size:clamp(25px,7.4vw,32px);line-height:1.4}
+  .sig{font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;margin-top:26px;opacity:.85}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="pebble" style="width:230px;height:230px;background:rgba(142,156,129,.30);top:4%;left:-20%"></div>
+  <div class="pebble" style="width:170px;height:170px;background:rgba(193,122,91,.22);top:58%;right:-18%;animation-delay:-6s"></div>
+  <div class="pebble" style="width:200px;height:200px;background:rgba(142,156,129,.22);bottom:6%;left:-16%;animation-delay:-11s"></div>
+
+  <section id="hero">
+    <span class="lab rv">Nikoh to‘yi</span>
+    <div class="hero-arch arch rv d1" style="margin-top:24px">
+      <div class="sun"></div>
+      <h1 class="nm" style="margin-top:96px">
+        <span>Ilhom</span>
+        <em>va</em>
+        <span>Sevara</span>
+      </h1>
+      <div style="width:44px;height:1px;background:rgba(154,91,64,.4);margin:22px auto"></div>
+      <div style="font-family:var(--disp);font-size:15px;letter-spacing:.22em;color:var(--ink2)">21.03.2027</div>
+    </div>
+    <div class="hero-meta rv d3">
+      <span class="s">Yakshanba</span>
+      <span class="n">21</span>
+      <span class="s">Mart</span>
+    </div>
+  </section>
+
+  <section id="say">
+    <span class="lab rv">Assalomu alaykum</span>
+    <p class="lede rv d1">Bahorning ilk kunlarida yangi hayotimizni boshlaymiz. Shu quvonchni Siz bilan bo‘lishmoqchimiz.</p>
+    <svg class="rv d2" viewBox="0 0 100 30" style="width:80px;margin:32px auto 0;display:block">
+      <path d="M50 26 C 34 26 26 16 26 8 C 34 8 44 14 50 26 Z" fill="#8e9c81"/>
+      <path d="M50 26 C 66 26 74 16 74 8 C 66 8 56 14 50 26 Z" fill="#c17a5b" opacity=".8"/>
+      <path d="M50 26 V 12" stroke="#5f6d54" stroke-width="1.2"/>
+    </svg>
+  </section>
+
+  <section id="det">
+    <span class="lab rv">Marosim</span>
+    <div class="three">
+      <div class="a rv d1"><span class="k">Sana</span><span class="v">21<br>Mart</span></div>
+      <div class="a rv d2"><span class="k">Vaqt</span><span class="v">17:30</span></div>
+      <div class="a rv d3"><span class="k">Kun</span><span class="v">Yak-<br>shanba</span></div>
+    </div>
+    <div class="venue rv d4">
+      <div class="t">“Oq saroy” to‘yxonasi</div>
+      <div class="s">Kattaqo‘rg‘on shahri<br>Samarqand viloyati</div>
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Oq%20saroy%20to%27yxonasi%20Kattaqo%27rg%27on" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Xaritani ochish
+      </a>
+    </div>
+  </section>
+
+  <section id="cd">
+    <span class="lab rv">To‘yimizgacha</span>
+    <div class="cdrow rv d1">
+      <div><div class="p"><span class="v" id="D">—</span></div><div class="k">Kun</div></div>
+      <div><div class="p"><span class="v" id="H">—</span></div><div class="k">Soat</div></div>
+      <div><div class="p"><span class="v" id="M">—</span></div><div class="k">Daqiqa</div></div>
+      <div><div class="p"><span class="v" id="S">—</span></div><div class="k">Soniya</div></div>
+    </div>
+  </section>
+
+  <section id="end">
+    <div class="end-arch rv">
+      <p class="fin">Sizni kutamiz</p>
+      <p class="sig">Ilhom &amp; Sevara</p>
+    </div>
+  </section>
+</div>
+
+<script>
+const T=new Date('2027-03-21T17:30:00+05:00').getTime();
+const p=n=>String(n).padStart(2,'0');
+setInterval(()=>{const d=T-Date.now(); if(d<=0)return; const s=Math.floor(d/1000);
+  D.textContent=Math.floor(s/86400); H.textContent=p(Math.floor(s%86400/3600));
+  M.textContent=p(Math.floor(s%3600/60)); S.textContent=p(s%60);},1000);
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.12});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

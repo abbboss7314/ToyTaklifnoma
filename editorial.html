@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jasur & Nilufar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f4ef;
+    --ink:#171512;
+    --ink2:#6a655d;
+    --rule:#d8d3c8;
+    --accent:#8a7a5e;
+    --serif:'Cormorant Garamond',Didot,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    background:#e7e3da;font-family:'Inter',-apple-system,sans-serif;color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{width:min(500px,100vw);margin:0 auto;background:var(--paper);overflow:hidden}
+
+  section{padding:0 30px;position:relative}
+  .lab{font-size:9px;letter-spacing:.46em;text-transform:uppercase;color:var(--ink2)}
+  .rule{height:1px;background:var(--rule);margin:0}
+
+  /* ---- kirish niqobi ---- */
+  .rev{overflow:hidden;display:block}
+  .rev>span{display:block;transform:translateY(105%);transition:transform 1.15s cubic-bezier(.16,1,.3,1)}
+  .in .rev>span{transform:none}
+  .fade{opacity:0;transition:opacity 1.2s .25s}
+  .in .fade{opacity:1}
+  .grow{transform:scaleX(0);transform-origin:left;transition:transform 1.3s cubic-bezier(.16,1,.3,1)}
+  .in .grow{transform:none}
+  .d1>span,.d1{transition-delay:.1s}.d2>span,.d2{transition-delay:.24s}
+  .d3>span,.d3{transition-delay:.38s}.d4>span,.d4{transition-delay:.52s}
+
+  /* ---- 1. HERO ---- */
+  #hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:space-between;
+    padding-top:52px;padding-bottom:38px}
+  .top{display:flex;justify-content:space-between;align-items:baseline}
+  .nm{font-family:var(--serif);font-weight:300;line-height:.86;letter-spacing:-.015em}
+  .nm .a{display:block;font-size:clamp(58px,19vw,92px)}
+  .nm .b{display:block;font-size:clamp(58px,19vw,92px);text-indent:.12em}
+  .amp{font-family:var(--serif);font-style:italic;font-size:clamp(26px,8vw,38px);
+    color:var(--accent);margin:6px 0 4px;display:block}
+  .meta{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+  .meta .r{text-align:right}
+  .big-date{font-family:var(--serif);font-weight:300;font-size:clamp(46px,15vw,70px);line-height:.85}
+
+  /* ---- 2. MATN ---- */
+  #say{padding-top:96px;padding-bottom:96px}
+  .lede{font-family:var(--serif);font-weight:300;font-size:clamp(24px,7vw,34px);
+    line-height:1.38;letter-spacing:-.01em;max-width:16ch}
+  .sub{font-size:13px;line-height:1.95;color:var(--ink2);max-width:34ch;margin-top:34px;font-weight:300}
+
+  /* ---- 3. TAFSILOT ---- */
+  #det{padding-top:70px;padding-bottom:90px}
+  .row{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:baseline;
+    padding:26px 0;border-top:1px solid var(--rule)}
+  .row:last-of-type{border-bottom:1px solid var(--rule)}
+  .row .k{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink2);white-space:nowrap}
+  .row .v{font-family:var(--serif);font-size:clamp(21px,6vw,27px);line-height:1.25;text-align:right;font-weight:400}
+  .row .v em{display:block;font-style:normal;font-family:'Inter',sans-serif;font-size:11px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--ink2);margin-top:9px}
+  .btn{display:inline-flex;align-items:center;gap:9px;margin-top:34px;padding:0 0 8px;
+    border-bottom:1px solid var(--ink);text-decoration:none;color:var(--ink);
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase}
+  .btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6}
+
+  /* ---- 4. SANOQ ---- */
+  #cd{padding-top:74px;padding-bottom:84px;background:var(--ink);color:#f2efe8;margin:0 -30px;padding-left:30px;padding-right:30px}
+  #cd .lab{color:#9c968b}
+  .cdrow{display:flex;justify-content:space-between;margin-top:38px}
+  .cdrow div{text-align:left;flex:1}
+  .cdrow .v{font-family:var(--serif);font-weight:300;font-size:clamp(34px,11vw,52px);line-height:.9;
+    font-variant-numeric:tabular-nums}
+  .cdrow .k{font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:#9c968b;margin-top:14px}
+
+  /* ---- 5. YAKUN ---- */
+  #end{padding-top:96px;padding-bottom:74px;text-align:center}
+  .mono{font-family:var(--serif);font-size:clamp(30px,9vw,42px);font-weight:300;line-height:1.3}
+  .sig{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink2);margin-top:40px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <section id="hero">
+    <div class="top">
+      <span class="lab fade d1">Taklifnoma</span>
+      <span class="lab fade d1">Samarqand</span>
+    </div>
+
+    <div>
+      <h1 class="nm">
+        <span class="rev d1"><span class="a">Jasur</span></span>
+        <span class="rev d2"><span class="amp">va</span></span>
+        <span class="rev d3"><span class="b">Nilufar</span></span>
+      </h1>
+      <div class="rule grow d4" style="margin-top:30px"></div>
+      <div class="meta" style="margin-top:22px">
+        <div>
+          <span class="lab fade d4">Shanba</span>
+          <div class="big-date rev d4"><span>15.05</span></div>
+        </div>
+        <div class="r">
+          <span class="lab fade d4">Yil</span>
+          <div class="big-date rev d4"><span>2027</span></div>
+        </div>
+      </div>
+    </div>
+
+    <span class="lab fade d4" style="align-self:center">↓&nbsp;&nbsp;Pastga</span>
+  </section>
+
+  <section id="say">
+    <span class="lab fade">Bir jumla</span>
+    <p class="lede rev d1" style="margin-top:26px"><span>Bir kun. Ikki hayot. Va Siz.</span></p>
+    <p class="sub fade d3">Nikoh marosimimizda ishtirok etishingizni chin dildan so‘raymiz. Sizning borligingiz — bu kunni to‘liq qiladigan yagona narsa.</p>
+  </section>
+
+  <section id="det">
+    <span class="lab fade">Tafsilotlar</span>
+    <div style="margin-top:30px">
+      <div class="row"><span class="k">Sana</span><span class="v">15 May 2027<em>Shanba</em></span></div>
+      <div class="row"><span class="k">Vaqt</span><span class="v">18:30<em>Kutib olish 18:00</em></span></div>
+      <div class="row"><span class="k">Manzil</span><span class="v">“Registon” to‘yxonasi<em>Samarqand shahri</em></span></div>
+      <div class="row"><span class="k">Kiyim</span><span class="v">Rasmiy<em>Bosiq ranglar</em></span></div>
+    </div>
+    <a class="btn fade d3" href="https://www.google.com/maps/search/?api=1&query=Registon%20to%27yxonasi%20Samarqand" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Xaritada ochish
+    </a>
+  </section>
+
+  <section id="cd">
+    <span class="lab fade">Qolgan vaqt</span>
+    <div class="cdrow">
+      <div><div class="v" id="D">—</div><div class="k">Kun</div></div>
+      <div><div class="v" id="H">—</div><div class="k">Soat</div></div>
+      <div><div class="v" id="M">—</div><div class="k">Daqiqa</div></div>
+      <div><div class="v" id="S">—</div><div class="k">Soniya</div></div>
+    </div>
+  </section>
+
+  <section id="end">
+    <p class="mono rev d1"><span>Sizni kutamiz</span></p>
+    <p class="sig fade d3">Jasur &amp; Nilufar · 15.05.2027</p>
+  </section>
+</div>
+
+<script>
+const T=new Date('2027-05-15T18:30:00+05:00').getTime();
+const p=n=>String(n).padStart(2,'0');
+setInterval(()=>{
+  const d=T-Date.now(); if(d<=0)return;
+  const s=Math.floor(d/1000);
+  D.textContent=Math.floor(s/86400); H.textContent=p(Math.floor(s%86400/3600));
+  M.textContent=p(Math.floor(s%3600/60)); S.textContent=p(s%60);
+},1000);
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.12});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
