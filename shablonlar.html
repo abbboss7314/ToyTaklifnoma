@@ -223,7 +223,7 @@
     </div>
     <footer>
       <span data-t="foot1"></span>
-      <span data-t="foot2"></span>
+      <a id="igProfile" target="_blank" rel="noopener" style="color:var(--gold)">@taklifnoma___017</a>
     </footer>
   </section>
 </main>
@@ -242,9 +242,14 @@
 
 <script>
 /* ═══════════════════════════════════════════════
-   ⚠️  INSTAGRAM MANZILINGIZNI SHU YERGA YOZING
+   Instagram: @taklifnoma___017
+   IG_DM  — Direct yozish oynasini ochadi
+   IG_PRO — profilning o'zi
    ═══════════════════════════════════════════════ */
-const IG = "https://www.instagram.com/";
+const IG_USER = "taklifnoma___017";
+const IG_DM  = "https://ig.me/m/" + IG_USER;
+const IG_PRO = "https://www.instagram.com/" + IG_USER + "/";
+const IG = IG_DM;
 
 const NS='http://www.w3.org/2000/svg';
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
@@ -396,7 +401,8 @@ function render(){
   const t=L[lang];
   document.documentElement.lang=lang;
   document.querySelectorAll('[data-t]').forEach(n=>{const v=t[n.dataset.t]; if(v) n.textContent=v;});
-  igTop.href=IG; igBottom.href=IG; morder.href=IG;
+  igTop.href=IG_DM; igBottom.href=IG_DM; morder.href=IG_DM;
+  document.getElementById("igProfile").href=IG_PRO;
 
   // filtrlar
   const cats=['all','milliy','klassik','minimal','zamonaviy','foto'];
