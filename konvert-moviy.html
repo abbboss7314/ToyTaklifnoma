@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Pinyon+Script&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cover:#1c2b4a; --cover2:#152139;
-    --seal:#c9a24a; --seal2:#9d7a2c; --sealInk:#1c2b4a;
-    --metal:#c9a24a; --metalL:#e6cf9a;
-    --paper:#f7f8fb; --paper2:#eef1f7; --tap:#e6cf9a;
-    --ink:#2b3446; --ink2:#7c8496; --line:rgba(60,80,120,.26);
+    --cover:#1c2b4a; --cover2:#131e37;
+    --seal:#c9a24a; --seal2:#9a7628; --sealInk:#17233d;
+    --metal:#c19a4e; --metalL:#e4cb92;
+    --paper:#1f3054; --paper2:#182746; --tap:#e8d3a4;
+    --ink:#f0f4fb; --ink2:#9dabc5; --line:rgba(201,162,74,.32); --band:rgba(0,0,0,.26); --cov:#1c2b4a;
     --serif:'Cormorant Garamond',Georgia,serif;
     --script:'Pinyon Script','Cormorant Garamond',cursive;
   }
@@ -23,20 +23,20 @@
     font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
   body.locked{overflow:hidden;height:100%}
   .page{position:relative;width:min(480px,100vw);margin:0 auto;background:var(--paper);overflow:hidden;
-    box-shadow:0 0 80px -30px rgba(0,0,0,.35)}
+    box-shadow:0 0 80px -30px rgba(0,0,0,.35);border-top:7px solid var(--cov)}
 
   /* ══════ MUQOVA ══════ */
   #cover{position:fixed;inset:0;z-index:90;background:var(--cover);overflow:hidden}
   #cover .tex{position:absolute;inset:0;width:100%;height:100%}
   .flap{position:absolute;left:0;right:0;top:0;height:58%;z-index:4;
-    background:linear-gradient(180deg,#152139 0%,#1c2b4a 62%,#152139 100%);
+    background:linear-gradient(180deg,#131e37 0%,#1c2b4a 62%,#131e37 100%);
     clip-path:polygon(0 0,100% 0,50% 100%);
     transform-origin:top center;transition:transform 1.7s cubic-bezier(.5,0,.15,1);
     filter:drop-shadow(0 8px 16px rgba(0,0,0,.22))}
   .flap .tex{opacity:.9}
   #cover.open .flap{transform:rotateX(-174deg)}
   .pocket{position:absolute;left:0;right:0;bottom:0;height:56%;z-index:3;
-    background:linear-gradient(0deg,#152139,#1c2b4a);
+    background:linear-gradient(0deg,#131e37,#1c2b4a);
     clip-path:polygon(0 100%,50% 0,100% 100%);box-shadow:0 -10px 24px -12px rgba(0,0,0,.3)}
   .glow{position:absolute;left:50%;top:46%;width:8px;height:8px;transform:translate(-50%,-50%);
     border-radius:50%;z-index:2;opacity:0;
@@ -68,7 +68,10 @@
   /* ══════ HERO ══════ */
   #hero{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding-top:64px;padding-bottom:52px;overflow:hidden}
-  #wm{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none;z-index:0}
+  #wm{position:absolute;inset:0;width:100%;height:100%;opacity:.6;pointer-events:none;z-index:0}
+  /* konvertdan xatga yumshoq o'tish */
+  #hero::before{content:"";position:absolute;left:0;right:0;top:0;height:230px;z-index:0;
+    pointer-events:none;background:linear-gradient(180deg,var(--band),transparent)}
   #hero>*:not(#wm){position:relative;z-index:1}
   .frame{position:relative;width:min(320px,86vw);padding:52px 26px 44px}
   .frame::before,.frame::after{content:"";position:absolute;left:0;right:0;height:36px;
@@ -78,7 +81,7 @@
   .frame .sd{position:absolute;top:36px;bottom:36px;width:1px;background:var(--line)}
   .frame .sd.l{left:0}.frame .sd.r{right:0}
   .nm{font-family:var(--serif);line-height:1.04;color:var(--ink)}
-  .nm span{display:block;font-size:clamp(34px,10.6vw,46px);font-weight:500;letter-spacing:.015em}
+  .nm span{display:block;font-size:clamp(34px,10.6vw,46px);font-weight:500;letter-spacing:.015em;color:var(--ink)}
   .nm em{display:block;font-family:var(--script);font-style:normal;font-size:30px;
     color:var(--metal);margin:4px 0;line-height:1}
   .dline{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:26px}
@@ -107,10 +110,10 @@
 
   /* ══════ MANZIL ══════ */
   #place{padding-top:70px;padding-bottom:74px;text-align:center;background:var(--paper2)}
-  .venue{font-family:var(--serif);font-size:clamp(21px,6.2vw,26px);font-weight:500;margin-top:14px}
+  .venue{font-family:var(--serif);font-size:clamp(21px,6.2vw,26px);font-weight:500;margin-top:14px;color:var(--ink)}
   .addr{font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);margin-top:12px;line-height:2}
   .btn{display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:14px 28px;border-radius:40px;
-    border:1px solid var(--metal);color:var(--ink);text-decoration:none;background:var(--paper);
+    border:1px solid var(--metal);color:var(--ink);text-decoration:none;background:transparent;
     font-size:9px;letter-spacing:.3em;text-transform:uppercase}
   .btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.7}
 
@@ -119,7 +122,7 @@
   .cdrow{display:flex;justify-content:center;gap:9px;margin-top:26px}
   .cdrow div{flex:1;max-width:80px}
   .cdrow .ring{position:relative;aspect-ratio:1;border:1px solid var(--line);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;background:var(--paper)}
+    display:flex;align-items:center;justify-content:center;background:transparent}
   .cdrow .ring::after{content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid var(--line);opacity:.5}
   .cdrow .v{font-family:var(--serif);font-size:clamp(20px,6vw,25px);color:var(--ink);font-variant-numeric:tabular-nums}
   .cdrow .k{font-family:var(--serif);font-size:13px;color:var(--ink2);margin-top:10px}
@@ -208,8 +211,8 @@
 <script>
 const NS='http://www.w3.org/2000/svg';
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
-const C={emb:'#27395d',embLine:'#324a76',seal:'#c9a24a',seal2:'#9d7a2c',
-         sealInk:'#1c2b4a',mono:'#f2e3bd',metal:'#c9a24a',metalL:'#e6cf9a'};
+const C={emb:'#26385c',embLine:'#31486f',seal:'#c9a24a',seal2:'#9a7628',
+         sealInk:'#17233d',mono:'#f3e5c0',metal:'#c19a4e',metalL:'#e4cb92'};
 
 /* ── bo'rtma damask naqsh (bir rangli) ── */
 function damask(svg,W,H){
@@ -241,7 +244,7 @@ function damask(svg,W,H){
 }
 damask(document.getElementById('texA'),400,860);
 damask(document.getElementById('texB'),400,500);
-const WM='#e6eaf2';
+const WM='#283a60';
 (function(){ // ichki sahifadagi yengil suv belgisi
   const sv=document.getElementById('wm'); if(!sv)return;
   const o={emb:C.emb,embLine:C.embLine};
