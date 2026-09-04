@@ -273,6 +273,12 @@ function star8(cx,cy,R,r,rot=0){let p=[];for(let i=0;i<16;i++){const rad=i%2?r:R
 
 /* ═══════ SHABLONLAR ═══════ */
 const T=[
+ {f:'konvert-bordo', c:['konvert','klassik'], nm:{uz:'Bordo',        ru:'Бордо',         en:'Burgundy'}},
+ {f:'konvert-oq',    c:['konvert','minimal'], nm:{uz:'Oq',           ru:'Белый',         en:'White'}},
+ {f:'konvert-pudra', c:['konvert','klassik'], nm:{uz:'Pudra',        ru:'Пудра',         en:'Blush'}},
+ {f:'konvert-krem',  c:['konvert','klassik'], nm:{uz:'Krem va oltin',ru:'Крем и золото', en:'Ivory & Gold'}},
+ {f:'konvert-moviy', c:['konvert','klassik'], nm:{uz:'Moviy',        ru:'Синий',         en:'Navy'}},
+ {f:'konvert-zaytun',c:['konvert','minimal'], nm:{uz:'Zaytun',       ru:'Оливковый',     en:'Olive'}},
  {f:'koshin',   c:['milliy'],              nm:{uz:'Koshin',   ru:'Кошин',      en:'Majolica'}},
  {f:'3d',       c:['klassik'],             nm:{uz:'Muhr',     ru:'Печать',     en:'Wax Seal'}},
  {f:'qorongi',  c:['klassik','zamonaviy'], nm:{uz:'Kecha',    ru:'Ночь',       en:'Night'}},
@@ -301,8 +307,14 @@ uz:{
  ctaB:'Direct’ga yozish',
  mOpen:'To‘liq ochish', mOrder:'Shuni buyurtma qilish',
  foot1:'Taklifnoma Elektron · Individual dizayn', foot2:'Buyurtma — Instagram Direct',
- cats:{all:'Barchasi',milliy:'Milliy',minimal:'Minimal',klassik:'Klassik',zamonaviy:'Zamonaviy',foto:'Foto'},
+ cats:{all:'Barchasi',konvert:'Konvert',milliy:'Milliy',minimal:'Minimal',klassik:'Klassik',zamonaviy:'Zamonaviy',foto:'Foto'},
  desc:{
+  'konvert-bordo':"Bo‘rtma naqshli bordo konvert. Muhrni bosing — ochiladi.",
+  'konvert-oq':"Butunlay oq: bo‘rtma naqsh va marvarid tusli muhr.",
+  'konvert-pudra':"Yumshoq pudra rang, kumush muhr. Nozik va issiq.",
+  'konvert-krem':"Krem qog‘oz va yorqin oltin muhr. Eng bayramona.",
+  'konvert-moviy':"To‘q moviy konvert, oltin muhr. Kechki marosim uchun.",
+  'konvert-zaytun':"Zaytun rang va suyak tusli muhr. Tabiiy, tinch.",
   koshin:'Registon koshini, oltin hoshiyali arka, ichida suratingiz.',
   '3d':'Mum muhrli konvert ochiladi, ichidan akvarel taklifnoma chiqadi.',
   qorongi:'Qora fon, oltin yozuv, yulduz porlashlari. Kechki marosim uchun.',
@@ -335,8 +347,14 @@ ru:{
  ctaB:'Написать в Direct',
  mOpen:'Открыть полностью', mOrder:'Заказать этот',
  foot1:'Taklifnoma Elektron · Индивидуальный дизайн', foot2:'Заказ — Instagram Direct',
- cats:{all:'Все',milliy:'Национальный',minimal:'Минимализм',klassik:'Классика',zamonaviy:'Современный',foto:'Фото'},
+ cats:{all:'Все',konvert:'Конверт',milliy:'Национальный',minimal:'Минимализм',klassik:'Классика',zamonaviy:'Современный',foto:'Фото'},
  desc:{
+  'konvert-bordo':"Бордовый конверт с тиснением. Нажмите на печать — откроется.",
+  'konvert-oq':"Полностью белый: тиснение и жемчужная печать.",
+  'konvert-pudra':"Мягкий пудровый тон, серебряная печать. Нежно и тепло.",
+  'konvert-krem':"Кремовая бумага и яркая золотая печать. Самый праздничный.",
+  'konvert-moviy':"Тёмно-синий конверт, золотая печать. Для вечера.",
+  'konvert-zaytun':"Оливковый тон и печать цвета кости. Спокойно и естественно.",
   koshin:'Регистанская майолика, арка с золотой каймой, внутри ваше фото.',
   '3d':'Конверт с сургучной печатью открывается — внутри акварельное приглашение.',
   qorongi:'Чёрный фон, золотые буквы, мерцание звёзд. Для вечера.',
@@ -369,8 +387,14 @@ en:{
  ctaB:'Message on Direct',
  mOpen:'Open full', mOrder:'Order this one',
  foot1:'Taklifnoma Elektron · Bespoke design', foot2:'Orders — Instagram Direct',
- cats:{all:'All',milliy:'Traditional',minimal:'Minimal',klassik:'Classic',zamonaviy:'Modern',foto:'Photo'},
+ cats:{all:'All',konvert:'Envelope',milliy:'Traditional',minimal:'Minimal',klassik:'Classic',zamonaviy:'Modern',foto:'Photo'},
  desc:{
+  'konvert-bordo':"Embossed burgundy envelope. Tap the seal to open.",
+  'konvert-oq':"Total white: tone-on-tone emboss and a pearl seal.",
+  'konvert-pudra':"Soft blush with a silver seal. Delicate and warm.",
+  'konvert-krem':"Ivory stock with a bright gold seal. The most festive.",
+  'konvert-moviy':"Deep navy envelope, gold seal. Made for evening.",
+  'konvert-zaytun':"Olive tone with a bone-coloured seal. Calm and natural.",
   koshin:'Registan majolica, a gold-edged arch, your photograph inside.',
   '3d':'A wax-sealed envelope opens to a watercolour invitation.',
   qorongi:'Black ground, gold lettering, drifting stars. For evening.',
@@ -409,7 +433,7 @@ function render(){
   document.getElementById("igProfile").href=IG_PRO;
 
   // filtrlar
-  const cats=['all','milliy','klassik','minimal','zamonaviy','foto'];
+  const cats=['all','konvert','milliy','klassik','minimal','zamonaviy','foto'];
   filters.innerHTML=cats.map(c=>
     `<button class="chip${c===cat?' on':''}" data-c="${c}">${t.cats[c]}</button>`).join('');
 
