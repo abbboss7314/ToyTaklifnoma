@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sanjar & Nozima</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cobalt:#17457f;
+    --cobalt-d:#0f2f5c;
+    --turq:#2f9aa8;
+    --turq-d:#1f7482;
+    --gold:#d8ab4e;
+    --gold-l:#f0d79a;
+    --cream:#faf4e6;
+    --cream-d:#f2e9d4;
+    --ink:#22303f;
+    --ink2:#6a7686;
+    --serif:'Cormorant Garamond',Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:#d9d2c0;font-family:'Inter',-apple-system,sans-serif;color:var(--ink);
+    -webkit-font-smoothing:antialiased}
+  .page{position:relative;width:min(500px,100vw);margin:0 auto;background:var(--cream);overflow:hidden}
+
+  section{position:relative;padding:0 26px;z-index:2}
+  .lab{font-size:8.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--turq-d);font-weight:500}
+  .rv{opacity:0;transform:translateY(24px);transition:opacity 1.1s,transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .in .rv{opacity:1;transform:none}
+  .d1{transition-delay:.14s}.d2{transition-delay:.3s}.d3{transition-delay:.46s}.d4{transition-delay:.62s}
+
+  /* ---------- HERO: koshinli arka ---------- */
+  #hero{position:relative;height:100dvh;padding:0;overflow:hidden}
+  #heroSvg{position:absolute;inset:0;width:100%;height:100%}
+  .hero-txt{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:0 28px 40px;text-align:center;
+    background:linear-gradient(180deg,rgba(10,26,48,0) 0%,rgba(10,26,48,.55) 42%,rgba(8,22,42,.92) 100%)}
+  .hero-txt .top{font-size:8px;letter-spacing:.44em;text-transform:uppercase;color:rgba(240,215,154,.9)}
+  .nm{font-family:var(--serif);line-height:1.06;margin-top:14px}
+  .nm span{display:block;font-size:clamp(32px,9.6vw,42px);font-weight:500;letter-spacing:.03em;color:#fdf6e6}
+  .nm em{display:block;font-style:italic;font-size:22px;color:var(--gold-l);margin:2px 0;opacity:.9}
+  .dsep{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px}
+  .dsep .l{width:34px;height:1px;background:rgba(216,171,78,.6)}
+  .dsep .n{font-family:var(--serif);font-size:19px;letter-spacing:.26em;color:var(--gold-l)}
+  .dsep .d{width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
+  .hint{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:rgba(250,244,230,.62);margin-top:22px}
+  .open{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:14px 32px;
+    border-radius:40px;background:linear-gradient(180deg,#e6bd6a,#c1913c);color:#123055;
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;
+    border:none;cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+  .open svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+  .open i{display:block;width:6px;height:6px;border-right:2px solid #123055;border-bottom:2px solid #123055;
+    transform:rotate(45deg);animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(2px,2px)}}
+
+  /* ---------- koshin lenta ---------- */
+  .strip{display:block;width:100%;height:34px}
+
+  /* ---------- TAKLIF ---------- */
+  #say{padding-top:60px;padding-bottom:64px;text-align:center}
+  .panel{position:relative;max-width:340px;margin:26px auto 0}
+  .panel svg{display:block;width:100%;height:auto}
+  .panel .in-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;padding:16% 15% 12%}
+  .bism{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--turq-d);margin-bottom:16px}
+  .lede{font-family:var(--serif);font-size:clamp(17px,5vw,20px);line-height:1.85;color:#3c4a5a}
+
+  /* ---------- SANA ---------- */
+  #when{padding-top:56px;padding-bottom:60px;text-align:center;background:var(--cream-d)}
+  .niche{position:relative;width:210px;margin:24px auto 0}
+  .niche svg{display:block;width:100%;height:auto}
+  .niche .in-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding-top:14%}
+  .niche .dd{font-family:var(--serif);font-size:56px;font-weight:500;color:var(--gold-l);line-height:1}
+  .niche .mm{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:#bcd3e0;margin-top:10px}
+  .niche .yy{font-family:var(--serif);font-size:17px;letter-spacing:.24em;color:#bcd3e0;margin-top:8px}
+  .wrow{display:flex;justify-content:center;gap:22px;margin-top:24px}
+  .wrow div{text-align:center}
+  .wrow .k{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink2)}
+  .wrow .v{font-family:var(--serif);font-size:22px;color:var(--cobalt);margin-top:6px}
+
+  /* ---------- DASTUR ---------- */
+  #prog{padding-top:56px;padding-bottom:62px;text-align:center}
+  .steps{max-width:330px;margin:26px auto 0}
+  .step{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:center;text-align:left;
+    padding:16px 0;border-bottom:1px solid rgba(23,69,127,.14)}
+  .step:first-child{border-top:1px solid rgba(23,69,127,.14)}
+  .step .t{font-family:var(--serif);font-size:21px;color:var(--turq-d)}
+  .step .n{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);line-height:1.6}
+
+  /* ---------- MANZIL ---------- */
+  #place{padding-top:0;padding-bottom:64px;text-align:center;background:var(--cream-d)}
+  .venue{font-family:var(--serif);font-size:clamp(22px,6.4vw,27px);font-weight:500;color:var(--cobalt);margin-top:14px}
+  .addr{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);margin-top:12px;line-height:2}
+  .btn{display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:15px 30px;border-radius:40px;
+    background:var(--cobalt);color:#f5e9cd;text-decoration:none;
+    font-size:9px;letter-spacing:.3em;text-transform:uppercase}
+  .btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+  /* ---------- SANOQ ---------- */
+  #cd{padding-top:56px;padding-bottom:60px;text-align:center}
+  .cdrow{display:flex;justify-content:center;gap:8px;margin-top:26px}
+  .cdrow div{flex:1;max-width:84px}
+  .cdrow .box{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+  .cdrow .box svg{position:absolute;inset:0;width:100%;height:100%}
+  .cdrow .v{position:relative;font-family:var(--serif);font-size:clamp(19px,5.6vw,24px);
+    font-weight:600;color:var(--gold-l);font-variant-numeric:tabular-nums}
+  .cdrow .k{font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);margin-top:11px}
+
+  /* ---------- YAKUN ---------- */
+  #end{padding-top:52px;padding-bottom:60px;text-align:center}
+  .fin{font-family:var(--serif);font-size:clamp(23px,6.8vw,30px);color:var(--cobalt);line-height:1.5;font-weight:500}
+  .sig{font-size:8.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink2);margin-top:26px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section id="hero">
+    <svg id="heroSvg" viewBox="0 0 400 820" preserveAspectRatio="xMidYMid slice"></svg>
+    <div class="hero-txt">
+      <div class="top">Nikoh to‘yi taklifnomasi</div>
+      <h1 class="nm">
+        <span>Sanjar</span>
+        <em>va</em>
+        <span>Nozima</span>
+      </h1>
+      <div class="dsep">
+        <span class="l"></span>
+        <span class="n">24 · 10 · 2026</span>
+        <span class="l"></span>
+      </div>
+      <p class="hint">Taklifnomani ochish uchun bosing</p>
+      <button class="open" id="openBtn">Ochish <i></i></button>
+    </div>
+  </section>
+
+  <svg class="strip" id="s1" preserveAspectRatio="none" viewBox="0 0 400 34"></svg>
+
+  <!-- ═══════════ TAKLIF ═══════════ -->
+  <section id="say">
+    <span class="lab rv">Assalomu alaykum</span>
+    <div class="panel rv d1">
+      <svg id="panelSvg" viewBox="0 0 340 430"></svg>
+      <div class="in-t">
+        <p class="bism">Bismillahir rohmanir rohiym</p>
+        <p class="lede">Ota-onalarimiz duosi bilan quriladigan xonadonimizning ilk kunida Sizni davramizda ko‘rishni chin dildan istaymiz.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SANA ═══════════ -->
+  <section id="when">
+    <span class="lab rv">Marosim kuni</span>
+    <div class="niche rv d1">
+      <svg id="nicheSvg" viewBox="0 0 210 250"></svg>
+      <div class="in-t">
+        <span class="dd">24</span>
+        <span class="mm">Oktabr</span>
+        <span class="yy">2026</span>
+      </div>
+    </div>
+    <div class="wrow rv d2">
+      <div><div class="k">Kun</div><div class="v">Shanba</div></div>
+      <div><div class="k">Boshlanishi</div><div class="v">18:00</div></div>
+    </div>
+  </section>
+
+  <svg class="strip" id="s2" preserveAspectRatio="none" viewBox="0 0 400 34"></svg>
+
+  <!-- ═══════════ DASTUR ═══════════ -->
+  <section id="prog">
+    <span class="lab rv">Kun tartibi</span>
+    <div class="steps rv d1">
+      <div class="step"><span class="t">18:00</span><span class="n">Mehmonlarni<br>kutib olish</span></div>
+      <div class="step"><span class="t">18:30</span><span class="n">Nikoh<br>marosimi</span></div>
+      <div class="step"><span class="t">19:30</span><span class="n">Ziyofat<br>va raqs</span></div>
+      <div class="step"><span class="t">22:00</span><span class="n">Shirinliklar<br>va yakun</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ MANZIL ═══════════ -->
+  <section id="place">
+    <svg class="strip" id="s3" preserveAspectRatio="none" viewBox="0 0 400 34" style="margin:0 -26px;width:calc(100% + 52px)"></svg>
+    <div style="padding-top:54px">
+      <span class="lab rv">Manzil</span>
+      <p class="venue rv d1">“Bibixonim” to‘yxonasi</p>
+      <p class="addr rv d1">Samarqand shahri<br>Registon ko‘chasi</p>
+      <a class="btn rv d2" href="https://www.google.com/maps/search/?api=1&query=Bibixonim%20to%27yxonasi%20Samarqand" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Xaritani ochish
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════ SANOQ ═══════════ -->
+  <section id="cd">
+    <span class="lab rv">To‘yimizgacha</span>
+    <div class="cdrow rv d1">
+      <div><div class="box"><svg class="oct" viewBox="0 0 100 100"></svg><span class="v" id="D">—</span></div><div class="k">Kun</div></div>
+      <div><div class="box"><svg class="oct" viewBox="0 0 100 100"></svg><span class="v" id="H">—</span></div><div class="k">Soat</div></div>
+      <div><div class="box"><svg class="oct" viewBox="0 0 100 100"></svg><span class="v" id="M">—</span></div><div class="k">Daqiqa</div></div>
+      <div><div class="box"><svg class="oct" viewBox="0 0 100 100"></svg><span class="v" id="S">—</span></div><div class="k">Soniya</div></div>
+    </div>
+  </section>
+
+  <svg class="strip" id="s4" preserveAspectRatio="none" viewBox="0 0 400 34"></svg>
+
+  <!-- ═══════════ YAKUN ═══════════ -->
+  <section id="end">
+    <p class="fin rv">Sizni kutib qolamiz</p>
+    <svg class="rv d1" id="mono" viewBox="0 0 120 120" style="width:96px;margin:22px auto 0;display:block"></svg>
+    <p class="sig rv d2">Sanjar &amp; Nozima · 24.10.2026</p>
+  </section>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const C={cobalt:'#17457f',cobaltD:'#0f2f5c',turq:'#2f9aa8',turqD:'#1f7482',
+         gold:'#d8ab4e',goldL:'#f0d79a',cream:'#faf4e6',white:'#fdfaf2'};
+
+/* ══════ 8 qirrali yulduz (girih) ══════ */
+function star8(cx,cy,R,r,rot=0){
+  const p=[];
+  for(let i=0;i<16;i++){
+    const rad=(i%2?r:R), a=(i*22.5+rot)*Math.PI/180;
+    p.push(`${(cx+rad*Math.cos(a)).toFixed(1)},${(cy+rad*Math.sin(a)).toFixed(1)}`);
+  }
+  return p.join(' ');
+}
+function diamond(cx,cy,s,rot=45){
+  const p=[];
+  for(let i=0;i<4;i++){const a=(i*90+rot)*Math.PI/180;
+    p.push(`${(cx+s*Math.cos(a)).toFixed(1)},${(cy+s*Math.sin(a)).toFixed(1)}`);}
+  return p.join(' ');
+}
+
+/* ══════ koshin naqshi (pattern) ══════ */
+function tilePattern(svg,id,size=76,bg=C.turq,starFill=C.cobalt){
+  const defs=el('defs'); svg.appendChild(defs);
+  const pat=el('pattern',{id,width:size,height:size,patternUnits:'userSpaceOnUse'});
+  const h=size/2;
+  pat.appendChild(el('rect',{width:size,height:size,fill:bg}));
+  // burchak yulduzlari (chorak)
+  [[0,0],[size,0],[0,size],[size,size]].forEach(([x,y])=>{
+    pat.appendChild(el('polygon',{points:star8(x,y,size*0.30,size*0.125),fill:starFill,
+      stroke:C.gold,'stroke-width':.9}));
+  });
+  // markaz yulduzi
+  pat.appendChild(el('polygon',{points:star8(h,h,size*0.30,size*0.125),fill:starFill,
+    stroke:C.gold,'stroke-width':.9}));
+  // oraliq romblar
+  [[h,0],[0,h],[size,h],[h,size]].forEach(([x,y])=>{
+    pat.appendChild(el('polygon',{points:diamond(x,y,size*0.115),fill:C.cream,opacity:.92}));
+  });
+  // kichik oltin nuqtalar
+  [[size*0.25,size*0.25],[size*0.75,size*0.25],[size*0.25,size*0.75],[size*0.75,size*0.75]]
+    .forEach(([x,y])=>pat.appendChild(el('circle',{cx:x,cy:y,r:size*0.032,fill:C.gold})));
+  defs.appendChild(pat);
+  return defs;
+}
+
+/* ══════ o'tkir (islomiy) arka yo'li ══════ */
+function archPath(x,y,w,h,spring=0.44){
+  const S=y+h*spring, cx=x+w/2;
+  return `M${x} ${y+h}`+
+         `L${x} ${S}`+
+         `C${x} ${S-h*0.30} ${cx-w*0.30} ${y+h*0.02} ${cx} ${y}`+
+         `C${cx+w*0.30} ${y+h*0.02} ${x+w} ${S-h*0.30} ${x+w} ${S}`+
+         `L${x+w} ${y+h}Z`;
+}
+
+/* ══════ HERO ══════ */
+(function(){
+  const svg=document.getElementById('heroSvg');
+  const defs=tilePattern(svg,'tileHero',82);
+
+  // arka teshigi
+  const clip=el('clipPath',{id:'archClip'});
+  clip.appendChild(el('path',{d:archPath(52,120,296,640,0.46)}));
+  defs.appendChild(clip);
+
+  // surat gradienti (o'rin egallovchi)
+  const g=el('linearGradient',{id:'phg',x1:'0',y1:'0',x2:'0',y2:'1'});
+  g.appendChild(el('stop',{offset:'0','stop-color':'#7d8a99'}));
+  g.appendChild(el('stop',{offset:'.55','stop-color':'#5d6b7c'}));
+  g.appendChild(el('stop',{offset:'1','stop-color':'#3a4757'}));
+  defs.appendChild(g);
+
+  // koshinli devor
+  svg.appendChild(el('rect',{width:400,height:820,fill:'url(#tileHero)'}));
+  // devor ustidan yumshoq qorayish
+  const sh=el('linearGradient',{id:'wsh',x1:'0',y1:'0',x2:'0',y2:'1'});
+  sh.appendChild(el('stop',{offset:'0','stop-color':'#0b2244','stop-opacity':'.55'}));
+  sh.appendChild(el('stop',{offset:'.45','stop-color':'#0b2244','stop-opacity':'.15'}));
+  sh.appendChild(el('stop',{offset:'1','stop-color':'#08162a','stop-opacity':'.75'}));
+  defs.appendChild(sh);
+  svg.appendChild(el('rect',{width:400,height:820,fill:'url(#wsh)'}));
+
+  /* ===== SURAT =====
+     O'z suratingizni qo'yish uchun quyidagi qatorni oching va manzilni yozing:
+     gPh.appendChild(el('image',{href:'rasm.jpg',x:52,y:120,width:296,height:640,
+       preserveAspectRatio:'xMidYMid slice'}));
+     va pastdagi "o'rin egallovchi" bloklarni o'chiring. */
+  const gPh=el('g',{'clip-path':'url(#archClip)'});
+  gPh.appendChild(el('rect',{x:52,y:120,width:296,height:640,fill:'url(#phg)'}));
+  // o'rin egallovchi belgisi
+  gPh.appendChild(el('rect',{x:52,y:120,width:296,height:640,fill:'none',
+    stroke:'rgba(255,255,255,.22)','stroke-width':1,'stroke-dasharray':'6 6'}));
+  const ic=el('g',{transform:'translate(200,360)',opacity:'.6'});
+  ic.appendChild(el('rect',{x:-22,y:-16,width:44,height:34,rx:4,fill:'none',
+    stroke:'#fff','stroke-width':1.6}));
+  ic.appendChild(el('circle',{cx:-9,cy:-5,r:3.6,fill:'none',stroke:'#fff','stroke-width':1.6}));
+  ic.appendChild(el('path',{d:'M22 12 L6 -4 L-14 18',fill:'none',stroke:'#fff','stroke-width':1.6}));
+  gPh.appendChild(ic);
+  const tx=el('text',{x:200,y:412,'text-anchor':'middle',fill:'rgba(255,255,255,.72)',
+    'font-family':'Inter,sans-serif','font-size':'10','letter-spacing':'3.2'});
+  tx.textContent='SURAT O‘RNI';
+  gPh.appendChild(tx);
+  svg.appendChild(gPh);
+
+  // arka oltin hoshiyasi
+  svg.appendChild(el('path',{d:archPath(52,120,296,640,0.46),fill:'none',
+    stroke:C.gold,'stroke-width':3.4}));
+  svg.appendChild(el('path',{d:archPath(44,112,312,656,0.46),fill:'none',
+    stroke:'rgba(240,215,154,.5)','stroke-width':1.2}));
+  svg.appendChild(el('path',{d:archPath(60,128,280,624,0.46),fill:'none',
+    stroke:'rgba(240,215,154,.35)','stroke-width':1}));
+
+  // yon ustunlar
+  [40,360].forEach(x=>{
+    svg.appendChild(el('rect',{x:x-9,y:100,width:18,height:700,fill:C.cobaltD,opacity:.85}));
+    svg.appendChild(el('rect',{x:x-9,y:100,width:18,height:700,fill:'none',
+      stroke:'rgba(240,215,154,.45)','stroke-width':1}));
+    for(let y=124;y<790;y+=42)
+      svg.appendChild(el('polygon',{points:diamond(x,y,6),fill:C.gold,opacity:.75}));
+  });
+  // tepa toj
+  svg.appendChild(el('rect',{x:0,y:0,width:400,height:56,fill:C.cobaltD,opacity:.9}));
+  for(let x=20;x<400;x+=40)
+    svg.appendChild(el('polygon',{points:star8(x,28,15,6),fill:C.turq,stroke:C.gold,'stroke-width':.8}));
+})();
+
+/* ══════ koshin lentalari ══════ */
+['s1','s2','s3','s4'].forEach(id=>{
+  const s=document.getElementById(id);
+  s.appendChild(el('rect',{width:400,height:34,fill:C.cobalt}));
+  for(let x=17;x<400;x+=34){
+    s.appendChild(el('polygon',{points:star8(x,17,13,5.4),fill:C.turq,stroke:C.gold,'stroke-width':.8}));
+    s.appendChild(el('polygon',{points:diamond(x+17,17,5.4),fill:C.cream,opacity:.9}));
+  }
+  s.appendChild(el('rect',{y:0,width:400,height:2,fill:C.gold}));
+  s.appendChild(el('rect',{y:32,width:400,height:2,fill:C.gold}));
+});
+
+/* ══════ TAKLIF paneli (arka shaklida) ══════ */
+(function(){
+  const svg=document.getElementById('panelSvg');
+  svg.appendChild(el('path',{d:archPath(6,6,328,418,0.42),fill:'#fffdf6',
+    stroke:C.turq,'stroke-width':1.6}));
+  svg.appendChild(el('path',{d:archPath(16,16,308,398,0.42),fill:'none',
+    stroke:C.gold,'stroke-width':1,opacity:.7}));
+  // burchak romblari
+  [[30,392],[310,392]].forEach(([x,y])=>
+    svg.appendChild(el('polygon',{points:diamond(x,y,7),fill:C.turq,opacity:.7})));
+  svg.appendChild(el('polygon',{points:star8(170,26,13,5.4),fill:C.cobalt,stroke:C.gold,'stroke-width':.8}));
+})();
+
+/* ══════ SANA nishi ══════ */
+(function(){
+  const svg=document.getElementById('nicheSvg');
+  const defs=tilePattern(svg,'tileNiche',44,C.cobaltD,C.cobalt);
+  svg.appendChild(el('path',{d:archPath(6,6,198,238,0.44),fill:'url(#tileNiche)'}));
+  svg.appendChild(el('path',{d:archPath(6,6,198,238,0.44),fill:'rgba(11,34,68,.55)'}));
+  svg.appendChild(el('path',{d:archPath(6,6,198,238,0.44),fill:'none',stroke:C.gold,'stroke-width':2.6}));
+  svg.appendChild(el('path',{d:archPath(15,15,180,220,0.44),fill:'none',
+    stroke:'rgba(240,215,154,.45)','stroke-width':1}));
+})();
+
+/* ══════ sakkiz burchak sanoq ramkalari ══════ */
+document.querySelectorAll('.oct').forEach(s=>{
+  s.appendChild(el('polygon',{points:star8(50,50,47,30),fill:C.cobalt,stroke:C.gold,'stroke-width':1.4}));
+  s.appendChild(el('polygon',{points:star8(50,50,38,24),fill:'none',
+    stroke:'rgba(240,215,154,.4)','stroke-width':.9}));
+});
+
+/* ══════ monogramma ══════ */
+(function(){
+  const s=document.getElementById('mono');
+  s.appendChild(el('polygon',{points:star8(60,60,56,34),fill:C.cobalt,stroke:C.gold,'stroke-width':1.6}));
+  s.appendChild(el('polygon',{points:star8(60,60,44,27),fill:'none',stroke:'rgba(240,215,154,.45)','stroke-width':1}));
+  const t=el('text',{x:60,y:72,'text-anchor':'middle',fill:C.goldL,
+    'font-family':'Cormorant Garamond,serif','font-size':'30'});
+  t.textContent='S & N';
+  s.appendChild(t);
+})();
+
+/* ══════ sanoq ══════ */
+const T=new Date('2026-10-24T18:00:00+05:00').getTime();
+const p2=n=>String(n).padStart(2,'0');
+setInterval(()=>{const d=T-Date.now(); if(d<=0)return; const s=Math.floor(d/1000);
+  D.textContent=Math.floor(s/86400); H.textContent=p2(Math.floor(s%86400/3600));
+  M.textContent=p2(Math.floor(s%3600/60)); S.textContent=p2(s%60);},1000);
+
+document.getElementById('openBtn').addEventListener('click',()=>
+  document.getElementById('say').scrollIntoView({behavior:'smooth'}));
+
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
