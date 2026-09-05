@@ -413,5 +413,277 @@ document.getElementById('openBtn').addEventListener('click',()=>
 const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});
 document.querySelectorAll('section').forEach(s=>io.observe(s));
 </script>
+
+<!--ANM:start-->
+<style id="anm-css">
+:root{--anm-bg:#1f7482;--anm-fg:#faf4e6;--anm-p1:#f0d79a;--anm-p2:#faf4e6;--anm-serif:'Cormorant Garamond',Georgia,serif}
+html.anm-lock,html.anm-lock body{overflow:hidden!important}
+
+/* ── kirish pardasi ── */
+.anm-ov{position:fixed;inset:0;z-index:9998;display:grid;place-items:center;background:var(--anm-bg);
+  will-change:opacity,transform,clip-path}
+.anm-ov.x-fade{transition:opacity .85s ease}
+.anm-ov.x-fade.go{opacity:0}
+.anm-ov.x-up{transition:transform 1.05s cubic-bezier(.76,0,.24,1),opacity .8s .25s}
+.anm-ov.x-up.go{transform:translateY(-101%);opacity:.4}
+.anm-ov.x-iris{clip-path:circle(140% at 50% 46%);transition:clip-path 1.15s cubic-bezier(.7,0,.24,1),opacity .5s .7s}
+.anm-ov.x-iris.go{clip-path:circle(0% at 50% 46%);opacity:0}
+.anm-ov.x-cur{background:none;transition:opacity .3s .95s}
+.anm-ov.x-cur .cur{position:absolute;left:0;width:100%;height:50.6%;background:var(--anm-bg);
+  transition:transform 1.05s cubic-bezier(.76,0,.24,1) .28s}
+.anm-ov.x-cur .cur.t{top:0}.anm-ov.x-cur .cur.b{bottom:0}
+.anm-ov.x-cur.go .cur.t{transform:translateY(-101%)}
+.anm-ov.x-cur.go .cur.b{transform:translateY(101%)}
+.anm-ov.x-cur.go{opacity:0}
+.anm-ov.dead{display:none}
+
+.anm-mn{position:relative;z-index:2;text-align:center;color:var(--anm-fg);font-family:var(--anm-serif);
+  transition:opacity .45s ease,transform .6s ease}
+.anm-ov.go .anm-mn{opacity:0;transform:translateY(-8px)}
+.anm-mn .ini{display:block;font-size:clamp(38px,12vw,54px);letter-spacing:.2em;text-indent:.2em;
+  font-weight:400;opacity:0;transform:translateY(12px);animation:anmUp 1s .2s forwards cubic-bezier(.16,1,.3,1)}
+.anm-mn .ln{height:1px;width:0;background:currentColor;opacity:.5;margin:18px auto 0;
+  animation:anmLn 1.15s .55s forwards cubic-bezier(.16,1,.3,1)}
+.anm-mn .sb{display:block;font-family:inherit;font-size:9px;letter-spacing:.42em;text-transform:uppercase;
+  opacity:0;margin-top:16px;animation:anmUp .9s .95s forwards}
+.anm-mn .dots{display:block;margin-top:26px;opacity:0;animation:anmUp .8s 1.15s forwards}
+.anm-mn .dots b{display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;
+  margin:0 4px;opacity:.35;animation:anmDot 1.4s infinite}
+.anm-mn .dots b:nth-child(2){animation-delay:.18s}
+.anm-mn .dots b:nth-child(3){animation-delay:.36s}
+@keyframes anmUp{to{opacity:1;transform:none}}
+@keyframes anmLn{to{width:112px}}
+@keyframes anmDot{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+
+/* ── zarrachalar ── */
+.anm-p{position:fixed;top:0;left:50%;transform:translateX(-50%);height:100%;
+  pointer-events:none;z-index:6;overflow:hidden;contain:strict}
+.anm-p i{position:absolute;display:block;opacity:0;will-change:transform,opacity}
+.anm-p i.pt{border-radius:78% 22% 72% 28%/68% 62% 38% 32%;
+  background:linear-gradient(135deg,var(--anm-p1),var(--anm-p2));animation:anmFall linear infinite}
+.anm-p i.sn{border-radius:50%;background:var(--anm-p1);animation:anmFall linear infinite}
+.anm-p i.ds{border-radius:50%;background:var(--anm-p1);box-shadow:0 0 7px var(--anm-p1);
+  animation:anmRise linear infinite}
+.anm-p i.st{border-radius:50%;background:var(--anm-p1);box-shadow:0 0 9px 1px var(--anm-p1);
+  animation:anmTw ease-in-out infinite}
+.anm-p i.bk{border-radius:50%;background:radial-gradient(circle at 34% 30%,var(--anm-p1),transparent 72%);
+  filter:blur(.6px);animation:anmRise linear infinite}
+@keyframes anmFall{
+  0%{opacity:0;transform:translate3d(0,-10vh,0) rotate(0deg)}
+  9%{opacity:var(--o)}
+  50%{transform:translate3d(var(--dx),48vh,0) rotate(190deg)}
+  90%{opacity:var(--o)}
+  100%{opacity:0;transform:translate3d(0,110vh,0) rotate(380deg)}}
+@keyframes anmRise{
+  0%{opacity:0;transform:translate3d(0,108vh,0) scale(.85)}
+  12%{opacity:var(--o)}
+  88%{opacity:var(--o)}
+  100%{opacity:0;transform:translate3d(var(--dx),-12vh,0) scale(1.12)}}
+@keyframes anmTw{0%,100%{opacity:0;transform:scale(.35)}50%{opacity:var(--o);transform:scale(1)}}
+
+/* ── harflar ── */
+.anm-l{display:inline-block;opacity:0;transform:translateY(.5em) rotate(3deg);
+  animation:anmLt 1.05s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes anmLt{to{opacity:1;transform:none}}
+
+/* ── bosqichma-bosqich chiqish ── */
+.anm-s{opacity:0;transform:translateY(20px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.in .anm-s{opacity:1;transform:none}
+
+/* ── sanoq raqami ── */
+.anm-tk{display:inline-block;animation:anmTick .55s cubic-bezier(.16,1,.3,1)}
+@keyframes anmTick{
+  0%{transform:translateY(-34%) rotateX(52deg);opacity:.12;filter:blur(1.2px)}
+  100%{transform:none;opacity:1;filter:none}}
+
+/* ── tugma ── */
+.anm-btn{position:relative;overflow:hidden;transition:transform .18s ease}
+.anm-btn:active{transform:scale(.965)}
+.anm-btn.sh::after{content:'';position:absolute;top:-20%;left:-160%;width:55%;height:140%;
+  background:linear-gradient(100deg,transparent,var(--anm-sheen,rgba(255,255,255,.45)),transparent);
+  transform:skewX(-18deg);animation:anmSh 5.2s 2.4s infinite;pointer-events:none}
+@keyframes anmSh{0%{left:-160%}20%{left:170%}100%{left:170%}}
+.anm-rp{position:absolute;border-radius:50%;transform:translate(-50%,-50%) scale(0);
+  background:currentColor;opacity:.22;pointer-events:none;animation:anmRp .62s ease-out forwards}
+@keyframes anmRp{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+
+/* ── suzuvchi bezak ── */
+.anm-fl{animation:anmFl 7.5s ease-in-out infinite alternate}
+@keyframes anmFl{from{transform:translateY(-5px) rotate(-1.1deg)}to{transform:translateY(6px) rotate(1.1deg)}}
+.anm-fl2{animation:anmFl2 9s ease-in-out infinite alternate}
+@keyframes anmFl2{from{transform:translateY(5px) scale(.985)}to{transform:translateY(-6px) scale(1.015)}}
+
+/* ── rasm (ken burns) ── */
+.anm-kb{animation:anmKB 22s ease-in-out infinite alternate}
+@keyframes anmKB{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+
+/* ── pastga ishorasi ── */
+.anm-dn{animation:anmDn 2.1s ease-in-out infinite}
+@keyframes anmDn{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(7px);opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .anm-ov{display:none!important}
+  .anm-p{display:none!important}
+  .anm-l,.anm-s{opacity:1!important;transform:none!important;animation:none!important}
+  .anm-fl,.anm-fl2,.anm-kb,.anm-dn,.anm-btn.sh::after{animation:none!important}
+}
+</style>
+<script id="anm-js">
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var CFG={"intro":true,"exit":"iris","ini":"S & N","sub":"Taklifnoma","particles":"star","pn":26,"po":0.45,"letters":null,"ld":1.9,"sheen":true,"sheenC":"rgba(240,215,154,.3)","float":null,"float2":null,"kb":null,"down":null,"heroFade":true,"stagger":true};
+var page=document.querySelector('.page')||document.body;
+
+/* 1 ── kirish pardasi */
+function intro(){
+  if(!CFG.intro||RM) return start();
+  var d=document.documentElement; d.classList.add('anm-lock');
+  var ov=document.createElement('div');
+  ov.className='anm-ov x-'+CFG.exit;
+  ov.innerHTML=(CFG.exit==='cur'?'<div class="cur t"></div><div class="cur b"></div>':'')+
+    '<div class="anm-mn"><span class="ini"></span><span class="ln"></span>'+
+    (CFG.sub?'<span class="sb"></span>':'')+
+    '<span class="dots"><b></b><b></b><b></b></span></div>';
+  ov.querySelector('.ini').textContent=CFG.ini;
+  if(CFG.sub) ov.querySelector('.sb').textContent=CFG.sub;
+  document.body.appendChild(ov);
+  var t=setTimeout(go,2350);
+  function go(){clearTimeout(t);ov.classList.add('go');d.classList.remove('anm-lock');
+    setTimeout(function(){ov.classList.add('dead')},1500);start();}
+  ov.addEventListener('click',go);
+}
+
+/* 2 ── zarrachalar */
+function particles(){
+  if(CFG.particles==='none'||RM) return;
+  var k={petal:'pt',snow:'sn',dust:'ds',star:'st',bokeh:'bk'}[CFG.particles];
+  if(!k) return;
+  var box=document.createElement('div'); box.className='anm-p';
+  var w=Math.round(page.getBoundingClientRect().width)||480;
+  box.style.width=w+'px';
+  for(var i=0;i<CFG.pn;i++){
+    var e=document.createElement('i'), s;
+    if(k==='pt'){s=6+Math.random()*8; e.style.width=s+'px'; e.style.height=(s*.72).toFixed(1)+'px';}
+    else if(k==='sn'){s=2.5+Math.random()*4; e.style.width=e.style.height=s.toFixed(1)+'px';}
+    else if(k==='bk'){s=14+Math.random()*30; e.style.width=e.style.height=s.toFixed(0)+'px';}
+    else {s=1.6+Math.random()*2.4; e.style.width=e.style.height=s.toFixed(1)+'px';}
+    e.className=k;
+    e.style.left=(Math.random()*100).toFixed(1)+'%';
+    e.style.setProperty('--dx',((Math.random()*2-1)*46).toFixed(0)+'px');
+    e.style.setProperty('--o',(CFG.po*(.55+Math.random()*.55)).toFixed(2));
+    var dur=(k==='st')?(2.2+Math.random()*3.4):(k==='ds'||k==='bk')?(13+Math.random()*16):(9+Math.random()*11);
+    e.style.animationDuration=dur.toFixed(1)+'s';
+    e.style.animationDelay=(-Math.random()*dur).toFixed(1)+'s';
+    if(k==='st') e.style.top=(Math.random()*100).toFixed(1)+'%';
+    box.appendChild(e);
+  }
+  document.body.appendChild(box);
+  addEventListener('resize',function(){box.style.width=Math.round(page.getBoundingClientRect().width)+'px'},{passive:true});
+}
+
+/* 3 ── harf-harf ism */
+function letters(){
+  if(!CFG.letters||RM) return;
+  var n=0;
+  document.querySelectorAll(CFG.letters).forEach(function(el){
+    if(el.dataset.anmL) return; el.dataset.anmL='1';
+    var txt=el.textContent, out='';
+    for(var i=0;i<txt.length;i++){
+      var ch=txt[i];
+      if(ch===' '){out+='<span class="anm-l" style="animation-delay:'+(CFG.ld+n*0.042).toFixed(3)+'s">&nbsp;</span>';}
+      else{out+='<span class="anm-l" style="animation-delay:'+(CFG.ld+n*0.042).toFixed(3)+'s">'+
+        ch.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span>';}
+      n++;
+    }
+    n+=3;
+    el.innerHTML=out;
+  });
+}
+
+/* 4 ── bosqichma-bosqich */
+function stagger(){
+  if(!CFG.stagger||RM) return;
+  var skip=/(^|\s)(rv|fade|rev|grow|anm-s)(\s|$)/;
+  document.querySelectorAll('section').forEach(function(sec){
+    var kids=sec.querySelectorAll('.row,.card,.cdrow>div,.ln,.item,.info,.tile');
+    var i=0;
+    kids.forEach(function(el){
+      if(skip.test(el.className)) return;
+      if(el.closest('.anm-s')) return;
+      el.classList.add('anm-s');
+      el.style.transitionDelay=(0.06+i*0.085).toFixed(3)+'s';
+      i++;
+    });
+  });
+}
+
+/* 5 ── sanoq raqami */
+function ticker(){
+  if(RM) return;
+  ['D','H','M','S'].forEach(function(id){
+    var el=document.getElementById(id); if(!el) return;
+    new MutationObserver(function(){
+      el.classList.remove('anm-tk'); void el.offsetWidth; el.classList.add('anm-tk');
+    }).observe(el,{childList:true,characterData:true,subtree:true});
+  });
+}
+
+/* 6 ── tugmalar */
+function buttons(){
+  document.querySelectorAll('.btn,.cta,a[href*="google.com/maps"],a[href*="ig.me"]').forEach(function(b){
+    b.classList.add('anm-btn');
+    if(CFG.sheen&&!RM) b.classList.add('sh');
+    if(CFG.sheenC) b.style.setProperty('--anm-sheen',CFG.sheenC);
+    b.addEventListener('pointerdown',function(ev){
+      if(RM) return;
+      var r=b.getBoundingClientRect(), s=Math.max(r.width,r.height)*2.2;
+      var d=document.createElement('span'); d.className='anm-rp';
+      d.style.width=d.style.height=s+'px';
+      d.style.left=(ev.clientX-r.left)+'px'; d.style.top=(ev.clientY-r.top)+'px';
+      b.appendChild(d); setTimeout(function(){d.remove()},640);
+    },{passive:true});
+  });
+}
+
+/* 7 ── bezaklar */
+function decor(){
+  if(RM) return;
+  if(CFG.float) document.querySelectorAll(CFG.float).forEach(function(e,i){
+    e.classList.add('anm-fl'); e.style.animationDelay=(i*.7).toFixed(2)+'s';});
+  if(CFG.float2) document.querySelectorAll(CFG.float2).forEach(function(e,i){
+    e.classList.add('anm-fl2'); e.style.animationDelay=(i*.9).toFixed(2)+'s';});
+  if(CFG.kb) document.querySelectorAll(CFG.kb).forEach(function(e,i){
+    e.classList.add('anm-kb'); e.style.animationDelay=(i*2.5).toFixed(2)+'s';});
+  if(CFG.down) document.querySelectorAll(CFG.down).forEach(function(e){e.classList.add('anm-dn')});
+}
+
+/* 8 ── hero yo'qolishi */
+function heroFade(){
+  if(!CFG.heroFade||RM) return;
+  var h=document.querySelector('#hero'); if(!h) return;
+  h.style.willChange='opacity,transform';
+  var tick=false;
+  function upd(){
+    tick=false;
+    var y=scrollY, vh=innerHeight;
+    if(y>vh*1.05){ if(h.style.opacity!=='0'){h.style.opacity='0';} return; }
+    var k=Math.min(1,y/(vh*.82));
+    h.style.opacity=(1-k).toFixed(3);
+    h.style.transform='scale('+(1-k*.05).toFixed(4)+')';
+  }
+  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});
+}
+
+function start(){ letters(); }
+
+function boot(){
+  particles(); stagger(); ticker(); buttons(); decor(); heroFade(); intro();
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+else boot();
+})();
+</script>
+<!--ANM:end-->
 </body>
 </html>
