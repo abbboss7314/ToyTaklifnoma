@@ -282,6 +282,7 @@ function star8(cx,cy,R,r,rot=0){let p=[];for(let i=0;i<16;i++){const rad=i%2?r:R
 })();
 
 /* ═══════ SHABLONLAR ═══════ */
+const V='?v=20260905b';
 const T=[
  {f:'konvert-bordo', e:['toy'],     c:['konvert','klassik'], nm:{uz:'Bordo',        ru:'Бордо',         en:'Burgundy'}},
  {f:'konvert-oq',    e:['toy'],     c:['konvert','minimal'], nm:{uz:'Oq',           ru:'Белый',         en:'White'}},
@@ -476,7 +477,7 @@ function render(){
   const list=T.filter(x=>(ev==='all'||x.e.includes(ev))&&(cat==='all'||x.c.includes(cat)));
   grid.innerHTML=list.map(x=>`
     <article class="card" data-f="${x.f}" data-n="${x.nm[lang]}">
-      <div class="shot"><iframe data-src="${x.f}.html" title="${x.nm[lang]}"></iframe>
+      <div class="shot"><iframe data-src="${x.f}.html${V}" title="${x.nm[lang]}"></iframe>
         <span class="eye">${EYE}</span></div>
       <div class="meta">
         <h3>${x.nm[lang]}</h3>
@@ -525,8 +526,8 @@ document.getElementById('fEv').addEventListener('click',e=>{
 });
 document.getElementById('grid').addEventListener('click',e=>{
   const c=e.target.closest('.card'); if(!c)return;
-  mframe.src=c.dataset.f+'.html';
-  mopen.href=c.dataset.f+'.html';
+  mframe.src=c.dataset.f+'.html'+V;
+  mopen.href=c.dataset.f+'.html'+V;
   mtitle.textContent=c.dataset.n;
   modal.classList.add('open'); document.body.style.overflow='hidden';
 });
