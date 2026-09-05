@@ -696,6 +696,7 @@ sndBtn.addEventListener('click',()=>{
   else{bgm.pause();sndIcon.innerHTML='<path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/>';}
 });
 </script>
+
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#6b1421;--anm-fg:#e8d3a4;--anm-p1:#e8d3a4;--anm-p2:#e8d3a4;--anm-serif:'Cormorant Garamond',Georgia,serif}
@@ -905,7 +906,11 @@ function ticker(){
   if(RM) return;
   ['D','H','M','S'].forEach(function(id){
     var el=document.getElementById(id); if(!el) return;
+    var last=el.textContent;
     new MutationObserver(function(){
+      var v=el.textContent;
+      if(v===last) return;          /* qiymat o'zgarmasa — qimirlamasin */
+      last=v;
       el.classList.remove('anm-tk'); void el.offsetWidth; el.classList.add('anm-tk');
     }).observe(el,{childList:true,characterData:true,subtree:true});
   });

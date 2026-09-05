@@ -383,6 +383,7 @@
   });
 </script>
 
+
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#faf3e8;--anm-fg:#a98b58;--anm-p1:#e8cdb6;--anm-p2:#d3aa8a;--anm-serif:'Great Vibes',cursive}
@@ -592,7 +593,11 @@ function ticker(){
   if(RM) return;
   ['D','H','M','S'].forEach(function(id){
     var el=document.getElementById(id); if(!el) return;
+    var last=el.textContent;
     new MutationObserver(function(){
+      var v=el.textContent;
+      if(v===last) return;          /* qiymat o'zgarmasa — qimirlamasin */
+      last=v;
       el.classList.remove('anm-tk'); void el.offsetWidth; el.classList.add('anm-tk');
     }).observe(el,{childList:true,characterData:true,subtree:true});
   });

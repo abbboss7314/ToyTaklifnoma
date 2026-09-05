@@ -189,6 +189,7 @@ document.querySelectorAll('.mq span').forEach(s=>s.textContent=s.textContent+s.t
 const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.12});
 document.querySelectorAll('section').forEach(s=>io.observe(s));
 </script>
+
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#f7ecd9;--anm-fg:#d2622f;--anm-p1:rgba(226,160,44,.6);--anm-p2:#d2622f;--anm-serif:'Bricolage Grotesque',Inter,sans-serif}
@@ -398,7 +399,11 @@ function ticker(){
   if(RM) return;
   ['D','H','M','S'].forEach(function(id){
     var el=document.getElementById(id); if(!el) return;
+    var last=el.textContent;
     new MutationObserver(function(){
+      var v=el.textContent;
+      if(v===last) return;          /* qiymat o'zgarmasa — qimirlamasin */
+      last=v;
       el.classList.remove('anm-tk'); void el.offsetWidth; el.classList.add('anm-tk');
     }).observe(el,{childList:true,characterData:true,subtree:true});
   });

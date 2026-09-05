@@ -195,6 +195,7 @@ setInterval(()=>{const d=T-Date.now(); if(d<=0)return; const s=Math.floor(d/1000
 const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.12});
 document.querySelectorAll('section,.zoom').forEach(s=>io.observe(s));
 </script>
+
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#1b1a18;--anm-fg:#f2efe9;--anm-p1:#f2efe9;--anm-p2:#f2efe9;--anm-serif:'Cormorant Garamond',Georgia,serif}
@@ -404,7 +405,11 @@ function ticker(){
   if(RM) return;
   ['D','H','M','S'].forEach(function(id){
     var el=document.getElementById(id); if(!el) return;
+    var last=el.textContent;
     new MutationObserver(function(){
+      var v=el.textContent;
+      if(v===last) return;          /* qiymat o'zgarmasa — qimirlamasin */
+      last=v;
       el.classList.remove('anm-tk'); void el.offsetWidth; el.classList.add('anm-tk');
     }).observe(el,{childList:true,characterData:true,subtree:true});
   });
