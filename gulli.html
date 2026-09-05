@@ -134,6 +134,10 @@
     .cart{width:80px;height:110px}.cart .dd{font-size:32px}
     .sig{margin-top:12px;font-size:17px}
   }
+
+  /* ── Lottie gul lentasi ── */
+  .lot{width:min(300px,88%);aspect-ratio:900/240;margin:10px auto 4px;pointer-events:none}
+  .lot svg{display:block;width:100%;height:100%}
 </style>
 </head>
 <body>
@@ -252,7 +256,7 @@
         <span class="n">Umida</span>
       </h1>
 
-      <svg class="dv rv d3" viewBox="0 0 100 10" fill="none"><path d="M4 5h34M62 5h34" stroke="#c2a87f" stroke-width=".9"/><path d="M50 1.2l3.4 3.8L50 8.8 46.6 5 50 1.2z" fill="#eadec4" stroke="#bfa478" stroke-width=".7"/></svg>
+      <div class="lot rv d3" id="lotFloral" aria-hidden="true"></div>
 
       <p class="msg rv d3">Eng baxtli kunimizda Sizni davramizda ko‘rishdan mamnun bo‘lamiz.</p>
 
@@ -384,6 +388,24 @@
 </script>
 
 
+
+<script src="lottie.min.js"></script>
+<script>
+(function(){
+  var el=document.getElementById('lotFloral');
+  if(!el||!window.lottie) return;
+  var an=lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,
+    rendererSettings:{progressiveLoad:true},path:'gul.json'});
+  var played=false, ready=false;
+  an.addEventListener('DOMLoaded',function(){ready=true; if(want) go();});
+  var want=false;
+  function go(){ if(played)return; played=true; an.goToAndPlay(0,true); }
+  function play(){ want=true; if(ready) go(); }
+  var ob=document.getElementById('openBtn');
+  if(ob) ob.addEventListener('click',function(){setTimeout(play,1500)});
+  new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting) play()})},{threshold:.35}).observe(el);
+})();
+</script>
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#faf3e8;--anm-fg:#a98b58;--anm-p1:#e8cdb6;--anm-p2:#d3aa8a;--anm-serif:'Great Vibes',cursive}
