@@ -72,7 +72,10 @@
   .rule svg{width:16px;height:16px}
 
   /* ══════ FILTR ══════ */
-  .filters{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+  .frow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+  .fk{font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--txt3);min-width:62px;text-align:right}
+  .filters{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}
+  @media(max-width:640px){.fk{min-width:0;width:100%;text-align:center;margin-bottom:-8px}}
   .chip{border:1px solid var(--line);background:none;color:var(--txt2);cursor:pointer;
     padding:10px 19px;border-radius:30px;font-size:11px;letter-spacing:.1em;font-family:inherit;
     transition:.25s}
@@ -199,7 +202,14 @@
       <h2 data-t="colH"></h2>
       <p data-t="colP"></p>
     </div>
-    <div class="filters" id="filters"></div>
+    <div class="frow">
+      <span class="fk" data-t="fEvent"></span>
+      <div class="filters" id="fEv"></div>
+    </div>
+    <div class="frow">
+      <span class="fk" data-t="fStyle"></span>
+      <div class="filters" id="fSt"></div>
+    </div>
     <div class="grid" id="grid"></div>
   </section>
 
@@ -273,28 +283,33 @@ function star8(cx,cy,R,r,rot=0){let p=[];for(let i=0;i<16;i++){const rad=i%2?r:R
 
 /* ═══════ SHABLONLAR ═══════ */
 const T=[
- {f:'konvert-bordo', c:['konvert','klassik'], nm:{uz:'Bordo',        ru:'Бордо',         en:'Burgundy'}},
- {f:'konvert-oq',    c:['konvert','minimal'], nm:{uz:'Oq',           ru:'Белый',         en:'White'}},
- {f:'konvert-pudra', c:['konvert','klassik'], nm:{uz:'Pudra',        ru:'Пудра',         en:'Blush'}},
- {f:'konvert-krem',  c:['konvert','klassik'], nm:{uz:'Krem va oltin',ru:'Крем и золото', en:'Ivory & Gold'}},
- {f:'konvert-moviy', c:['konvert','klassik'], nm:{uz:'Moviy',        ru:'Синий',         en:'Navy'}},
- {f:'konvert-zaytun',c:['konvert','minimal'], nm:{uz:'Zaytun',       ru:'Оливковый',     en:'Olive'}},
- {f:'koshin',   c:['milliy'],              nm:{uz:'Koshin',   ru:'Кошин',      en:'Majolica'}},
- {f:'3d',       c:['klassik'],             nm:{uz:'Muhr',     ru:'Печать',     en:'Wax Seal'}},
- {f:'qorongi',  c:['klassik','zamonaviy'], nm:{uz:'Kecha',    ru:'Ночь',       en:'Night'}},
- {f:'editorial',c:['minimal'],             nm:{uz:'Editorial',ru:'Editorial',  en:'Editorial'}},
- {f:'milliy',   c:['milliy'],              nm:{uz:'Suzani',   ru:'Сюзане',     en:'Suzani'}},
- {f:'foto',     c:['foto','minimal'],      nm:{uz:'Foto',     ru:'Фото',       en:'Photo'}},
- {f:'arka',     c:['minimal'],             nm:{uz:'Arka',     ru:'Арка',       en:'Arch'}},
- {f:'retro',    c:['zamonaviy'],           nm:{uz:'Retro',    ru:'Ретро',      en:'Retro'}},
- {f:'gulli',    c:['klassik'],             nm:{uz:'Akvarel',  ru:'Акварель',   en:'Watercolour'}},
- {f:'kitob',    c:['klassik'],             nm:{uz:'Kitob',    ru:'Книга',      en:'Book'}},
- {f:'index',    c:['klassik','zamonaviy'], nm:{uz:'Bayram',   ru:'Праздник',   en:'Festive'}}
+ {f:'konvert-bordo', e:['toy'],     c:['konvert','klassik'], nm:{uz:'Bordo',        ru:'Бордо',         en:'Burgundy'}},
+ {f:'konvert-oq',    e:['toy'],     c:['konvert','minimal'], nm:{uz:'Oq',           ru:'Белый',         en:'White'}},
+ {f:'konvert-pudra', e:['toy'],     c:['konvert','klassik'], nm:{uz:'Pudra',        ru:'Пудра',         en:'Blush'}},
+ {f:'konvert-krem',  e:['toy'],     c:['konvert','klassik'], nm:{uz:'Krem va oltin',ru:'Крем и золото', en:'Ivory & Gold'}},
+ {f:'konvert-moviy', e:['toy'],     c:['konvert','klassik'], nm:{uz:'Moviy',        ru:'Синий',         en:'Navy'}},
+ {f:'konvert-zaytun',e:['toy'],     c:['konvert','minimal'], nm:{uz:'Zaytun',       ru:'Оливковый',     en:'Olive'}},
+ {f:'koshin',        e:['toy'],     c:['milliy'],            nm:{uz:'Koshin',   ru:'Кошин',      en:'Majolica'}},
+ {f:'3d',            e:['toy'],     c:['klassik'],           nm:{uz:'Muhr',     ru:'Печать',     en:'Wax Seal'}},
+ {f:'qorongi',       e:['toy'],     c:['klassik','zamonaviy'],nm:{uz:'Kecha',   ru:'Ночь',       en:'Night'}},
+ {f:'editorial',     e:['toy'],     c:['minimal'],           nm:{uz:'Editorial',ru:'Editorial',  en:'Editorial'}},
+ {f:'milliy',        e:['toy'],     c:['milliy'],            nm:{uz:'Suzani',   ru:'Сюзане',     en:'Suzani'}},
+ {f:'foto',          e:['toy'],     c:['foto','minimal'],    nm:{uz:'Foto',     ru:'Фото',       en:'Photo'}},
+ {f:'arka',          e:['toy'],     c:['minimal'],           nm:{uz:'Arka',     ru:'Арка',       en:'Arch'}},
+ {f:'retro',         e:['toy'],     c:['zamonaviy'],         nm:{uz:'Retro',    ru:'Ретро',      en:'Retro'}},
+ {f:'gulli',         e:['toy'],     c:['klassik'],           nm:{uz:'Akvarel',  ru:'Акварель',   en:'Watercolour'}},
+ {f:'kitob',         e:['toy'],     c:['klassik'],           nm:{uz:'Kitob',    ru:'Книга',      en:'Book'}},
+ {f:'index',         e:['toy'],     c:['klassik','zamonaviy'],nm:{uz:'Bayram',  ru:'Праздник',   en:'Festive'}},
+ {f:'fotiha',        e:['fotiha'],  c:['klassik'],           nm:{uz:'Fotiha',   ru:'Фотиха',     en:'Engagement'}},
+ {f:'tugilgan',      e:['tugilgan'],c:['zamonaviy'],         nm:{uz:'Yubiley',  ru:'Юбилей',     en:'Birthday'}},
+ {f:'beshik',        e:['beshik'],  c:['minimal'],           nm:{uz:'Beshik',   ru:'Колыбель',   en:'Cradle'}},
+ {f:'sunnat',        e:['sunnat'],  c:['milliy'],            nm:{uz:'Sunnat',   ru:'Суннат',     en:'Sunnat'}}
 ];
 
 /* ═══════ TARJIMALAR ═══════ */
 const L={
 uz:{
+ fEvent:'Tadbir', fStyle:'Uslub',
  eyebrow:'Premium elektron taklifnomalar',
  h1a:'Sizning kuningiz —', h1b:'bizning dizaynimiz',
  sub:'To‘y, nikoh, fotiha va bayramlar uchun jonli taklifnomalar. Telefonda ochiladi, ovoz bilan, vaqt sanog‘i va xarita bilan.',
@@ -307,8 +322,13 @@ uz:{
  ctaB:'Direct’ga yozish',
  mOpen:'To‘liq ochish', mOrder:'Shuni buyurtma qilish',
  foot1:'Taklifnoma Elektron · Individual dizayn', foot2:'Buyurtma — Instagram Direct',
+ evs:{all:'Barchasi',toy:'To‘y',fotiha:'Fotiha',tugilgan:'Tug‘ilgan kun',beshik:'Beshik to‘yi',sunnat:'Sunnat to‘yi'},
  cats:{all:'Barchasi',konvert:'Konvert',milliy:'Milliy',minimal:'Minimal',klassik:'Klassik',zamonaviy:'Zamonaviy',foto:'Foto'},
  desc:{
+  fotiha:"Nafis fil suyagi va quruq atirgul rangi. Ikki oila uchun.",
+  tugilgan:"Olxo‘ri fon, ulkan oltin raqam va konfetti yog‘adi.",
+  beshik:"Yumshoq yalpiz rang, oy, bulutlar va beshik.",
+  sunnat:"Kobalt va oltin yulduz naqshi. Bayramona, milliy.",
   'konvert-bordo':"Bo‘rtma naqshli bordo konvert. Muhrni bosing — ochiladi.",
   'konvert-oq':"Butunlay oq: bo‘rtma naqsh va marvarid tusli muhr.",
   'konvert-pudra':"Yumshoq pudra rang, kumush muhr. Nozik va issiq.",
@@ -335,6 +355,7 @@ uz:{
       ['O‘zgartirish oson','Vaqt yoki manzil o‘zgarsa — havola o‘sha, ichi yangilanadi']]
 },
 ru:{
+ fEvent:'Событие', fStyle:'Стиль',
  eyebrow:'Премиальные электронные приглашения',
  h1a:'Ваш день —', h1b:'наш дизайн',
  sub:'Живые приглашения для свадьбы, никоха, фотихи и праздников. Открывается на телефоне: музыка, обратный отсчёт, карта.',
@@ -347,8 +368,13 @@ ru:{
  ctaB:'Написать в Direct',
  mOpen:'Открыть полностью', mOrder:'Заказать этот',
  foot1:'Taklifnoma Elektron · Индивидуальный дизайн', foot2:'Заказ — Instagram Direct',
+ evs:{all:'Все',toy:'Свадьба',fotiha:'Фотиха',tugilgan:'День рождения',beshik:'Бешик той',sunnat:'Суннат той'},
  cats:{all:'Все',konvert:'Конверт',milliy:'Национальный',minimal:'Минимализм',klassik:'Классика',zamonaviy:'Современный',foto:'Фото'},
  desc:{
+  fotiha:"Тонкая слоновая кость и пыльная роза. Для двух семей.",
+  tugilgan:"Сливовый фон, огромная золотая цифра и падающее конфетти.",
+  beshik:"Мягкий мятный тон, луна, облака и колыбель.",
+  sunnat:"Кобальт и золотой звёздный узор. Празднично, национально.",
   'konvert-bordo':"Бордовый конверт с тиснением. Нажмите на печать — откроется.",
   'konvert-oq':"Полностью белый: тиснение и жемчужная печать.",
   'konvert-pudra':"Мягкий пудровый тон, серебряная печать. Нежно и тепло.",
@@ -375,6 +401,7 @@ ru:{
       ['Легко менять','Изменилось время или адрес — ссылка та же, содержимое новое']]
 },
 en:{
+ fEvent:'Event', fStyle:'Style',
  eyebrow:'Premium digital invitations',
  h1a:'Your day —', h1b:'our design',
  sub:'Living invitations for weddings, nikoh, fotiha and celebrations. Opens on the phone with music, a countdown and a map.',
@@ -387,8 +414,13 @@ en:{
  ctaB:'Message on Direct',
  mOpen:'Open full', mOrder:'Order this one',
  foot1:'Taklifnoma Elektron · Bespoke design', foot2:'Orders — Instagram Direct',
+ evs:{all:'All',toy:'Wedding',fotiha:'Engagement',tugilgan:'Birthday',beshik:'Baby',sunnat:'Sunnat'},
  cats:{all:'All',konvert:'Envelope',milliy:'Traditional',minimal:'Minimal',klassik:'Classic',zamonaviy:'Modern',foto:'Photo'},
  desc:{
+  fotiha:"Delicate ivory and dusty rose. For the two families.",
+  tugilgan:"Plum ground, an oversized gold numeral and falling confetti.",
+  beshik:"Soft mint, a moon, clouds and a cradle.",
+  sunnat:"Cobalt and a gold star pattern. Festive and traditional.",
   'konvert-bordo':"Embossed burgundy envelope. Tap the seal to open.",
   'konvert-oq':"Total white: tone-on-tone emboss and a pearl seal.",
   'konvert-pudra':"Soft blush with a silver seal. Delicate and warm.",
@@ -415,7 +447,7 @@ en:{
       ['Easy to change','Time or venue changed? Same link, updated inside']]
 }};
 
-let lang='uz', cat='all';
+let lang='uz', cat='all', ev='all';
 
 /* ═══════ chizish ═══════ */
 const EYE='<svg viewBox="0 0 24 24"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>';
@@ -433,12 +465,15 @@ function render(){
   document.getElementById("igProfile").href=IG_PRO;
 
   // filtrlar
+  const evs=['all','toy','fotiha','tugilgan','beshik','sunnat'];
+  fEv.innerHTML=evs.map(c=>
+    `<button class="chip${c===ev?' on':''}" data-e="${c}">${t.evs[c]}</button>`).join('');
   const cats=['all','konvert','milliy','klassik','minimal','zamonaviy','foto'];
-  filters.innerHTML=cats.map(c=>
+  fSt.innerHTML=cats.map(c=>
     `<button class="chip${c===cat?' on':''}" data-c="${c}">${t.cats[c]}</button>`).join('');
 
   // kartochkalar
-  const list=T.filter(x=>cat==='all'||x.c.includes(cat));
+  const list=T.filter(x=>(ev==='all'||x.e.includes(ev))&&(cat==='all'||x.c.includes(cat)));
   grid.innerHTML=list.map(x=>`
     <article class="card" data-f="${x.f}" data-n="${x.nm[lang]}">
       <div class="shot"><iframe data-src="${x.f}.html" title="${x.nm[lang]}"></iframe>
@@ -482,8 +517,11 @@ document.querySelector('.lang').addEventListener('click',e=>{
   document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('on',x===b));
   render();
 });
-document.getElementById('filters').addEventListener('click',e=>{
+document.getElementById('fSt').addEventListener('click',e=>{
   const b=e.target.closest('.chip'); if(!b)return; cat=b.dataset.c; render();
+});
+document.getElementById('fEv').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b)return; ev=b.dataset.e; render();
 });
 document.getElementById('grid').addEventListener('click',e=>{
   const c=e.target.closest('.card'); if(!c)return;
