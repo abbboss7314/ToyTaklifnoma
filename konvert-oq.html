@@ -72,6 +72,23 @@
   #cover.rise{background:transparent;transition:background .9s}
   #cover.rise .pocket{opacity:0;transition:opacity .6s}
   #cover.rise .flap,#cover.rise .glow,#cover.rise>.tex{opacity:0;transition:opacity .6s}
+  /* ── FILM: arka shaklidagi video oyna ── */
+  #film{padding-top:8px;padding-bottom:64px;text-align:center}
+  .film{position:relative;width:min(300px,78%);margin:24px auto 0;aspect-ratio:3/4}
+  .film video{width:100%;height:100%;object-fit:cover;display:block;
+    border-radius:150px 150px 10px 10px;filter:saturate(.62) contrast(.96) brightness(1.14)}
+  .film .tint{position:absolute;inset:0;border-radius:150px 150px 10px 10px;pointer-events:none;
+    background:linear-gradient(180deg,rgba(247,230,229,.55),rgba(247,230,229,.10) 45%,rgba(140,90,95,.28));
+    mix-blend-mode:screen;opacity:.5}
+  .film .fr{position:absolute;inset:-9px;border:1px solid var(--line);
+    border-radius:158px 158px 14px 14px;pointer-events:none}
+  .film .fr::after{content:'';position:absolute;inset:6px;border:1px solid var(--band);
+    border-radius:152px 152px 10px 10px}
+  .film-cap{font-size:8px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink2);margin-top:22px}
+  /* ── Lottie uyasi ── */
+  .lot{width:min(260px,72%);aspect-ratio:900/240;margin:26px auto 0;pointer-events:none}
+  .lot svg{display:block;width:100%;height:100%}
+
   #cover.rise .letter{z-index:8;opacity:0;transform:translate(-50%,-50%) scale(3.1);
     box-shadow:none;transition:transform 1.15s cubic-bezier(.62,0,.3,1),opacity .9s .3s}
   .seal{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:128px;z-index:6;
@@ -128,12 +145,17 @@
 
   /* ══════ SANA ══════ */
   #when{padding-top:70px;padding-bottom:70px;text-align:center}
-  .cart{position:relative;width:184px;margin:26px auto 0}
+  .cart{position:relative;width:204px;margin:26px auto 0}
   .cart svg{display:block;width:100%;height:auto}
   .cart .in-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .cart .dd{font-family:var(--serif);font-size:46px;font-weight:400;line-height:1;color:var(--ink)}
-  .cart .mm{font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink2);margin-top:9px}
-  .cart .yy2{font-family:var(--serif);font-size:16px;letter-spacing:.2em;color:var(--ink2);margin-top:7px}
+  .cart .dd{font-family:var(--serif);font-size:52px;font-weight:500;line-height:1;color:var(--ink)}
+  .cart .mm{display:flex;align-items:center;gap:9px;font-size:8px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--ink2);margin-top:11px}
+  .cart .mm::before,.cart .mm::after{content:"";width:16px;height:1px;background:var(--metal);opacity:.55}
+  .cart .yy2{font-family:var(--serif);font-size:15px;letter-spacing:.26em;color:var(--ink2);margin-top:8px}
+  #beadRing{transform-origin:100px 100px;animation:medalSpin 84s linear infinite}
+  @keyframes medalSpin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){#beadRing{animation:none}}
   .wrow{display:flex;justify-content:center;gap:26px;margin-top:24px}
   .wrow .k{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink2)}
   .wrow .v{font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:6px}
@@ -206,7 +228,7 @@
   <section id="when">
     <span class="lab rv">Marosim kuni</span>
     <div class="cart rv d1">
-      <svg id="cartSvg" viewBox="0 0 184 216"></svg>
+      <svg id="cartSvg" viewBox="0 0 200 200"></svg>
       <div class="in-t">
         <span class="dd">21</span><span class="mm">Mart</span><span class="yy2">2027</span>
       </div>
@@ -425,11 +447,26 @@ function poly(cx,cy,R,n,r0){
 
 /* ── sana kartushi ── */
 (function(){
-  const s=document.getElementById('cartSvg');
-  const d='M92 4 C132 18 176 56 176 108 C176 160 132 198 92 212 C52 198 8 160 8 108 C8 56 52 18 92 4 Z';
-  s.appendChild(el('path',{d,fill:'transparent',stroke:C.metal,'stroke-width':1.2,opacity:'.75'}));
-  s.appendChild(el('path',{d:'M92 14 C127 27 166 60 166 108 C166 156 127 189 92 202 C57 189 18 156 18 108 C18 60 57 27 92 14 Z',
-    fill:'none',stroke:C.metal,'stroke-width':.7,opacity:'.4'}));
+  const s=document.getElementById('cartSvg'), cx=100, cy=100;
+  const pol=(r,a)=>[cx+Math.cos(a)*r, cy+Math.sin(a)*r];
+  s.appendChild(el('circle',{cx,cy,r:95,fill:'none',stroke:C.metal,'stroke-width':.7,opacity:.3}));
+  const ring=el('g',{id:'beadRing'});
+  for(let i=0;i<40;i++){
+    const a=i/40*Math.PI*2, [x,y]=pol(87,a);
+    ring.appendChild(el('circle',{cx:x.toFixed(2),cy:y.toFixed(2),
+      r:(i%5===0?2.1:1.05),fill:C.metal,opacity:(i%5===0?.7:.42)}));
+  }
+  s.appendChild(ring);
+  s.appendChild(el('circle',{cx,cy,r:76,fill:'none',stroke:C.metal,'stroke-width':1.05,opacity:.7}));
+  s.appendChild(el('circle',{cx,cy,r:71,fill:'none',stroke:C.metal,'stroke-width':.5,opacity:.33}));
+  [0,90,180,270].forEach(d=>{
+    const a=(d-90)*Math.PI/180, [x,y]=pol(95,a);
+    s.appendChild(el('path',{d:'M'+x+' '+(y-5.2)+' L'+(x+3.6)+' '+y+' L'+x+' '+(y+5.2)+' L'+(x-3.6)+' '+y+' Z',
+      fill:C.metalL,opacity:.9}));
+  });
+  [-1,0,1].forEach(k=>{
+    s.appendChild(el('circle',{cx:100+k*8,cy:cy+58,r:(k===0?1.9:1.2),fill:C.metal,opacity:(k===0?.7:.4)}));
+  });
 })();
 
 /* ── monogramma ── */
@@ -462,12 +499,14 @@ function openIt(){
   setTimeout(()=>cover.classList.add('gone'),4250);
   setTimeout(()=>cover.style.display='none',5200);
 }
+
 document.getElementById('seal').addEventListener('click',openIt);
 document.querySelector('.tap').addEventListener('click',openIt);
 
 const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});
 document.querySelectorAll('section').forEach(s=>io.observe(s));
 </script>
+
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#faf6ee;--anm-fg:#9a8455;--anm-p1:#efe3cd;--anm-p2:#dcc9a4;--anm-serif:'Cormorant Garamond',Georgia,serif}

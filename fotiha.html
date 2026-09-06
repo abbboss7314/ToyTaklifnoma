@@ -63,12 +63,19 @@
 
   /* ── SANA ── */
   #when{padding-top:72px;padding-bottom:72px;text-align:center}
-  .oval{position:relative;width:186px;margin:26px auto 0}
+  .oval{position:relative;width:206px;margin:26px auto 0}
   .oval svg{display:block;width:100%;height:auto}
   .oval .in-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .oval .dd{font-family:var(--serif);font-size:46px;line-height:1}
-  .oval .mm{font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink2);margin-top:9px}
-  .oval .yy{font-family:var(--serif);font-size:16px;letter-spacing:.2em;color:var(--ink2);margin-top:7px}
+  .oval .dd{font-family:var(--serif);font-size:52px;line-height:1;font-weight:500;
+    background:linear-gradient(160deg,var(--gold-d),var(--ink) 42%,var(--gold-d));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .oval .mm{display:flex;align-items:center;gap:9px;font-size:8px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--ink2);margin-top:11px}
+  .oval .mm::before,.oval .mm::after{content:"";width:16px;height:1px;background:var(--gold);opacity:.5}
+  .oval .yy{font-family:var(--serif);font-size:15px;letter-spacing:.26em;color:var(--ink2);margin-top:8px}
+  #beadRing{transform-origin:100px 100px;animation:medalSpin 84s linear infinite}
+  @keyframes medalSpin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){#beadRing{animation:none}}
   .wrow{display:flex;justify-content:center;gap:28px;margin-top:24px}
   .wrow .k{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink2)}
   .wrow .v{font-family:var(--serif);font-size:21px;margin-top:6px}
@@ -134,7 +141,7 @@
   <section id="when">
     <span class="lab rv">Marosim kuni</span>
     <div class="oval rv d1">
-      <svg viewBox="0 0 186 218" id="ov"></svg>
+      <svg viewBox="0 0 200 200" id="ov"></svg>
       <div class="in-t"><span class="dd">18</span><span class="mm">Oktabr</span><span class="yy">2026</span></div>
     </div>
     <div class="wrow rv d2">
@@ -211,12 +218,31 @@ vine(document.getElementById('v2'));
 
 /* ── oval ramka ── */
 (function(){
-  const s=document.getElementById('ov');
-  s.appendChild(el('path',{d:'M93 6 C133 20 178 58 178 109 C178 160 133 198 93 212 C53 198 8 160 8 109 C8 58 53 20 93 6 Z',
-    fill:'none',stroke:G,'stroke-width':1.2,opacity:'.8'}));
-  s.appendChild(el('path',{d:'M93 16 C128 29 168 62 168 109 C168 156 128 189 93 202 C58 189 18 156 18 109 C18 62 58 29 93 16 Z',
-    fill:'none',stroke:G,'stroke-width':.7,opacity:'.45'}));
-  s.appendChild(el('path',{d:'M93 0 L96 6 L93 12 L90 6 Z',fill:R}));
+  const s=document.getElementById('ov'), cx=100, cy=100;
+  const pol=(r,a)=>[cx+Math.cos(a)*r, cy+Math.sin(a)*r];
+  /* tashqi ingichka halqa */
+  s.appendChild(el('circle',{cx,cy,r:95,fill:'none',stroke:G,'stroke-width':.7,opacity:.3}));
+  /* aylanuvchi munchoq halqasi */
+  const ring=el('g',{id:'beadRing'});
+  for(let i=0;i<40;i++){
+    const a=i/40*Math.PI*2, [x,y]=pol(87,a);
+    ring.appendChild(el('circle',{cx:x.toFixed(2),cy:y.toFixed(2),
+      r:(i%5===0?2.1:1.05),fill:G,opacity:(i%5===0?.7:.45)}));
+  }
+  s.appendChild(ring);
+  /* ichki qo'sh halqa */
+  s.appendChild(el('circle',{cx,cy,r:76,fill:'none',stroke:G,'stroke-width':1.05,opacity:.7}));
+  s.appendChild(el('circle',{cx,cy,r:71,fill:'none',stroke:G,'stroke-width':.5,opacity:.35}));
+  /* to'rt tomonda romb */
+  [0,90,180,270].forEach(d=>{
+    const a=(d-90)*Math.PI/180, [x,y]=pol(95,a);
+    s.appendChild(el('path',{d:'M'+x+' '+(y-5.2)+' L'+(x+3.6)+' '+y+' L'+x+' '+(y+5.2)+' L'+(x-3.6)+' '+y+' Z',
+      fill:R,opacity:.9}));
+  });
+  /* pastda kichik uch nuqta */
+  [-1,0,1].forEach(k=>{
+    s.appendChild(el('circle',{cx:100+k*8,cy:cy+58,r:(k===0?1.9:1.2),fill:R,opacity:(k===0?.75:.45)}));
+  });
 })();
 
 /* ── sanoq ── */
@@ -230,6 +256,8 @@ const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.cla
 document.querySelectorAll('section').forEach(s=>io.observe(s));
 document.getElementById('hero').classList.add('in');
 </script>
+
+
 
 
 <!--ANM:start-->
