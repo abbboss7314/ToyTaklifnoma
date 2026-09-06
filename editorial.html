@@ -85,6 +85,8 @@
   #end{padding-top:96px;padding-bottom:74px;text-align:center}
   .mono{font-family:var(--serif);font-size:clamp(30px,9vw,42px);font-weight:300;line-height:1.3}
   .sig{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink2);margin-top:40px}
+  .lotX{width:min(268px,80%);aspect-ratio:1200/900;margin:30px auto 0;pointer-events:none;display:block}
+  .lotX svg{display:block;width:100%;height:100%}
 </style>
 </head>
 <body>
@@ -122,6 +124,7 @@
     <span class="lab fade">Bir jumla</span>
     <p class="lede rev d1" style="margin-top:26px"><span>Bir kun. Ikki hayot. Va Siz.</span></p>
     <p class="sub fade d3">Nikoh marosimimizda ishtirok etishingizni chin dildan so‘raymiz. Sizning borligingiz — bu kunni to‘liq qiladigan yagona narsa.</p>
+    <div class="lotX fade d4" id="lotX"></div>
   </section>
 
   <section id="det">
@@ -167,6 +170,25 @@ const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.cla
 document.querySelectorAll('section').forEach(s=>io.observe(s));
 </script>
 
+
+
+<script src="lottie.min.js"></script>
+<script>
+(function(){
+  var el=document.getElementById('lotX');
+  if(!el) return;
+  function init(){
+    if(!window.lottie||el.dataset.go) return; el.dataset.go='1';
+    var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:'a14.json'});
+    var ready=false, want=false, played=false;
+    an.addEventListener('DOMLoaded',function(){ready=true; if(want)go();});
+    function go(){ if(played)return; played=true; an.goToAndPlay(0,true); }
+    new IntersectionObserver(function(e){e.forEach(function(x){ if(x.isIntersecting){want=true; if(ready)go();} })},
+      {threshold:.35}).observe(el);
+  }
+  if(window.lottie) init(); else addEventListener('load',init);
+})();
+</script>
 
 <!--ANM:start-->
 <style id="anm-css">

@@ -114,6 +114,8 @@
     padding:28px 22px;border-radius:999px 999px 10px 10px / 46% 46% 10px 10px}
   .fin{font-family:var(--disp);font-weight:300;font-size:clamp(25px,7.4vw,32px);line-height:1.4}
   .sig{font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;margin-top:26px;opacity:.85}
+  .lotX{width:min(150px,74%);aspect-ratio:485/651;margin:30px auto 0;pointer-events:none;display:block}
+  .lotX svg{display:block;width:100%;height:100%}
 </style>
 </head>
 <body>
@@ -149,6 +151,7 @@
       <path d="M50 26 C 66 26 74 16 74 8 C 66 8 56 14 50 26 Z" fill="#c17a5b" opacity=".8"/>
       <path d="M50 26 V 12" stroke="#5f6d54" stroke-width="1.2"/>
     </svg>
+    <div class="lotX rv d3" id="lotX"></div>
   </section>
 
   <section id="det">
@@ -196,6 +199,25 @@ const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.cla
 document.querySelectorAll('section').forEach(s=>io.observe(s));
 </script>
 
+
+
+<script src="lottie.min.js"></script>
+<script>
+(function(){
+  var el=document.getElementById('lotX');
+  if(!el) return;
+  function init(){
+    if(!window.lottie||el.dataset.go) return; el.dataset.go='1';
+    var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:'a5.json'});
+    var ready=false, want=false, played=false;
+    an.addEventListener('DOMLoaded',function(){ready=true; if(want)go();});
+    function go(){ if(played)return; played=true; an.goToAndPlay(0,true); }
+    new IntersectionObserver(function(e){e.forEach(function(x){ if(x.isIntersecting){want=true; if(ready)go();} })},
+      {threshold:.35}).observe(el);
+  }
+  if(window.lottie) init(); else addEventListener('load',init);
+})();
+</script>
 
 <!--ANM:start-->
 <style id="anm-css">
