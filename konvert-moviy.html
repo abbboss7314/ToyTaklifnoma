@@ -261,6 +261,7 @@
   </section>
 
   <section id="end">
+    <div class="lot rv" id="lotEnd" style="--ar:1/1;--lw:150px;margin:0 auto 18px"></div>
     <p class="fin rv">Sizni kutamiz</p>
     <svg class="rv d1" id="mono" viewBox="0 0 90 90" style="width:74px;margin:22px auto 0;display:block"></svg>
     <p class="sign rv d2">Temur &amp; Kamila · 13.02.2027</p>
@@ -501,13 +502,47 @@ function openIt(){
   setTimeout(()=>cover.style.display='none',5200);
 }
 
+/* ── film + lottie ── */
+(function(){
+  var vd=document.getElementById('clip');
+  if(vd){
+    var io=new IntersectionObserver(function(e){e.forEach(function(x){
+      if(x.isIntersecting){ var p=vd.play(); if(p&&p.catch) p.catch(function(){}); }
+      else vd.pause();
+    })},{threshold:.25});
+    io.observe(vd);
+  }
+  function mount(id,path){
+    var el=document.getElementById(id);
+    if(!el||!path||!window.lottie) return;
+    var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:path});
+    var ready=false,want=false,played=false;
+    an.addEventListener('DOMLoaded',function(){ready=true; if(want)go();});
+    function go(){ if(played)return; played=true; an.goToAndPlay(0,true); }
+    new IntersectionObserver(function(e){e.forEach(function(x){ if(x.isIntersecting){want=true; if(ready)go();} })},
+      {threshold:.35}).observe(el);
+  }
+  var el=document.getElementById('lotSlot')||document.getElementById('lotSay');
+  function initLot(){
+  mount('lotEnd','b-moviy.json');
+  if(el&&window.lottie){
+    var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:'gul.json'});
+    var played=false, ready=false, want=false;
+    an.addEventListener('DOMLoaded',function(){ready=true; if(want)go();});
+    function go(){ if(played)return; played=true; an.goToAndPlay(0,true); }
+    new IntersectionObserver(function(e){e.forEach(function(x){ if(x.isIntersecting){want=true; if(ready)go();} })},
+      {threshold:.4}).observe(el);
+  }}
+  if(window.lottie) initLot(); else addEventListener('load',initLot);
+})();
+
 document.getElementById('seal').addEventListener('click',openIt);
 document.querySelector('.tap').addEventListener('click',openIt);
 
 const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});
 document.querySelectorAll('section').forEach(s=>io.observe(s));
 </script>
-
+<script src="lottie.min.js"></script>
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#1f3054;--anm-fg:#e6d09a;--anm-p1:#e6d09a;--anm-p2:#e6d09a;--anm-serif:'Cormorant Garamond',Georgia,serif}

@@ -261,6 +261,7 @@
   </section>
 
   <section id="end">
+    <div class="lot rv" id="lotEnd" style="--ar:473/513;--lw:168px;margin:0 auto 18px"></div>
     <p class="fin rv">Sizni kutamiz</p>
     <svg class="rv d1" id="mono" viewBox="0 0 90 90" style="width:74px;margin:22px auto 0;display:block"></svg>
     <p class="sign rv d2">Ulug‘bek &amp; Nigora · 07.11.2026</p>
@@ -511,8 +512,19 @@ function openIt(){
     })},{threshold:.25});
     io.observe(vd);
   }
+  function mount(id,path){
+    var el=document.getElementById(id);
+    if(!el||!path||!window.lottie) return;
+    var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:path});
+    var ready=false,want=false,played=false;
+    an.addEventListener('DOMLoaded',function(){ready=true; if(want)go();});
+    function go(){ if(played)return; played=true; an.goToAndPlay(0,true); }
+    new IntersectionObserver(function(e){e.forEach(function(x){ if(x.isIntersecting){want=true; if(ready)go();} })},
+      {threshold:.35}).observe(el);
+  }
   var el=document.getElementById('lotSlot')||document.getElementById('lotSay');
   function initLot(){
+  mount('lotEnd','b-bordo.json');
   if(el&&window.lottie){
     var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:'a12.json'});
     var played=false, ready=false, want=false;
