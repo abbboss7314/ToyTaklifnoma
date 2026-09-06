@@ -209,7 +209,7 @@ header.sm{background:rgba(15,18,24,.82);backdrop-filter:blur(14px) saturate(1.2)
   box-shadow:0 1px 0 rgba(212,168,86,.14)}
 
 /* lottie bezak */
-#lotRule{width:min(340px,74%);aspect-ratio:900/240;margin:34px auto 0;opacity:.75}
+#lotRule{width:min(300px,66%);aspect-ratio:850/300;margin:34px auto 0;opacity:.75}
 #lotRule svg{display:block;width:100%;height:100%}
 }
 </style>
@@ -331,7 +331,7 @@ function star8(cx,cy,R,r,rot=0){let p=[];for(let i=0;i<16;i++){const rad=i%2?r:R
 })();
 
 /* ═══════ SHABLONLAR ═══════ */
-const V='?v=20260906e';
+const V='?v=20260906f';
 const T=[
  {f:'konvert-bordo', e:['toy'],     c:['konvert','klassik'], nm:{uz:'Bordo',        ru:'Бордо',         en:'Burgundy'}},
  {f:'konvert-oq',    e:['toy'],     c:['konvert','minimal'], nm:{uz:'Oq',           ru:'Белый',         en:'White'}},
@@ -351,9 +351,7 @@ const T=[
  {f:'kitob',         e:['toy'],     c:['klassik'],           nm:{uz:'Kitob',    ru:'Книга',      en:'Book'}},
  {f:'index',         e:['toy'],     c:['klassik','zamonaviy'],nm:{uz:'Bayram',  ru:'Праздник',   en:'Festive'}},
  {f:'fotiha',        e:['fotiha'],  c:['klassik'],           nm:{uz:'Fotiha',   ru:'Фотиха',     en:'Engagement'}},
- {f:'tugilgan',      e:['tugilgan'],c:['zamonaviy'],         nm:{uz:'Yubiley',  ru:'Юбилей',     en:'Birthday'}},
- {f:'beshik',        e:['beshik'],  c:['minimal'],           nm:{uz:'Beshik',   ru:'Колыбель',   en:'Cradle'}},
- {f:'sunnat',        e:['sunnat'],  c:['milliy'],            nm:{uz:'Sunnat',   ru:'Суннат',     en:'Sunnat'}}
+ {f:'tugilgan',      e:['tugilgan'],c:['zamonaviy'],         nm:{uz:'Yubiley',  ru:'Юбилей',     en:'Birthday'}}
 ];
 
 /* ═══════ TARJIMALAR ═══════ */
@@ -372,7 +370,7 @@ uz:{
  ctaB:'Direct’ga yozish',
  mOpen:'To‘liq ochish', mOrder:'Shuni buyurtma qilish',
  foot1:'Taklifnoma Elektron · Individual dizayn', foot2:'Buyurtma — Instagram Direct',
- evs:{all:'Barchasi',toy:'To‘y',fotiha:'Fotiha',tugilgan:'Tug‘ilgan kun',beshik:'Beshik to‘yi',sunnat:'Sunnat to‘yi'},
+ evs:{all:'Barchasi',toy:'To‘y',fotiha:'Fotiha',tugilgan:'Tug‘ilgan kun'},
  cats:{all:'Barchasi',konvert:'Konvert',milliy:'Milliy',minimal:'Minimal',klassik:'Klassik',zamonaviy:'Zamonaviy',foto:'Foto'},
  desc:{
   fotiha:"Nafis fil suyagi va quruq atirgul rangi. Ikki oila uchun.",
@@ -418,7 +416,7 @@ ru:{
  ctaB:'Написать в Direct',
  mOpen:'Открыть полностью', mOrder:'Заказать этот',
  foot1:'Taklifnoma Elektron · Индивидуальный дизайн', foot2:'Заказ — Instagram Direct',
- evs:{all:'Все',toy:'Свадьба',fotiha:'Фотиха',tugilgan:'День рождения',beshik:'Бешик той',sunnat:'Суннат той'},
+ evs:{all:'Все',toy:'Свадьба',fotiha:'Фотиха',tugilgan:'День рождения'},
  cats:{all:'Все',konvert:'Конверт',milliy:'Национальный',minimal:'Минимализм',klassik:'Классика',zamonaviy:'Современный',foto:'Фото'},
  desc:{
   fotiha:"Тонкая слоновая кость и пыльная роза. Для двух семей.",
@@ -464,7 +462,7 @@ en:{
  ctaB:'Message on Direct',
  mOpen:'Open full', mOrder:'Order this one',
  foot1:'Taklifnoma Elektron · Bespoke design', foot2:'Orders — Instagram Direct',
- evs:{all:'All',toy:'Wedding',fotiha:'Engagement',tugilgan:'Birthday',beshik:'Baby',sunnat:'Sunnat'},
+ evs:{all:'All',toy:'Wedding',fotiha:'Engagement',tugilgan:'Birthday'},
  cats:{all:'All',konvert:'Envelope',milliy:'Traditional',minimal:'Minimal',klassik:'Classic',zamonaviy:'Modern',foto:'Photo'},
  desc:{
   fotiha:"Delicate ivory and dusty rose. For the two families.",
@@ -515,7 +513,7 @@ function render(){
   document.getElementById("igProfile").href=IG_PRO;
 
   // filtrlar
-  const evs=['all','toy','fotiha','tugilgan','beshik','sunnat'];
+  const evs=['all','toy','fotiha','tugilgan'];
   fEv.innerHTML=evs.map(c=>
     `<button class="chip${c===ev?' on':''}" data-e="${c}">${t.evs[c]}</button>`).join('');
   const cats=['all','konvert','milliy','klassik','minimal','zamonaviy','foto'];
@@ -651,7 +649,7 @@ addEventListener('scroll',function(){
 function lot(){
   var el=document.getElementById('lotRule');
   if(!el||!window.lottie||el.dataset.go) return; el.dataset.go='1';
-  var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:'gul.json'});
+  var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:'orn.json'});
   an.addEventListener('DOMLoaded',function(){ setTimeout(function(){an.goToAndPlay(0,true);},700); });
 }
 
