@@ -240,6 +240,7 @@ document.querySelectorAll('section').forEach(s=>io.observe(s));
 </script>
 
 
+
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#8e3d1e;--anm-fg:#fbf3e4;--anm-p1:#d4a03c;--anm-p2:#fbf3e4;--anm-serif:'Cormorant Garamond',Georgia,serif}
@@ -432,11 +433,14 @@ function stagger(){
   if(!CFG.stagger||RM) return;
   var skip=/(^|\s)(rv|fade|rev|grow|anm-s)(\s|$)/;
   document.querySelectorAll('section').forEach(function(sec){
-    var kids=sec.querySelectorAll('.row,.card,.cdrow>div,.ln,.item,.info,.tile');
+    var kids=sec.querySelectorAll('.row,.card,.cdrow>div,.item,.info');
     var i=0;
     kids.forEach(function(el){
       if(skip.test(el.className)) return;
       if(el.closest('.anm-s')) return;
+      var cs=getComputedStyle(el);
+      if(parseFloat(cs.opacity)<1) return;            /* bezak qatlami — tegmaymiz */
+      if(cs.position==='absolute'||cs.position==='fixed') return;
       el.classList.add('anm-s');
       el.style.transitionDelay=(0.06+i*0.085).toFixed(3)+'s';
       i++;

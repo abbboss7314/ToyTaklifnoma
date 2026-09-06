@@ -211,6 +211,7 @@ document.querySelectorAll('section').forEach(s=>io.observe(s));
 document.getElementById('hero').classList.add('in');
 </script>
 
+
 <!--ANM:start-->
 <style id="anm-css">
 :root{--anm-bg:#f7fbf8;--anm-fg:#6f9d8c;--anm-p1:#ffffff;--anm-p2:#6f9d8c;--anm-serif:'Pinyon Script',cursive}
@@ -403,11 +404,14 @@ function stagger(){
   if(!CFG.stagger||RM) return;
   var skip=/(^|\s)(rv|fade|rev|grow|anm-s)(\s|$)/;
   document.querySelectorAll('section').forEach(function(sec){
-    var kids=sec.querySelectorAll('.row,.card,.cdrow>div,.ln,.item,.info,.tile');
+    var kids=sec.querySelectorAll('.row,.card,.cdrow>div,.item,.info');
     var i=0;
     kids.forEach(function(el){
       if(skip.test(el.className)) return;
       if(el.closest('.anm-s')) return;
+      var cs=getComputedStyle(el);
+      if(parseFloat(cs.opacity)<1) return;            /* bezak qatlami — tegmaymiz */
+      if(cs.position==='absolute'||cs.position==='fixed') return;
       el.classList.add('anm-s');
       el.style.transitionDelay=(0.06+i*0.085).toFixed(3)+'s';
       i++;
