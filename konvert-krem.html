@@ -87,6 +87,9 @@
   .film-cap{font-size:8px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink2);margin-top:22px}
   /* ── Lottie uyasi ── */
   .lot{width:min(var(--lw,260px),72%);aspect-ratio:var(--ar,900/240);margin:26px auto 0;pointer-events:none}
+  .sp{width:var(--sw,104px);aspect-ratio:1;margin:20px auto 0;pointer-events:none;opacity:.9}
+  .sp.flip{transform:scaleX(-1)}
+  .sp svg,.lot svg{display:block;width:100%;height:100%}
   .lot svg{display:block;width:100%;height:100%}
 
   #cover.rise .letter{z-index:8;opacity:0;transform:translate(-50%,-50%) scale(3.1);
@@ -220,6 +223,7 @@
   </section>
 
   <section id="say">
+    <div class="sp flip rv" id="spSay" style="--sw:92px;margin-top:0;margin-bottom:14px"></div>
     <span class="lab rv">Assalomu alaykum</span>
     <p class="lede rv d1">Hayotimizdagi eng baxtli kunni Siz bilan birga nishonlashni istaymiz. Ushbu qutlug‘ kunda davramizda bo‘lishingizni so‘raymiz.</p>
     <div class="hair rv d2" style="width:110px;margin:32px auto 0"></div>
@@ -238,12 +242,14 @@
       <div><div class="k">Kun</div><div class="v">Shanba</div></div>
       <div><div class="k">Boshlanishi</div><div class="v">18:30</div></div>
     </div>
+    <div class="sp rv d3" id="spWhen" style="--sw:98px"></div>
   </section>
 
   <section id="place">
     <span class="lab rv">Manzil</span>
     <p class="venue rv d1">“Ipak yo‘li” to‘yxonasi</p>
     <p class="addr rv d1">Bulung‘ur tumani<br>Samarqand viloyati</p>
+    <div class="sp flip rv d2" id="spPlace" style="--sw:88px"></div>
     <a class="btn rv d2" href="https://www.google.com/maps/search/?api=1&query=Ipak%20yoli%20to'yxonasi%20Bulungur%20Samarqand" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
       Xaritani ochish
@@ -251,6 +257,7 @@
   </section>
 
   <section id="cd">
+    <div class="sp rv" id="spCd" style="--sw:80px;opacity:.7;margin-top:0"></div>
     <span class="lab rv">To‘yimizgacha</span>
     <div class="cdrow rv d1">
       <div><div class="ring"><span class="v" id="D">—</span></div><div class="k">Kun</div></div>
@@ -261,7 +268,7 @@
   </section>
 
   <section id="end">
-
+    <div class="lot rv" id="lotEnd" style="--ar:734/926;--lw:120px;margin:0 auto 18px"></div>
     <p class="fin rv">Sizni kutamiz</p>
     <svg class="rv d1" id="mono" viewBox="0 0 90 90" style="width:74px;margin:22px auto 0;display:block"></svg>
     <p class="sign rv d2">Anvar &amp; Ozoda · 26.09.2026</p>
@@ -524,7 +531,9 @@ function openIt(){
   }
   var el=document.getElementById('lotSlot')||document.getElementById('lotSay');
   function initLot(){
-  mount('lotEnd','');
+  mount('lotEnd','a4.json');
+  var SP='sp-krem.json';
+  mount('spSay',SP); mount('spWhen',SP); mount('spPlace',SP); mount('spCd',SP);
   if(el&&window.lottie){
     var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:'a4.json'});
     var played=false, ready=false, want=false;
