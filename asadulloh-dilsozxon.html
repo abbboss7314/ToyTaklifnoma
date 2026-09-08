@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Asadulloh &amp; Dilso‘zxon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Pinyon+Script&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cover:#f2efe8; --cover2:#e6e1d6;
+    --seal:#e1dbcf; --seal2:#c9c1b1; --sealInk:#8a8274;
+    --metal:#b3ab9a; --metalL:#d5cfc1;
+    --paper:#fbfaf6; --paper2:#f2efe7; --tap:#7a7467;
+    --ink:#413e37; --ink2:#8b877c; --line:rgba(95,90,78,.22); --band:rgba(120,113,96,.10); --cov:#f2efe8;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --script:'Pinyon Script','Cormorant Garamond',cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper2);color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  body.locked{overflow:hidden;height:100%}
+  .page{position:relative;width:min(480px,100vw);margin:0 auto;background:var(--paper);overflow:hidden;
+    box-shadow:0 0 80px -30px rgba(0,0,0,.35);border-top:7px solid var(--cov)}
+
+  /* ══════ MUQOVA ══════ */
+  #cover{position:fixed;inset:0;z-index:90;background:var(--cover);overflow:hidden}
+  #cover .tex{position:absolute;inset:0;width:100%;height:100%}
+  .flap{position:absolute;left:0;right:0;top:0;height:58%;z-index:4;
+    background:linear-gradient(180deg,#e6e1d6 0%,#f2efe8 62%,#e6e1d6 100%);
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    transform-origin:top center;transition:transform 1.7s cubic-bezier(.5,0,.15,1);
+    filter:drop-shadow(0 8px 16px rgba(0,0,0,.22))}
+  .flap .tex{opacity:.9}
+  #cover.open .flap{transform:rotateX(-174deg)}
+  .pocket{position:absolute;left:0;right:0;bottom:0;height:56%;z-index:4;
+    background:linear-gradient(0deg,#e6e1d6,#f2efe8);
+    clip-path:polygon(0 100%,50% 0,100% 100%);box-shadow:0 -10px 24px -12px rgba(0,0,0,.3);
+    transform-origin:bottom center;
+    transition:transform 1.6s cubic-bezier(.5,0,.15,1) .22s,opacity .7s;
+    filter:drop-shadow(0 -8px 16px rgba(0,0,0,.2))}
+  #cover.open .pocket{transform:rotateX(174deg)}
+  .glow{position:absolute;left:50%;top:46%;width:8px;height:8px;transform:translate(-50%,-50%);
+    border-radius:50%;z-index:1;opacity:0;
+    background:radial-gradient(circle,rgba(255,252,244,.6),rgba(255,250,235,.28) 34%,transparent 68%)}
+  #cover.open .glow{animation:burst 1.5s .55s ease-out forwards}
+  @keyframes burst{0%{opacity:0;width:8px;height:8px}40%{opacity:.85;width:420px;height:420px}
+    100%{opacity:0;width:760px;height:760px}}
+
+  /* ── ichidagi xat ── */
+  .letter{position:absolute;left:50%;top:50%;z-index:3;width:76%;max-width:320px;
+    aspect-ratio:3/4.15;background:linear-gradient(165deg,var(--paper2),var(--paper) 55%,var(--paper2));
+    border:1px solid var(--line);outline:1px solid var(--band);outline-offset:5px;
+    box-shadow:0 30px 56px -18px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.07);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:26px 22px;opacity:0;
+    transform:translate(-50%,46%) scale(.9);
+    transition:transform 1.15s cubic-bezier(.16,1,.3,1),opacity .55s}
+  #cover.open .letter{opacity:1;transform:translate(-50%,-52%) scale(1);transition-delay:.9s}
+  /* xat konvertdan butunlay chiqqach — oldinga o'tadi */
+  #cover.up .letter{z-index:8;transform:translate(-50%,-50%) scale(1.05);
+    box-shadow:0 34px 60px -18px rgba(0,0,0,.62);
+    transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s}
+  .letter .lmono{font-family:var(--script);font-size:34px;color:var(--metalL);line-height:1}
+  .letter .lhair{width:44px;height:1px;background:var(--metal);opacity:.6;margin:14px 0}
+  .letter .lnm{font-family:var(--serif);font-size:23px;line-height:1.35;color:var(--ink)}
+  .letter .lnm em{display:block;font-style:italic;font-size:.62em;color:var(--metalL);margin:2px 0}
+  .letter .ldt{font-size:8px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink2);margin-top:16px}
+
+  #cover.rise{background:transparent;transition:background .9s}
+  #cover.rise .pocket{opacity:0;transition:opacity .6s}
+  #cover.rise .flap,#cover.rise .glow,#cover.rise>.tex{opacity:0;transition:opacity .6s}
+  /* ── FILM: arka shaklidagi video oyna ── */
+  #film{padding-top:8px;padding-bottom:64px;text-align:center}
+  .film{position:relative;width:min(300px,78%);margin:24px auto 0;aspect-ratio:3/4}
+  .film video{width:100%;height:100%;object-fit:cover;display:block;
+    border-radius:150px 150px 10px 10px;filter:saturate(.62) contrast(.96) brightness(1.14)}
+  .film .tint{position:absolute;inset:0;border-radius:150px 150px 10px 10px;pointer-events:none;
+    background:linear-gradient(180deg,rgba(247,230,229,.55),rgba(247,230,229,.10) 45%,rgba(140,90,95,.28));
+    mix-blend-mode:screen;opacity:.5}
+  .film .fr{position:absolute;inset:-9px;border:1px solid var(--line);
+    border-radius:158px 158px 14px 14px;pointer-events:none}
+  .film .fr::after{content:'';position:absolute;inset:6px;border:1px solid var(--band);
+    border-radius:152px 152px 10px 10px}
+  .film-cap{font-size:8px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink2);margin-top:22px}
+  /* ── Lottie uyasi ── */
+  .lot{width:min(var(--lw,260px),72%);aspect-ratio:var(--ar,900/240);margin:26px auto 0;pointer-events:none}
+  .sp{width:var(--sw,104px);aspect-ratio:1;margin:20px auto 0;pointer-events:none;opacity:.9}
+  .sp.flip{transform:scaleX(-1)}
+  .sp svg,.lot svg{display:block;width:100%;height:100%}
+  .lot svg{display:block;width:100%;height:100%}
+
+  #cover.rise .letter{z-index:8;opacity:0;transform:translate(-50%,-50%) scale(3.1);
+    box-shadow:none;transition:transform 1.15s cubic-bezier(.62,0,.3,1),opacity .9s .3s}
+  .seal{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:128px;z-index:6;
+    cursor:pointer;filter:drop-shadow(0 10px 20px rgba(0,0,0,.34));
+    transition:transform .9s cubic-bezier(.4,0,.2,1),opacity .7s .35s}
+  #cover.open .seal{transform:translate(-50%,-50%) scale(1.5) rotate(8deg);opacity:0}
+  .tap{position:absolute;left:0;right:0;bottom:10%;z-index:7;text-align:center;transition:opacity .5s}
+  #cover.open .tap{opacity:0}
+  .tap b{display:block;font-size:9px;letter-spacing:.44em;text-transform:uppercase;
+    color:var(--tap);font-weight:500;opacity:1}
+  .tap i{display:block;width:56px;height:1px;background:var(--tap);opacity:.7;margin:11px auto 0;
+    animation:br 2.6s ease-in-out infinite}
+  @keyframes br{0%,100%{width:30px;opacity:.3}50%{width:78px;opacity:.85}}
+  #cover.gone{opacity:0;pointer-events:none;transition:opacity .8s}
+
+  /* ══════ UMUMIY ══════ */
+  section{position:relative;padding:0 28px;z-index:2}
+  .lab{font-size:8.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--ink2)}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity 1.1s,transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .in .rv{opacity:1;transform:none}
+  .d1{transition-delay:.14s}.d2{transition-delay:.3s}.d3{transition-delay:.46s}.d4{transition-delay:.62s}
+  .hair{height:1px;background:linear-gradient(90deg,transparent,var(--metal),transparent);opacity:.55}
+
+  /* ══════ HERO ══════ */
+  #hero{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding-top:64px;padding-bottom:52px;overflow:hidden}
+  #wm{position:absolute;inset:0;width:100%;height:100%;opacity:.6;pointer-events:none;z-index:0}
+  /* konvertdan xatga yumshoq o'tish */
+  #hero::before{content:"";position:absolute;left:0;right:0;top:0;height:230px;z-index:0;
+    pointer-events:none;background:linear-gradient(180deg,var(--band),transparent)}
+  #hero>*:not(#wm){position:relative;z-index:1}
+  .frame{position:relative;width:min(320px,86vw);padding:52px 26px 44px}
+  .frame::before,.frame::after{content:"";position:absolute;left:0;right:0;height:36px;
+    border:1px solid var(--line)}
+  .frame::before{top:0;border-bottom:none}
+  .frame::after{bottom:0;border-top:none}
+  .frame .sd{position:absolute;top:36px;bottom:36px;width:1px;background:var(--line)}
+  .frame .sd.l{left:0}.frame .sd.r{right:0}
+  .nm{font-family:var(--serif);line-height:1.04;color:var(--ink)}
+  .nm span{display:block;font-size:clamp(34px,10.6vw,46px);font-weight:500;letter-spacing:.015em;color:var(--ink)}
+  .nm em{display:block;font-family:var(--script);font-style:normal;font-size:30px;
+    color:var(--metal);margin:4px 0;line-height:1}
+  .dline{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:26px}
+  .dline .s{font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2)}
+  .dline .n{font-family:var(--serif);font-size:32px;color:var(--ink);line-height:1;padding:0 13px;
+    border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  .yr{font-family:var(--serif);font-size:18px;letter-spacing:.26em;color:var(--ink2);margin-top:12px}
+  .crest{width:52px;margin:0 auto 26px;display:block}
+
+  /* ══════ MATN ══════ */
+  #say{padding-top:74px;padding-bottom:74px;text-align:center;background:var(--paper2)}
+  .lede{font-family:var(--serif);font-size:clamp(18px,5.2vw,21px);line-height:1.9;color:var(--ink);
+    max-width:27ch;margin:24px auto 0;font-weight:400}
+
+  /* ══════ SANA ══════ */
+  #when{padding-top:70px;padding-bottom:70px;text-align:center}
+  .cart{position:relative;width:204px;margin:26px auto 0}
+  .cart svg{display:block;width:100%;height:auto}
+  .cart .in-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .cart .dd{font-family:var(--serif);font-size:52px;font-weight:500;line-height:1;color:var(--ink)}
+  .cart .mm{display:flex;align-items:center;gap:9px;font-size:8px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--ink2);margin-top:11px}
+  .cart .mm::before,.cart .mm::after{content:"";width:16px;height:1px;background:var(--metal);opacity:.55}
+  .cart .yy2{font-family:var(--serif);font-size:15px;letter-spacing:.26em;color:var(--ink2);margin-top:8px}
+  #beadRing{transform-origin:100px 100px;animation:medalSpin 84s linear infinite}
+  @keyframes medalSpin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){#beadRing{animation:none}}
+  .wrow{display:flex;justify-content:center;gap:26px;margin-top:24px}
+  .wrow .k{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink2)}
+  .wrow .v{font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:6px}
+
+  /* ══════ MANZIL ══════ */
+  #place{padding-top:70px;padding-bottom:74px;text-align:center;background:var(--paper2)}
+  .venue{font-family:var(--serif);font-size:clamp(21px,6.2vw,26px);font-weight:500;margin-top:14px;color:var(--ink)}
+  .addr{font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);margin-top:12px;line-height:2}
+  .btn{display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:14px 28px;border-radius:40px;
+    border:1px solid var(--metal);color:var(--ink);text-decoration:none;background:transparent;
+    font-size:9px;letter-spacing:.3em;text-transform:uppercase}
+  .btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.7}
+
+  /* ══════ SANOQ ══════ */
+  #cd{padding-top:70px;padding-bottom:70px;text-align:center}
+  .cdrow{display:flex;justify-content:center;gap:9px;margin-top:26px}
+  .cdrow div{flex:1;max-width:80px}
+  .cdrow .ring{position:relative;aspect-ratio:1;border:1px solid var(--line);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;background:transparent}
+  .cdrow .ring::after{content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid var(--line);opacity:.5}
+  .cdrow .v{font-family:var(--serif);font-size:clamp(20px,6vw,25px);color:var(--ink);font-variant-numeric:tabular-nums}
+  .cdrow .k{font-family:var(--serif);font-size:13px;color:var(--ink2);margin-top:10px}
+
+  /* ══════ YAKUN ══════ */
+  #end{padding-top:66px;padding-bottom:70px;text-align:center;background:var(--paper2)}
+  .fin{font-family:var(--script);font-size:clamp(28px,8.4vw,38px);color:var(--metal);line-height:1.4}
+  .sign{font-size:8.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink2);margin-top:26px}
+</style>
+</head>
+<body class="locked">
+
+<div id="cover">
+  <svg class="tex" id="texA" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 860"></svg>
+  <div class="pocket"></div>
+  <div class="glow"></div>
+  <div class="letter">
+    <span class="lmono">A&D</span>
+    <span class="lhair"></span>
+    <span class="lnm">Asadulloh<em>va</em>Dilso‘zxon</span>
+    <span class="ldt">Shanba · 26 Sentabr 2026</span>
+  </div>
+  <div class="flap"><svg class="tex" id="texB" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 500"></svg></div>
+  <svg class="seal" id="seal" viewBox="0 0 140 140"></svg>
+  <div class="tap"><b>Muhrni bosing</b><i></i></div>
+</div>
+
+<div class="page">
+  <section id="hero">
+    <svg id="wm" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 860"></svg>
+    <svg class="crest rv" id="crest" viewBox="0 0 60 60"></svg>
+    <span class="lab rv d1">Nikoh to‘yi taklifnomasi</span>
+    <div class="frame rv d2" style="margin-top:22px">
+      <span class="sd l"></span><span class="sd r"></span>
+      <h1 class="nm"><span>Asadulloh</span><em>va</em><span>Dilso‘zxon</span></h1>
+      <div class="dline">
+        <span class="s">Shanba</span>
+        <span class="n">26</span>
+        <span class="s">Sentabr</span>
+      </div>
+      <div class="yr">2026</div>
+    </div>
+  </section>
+
+  <section id="say">
+    <div class="sp flip rv" id="spSay" style="--sw:92px;margin-top:0;margin-bottom:14px"></div>
+    <span class="lab rv">Assalomu alaykum</span>
+    <p class="lede rv d1">Hayotimizdagi eng baxtli kunni Siz bilan birga nishonlashni istaymiz. Ushbu qutlug‘ kunda davramizda bo‘lishingizni so‘raymiz.</p>
+    <div class="hair rv d2" style="width:110px;margin:32px auto 0"></div>
+    <div class="lot rv d3" id="lotSay" style="--ar:944/532;--lw:230px"></div>
+  </section>
+
+  <section id="when">
+    <span class="lab rv">Marosim kuni</span>
+    <div class="cart rv d1">
+      <svg id="cartSvg" viewBox="0 0 200 200"></svg>
+      <div class="in-t">
+        <span class="dd">26</span><span class="mm">Sentabr</span><span class="yy2">2026</span>
+      </div>
+    </div>
+    <div class="wrow rv d2">
+      <div><div class="k">Kun</div><div class="v">Shanba</div></div>
+      <div><div class="k">Boshlanishi</div><div class="v">18:30</div></div>
+    </div>
+    <div class="sp rv d3" id="spWhen" style="--sw:98px"></div>
+  </section>
+
+  <section id="place">
+    <span class="lab rv">Manzil</span>
+    <p class="venue rv d1">“Navro‘z” to‘yxonasi</p>
+    <p class="addr rv d1">Qo‘qon shahri<br>Farg‘ona viloyati</p>
+    <div class="sp flip rv d2" id="spPlace" style="--sw:88px"></div>
+    <a class="btn rv d2" href="https://www.google.com/maps/search/?api=1&query=Navroz%20toyxonasi%20Qoqon" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Xaritani ochish
+    </a>
+  </section>
+
+  <section id="cd">
+    <div class="sp rv" id="spCd" style="--sw:80px;opacity:.7;margin-top:0"></div>
+    <span class="lab rv">To‘yimizgacha</span>
+    <div class="cdrow rv d1">
+      <div><div class="ring"><span class="v" id="D">—</span></div><div class="k">Kun</div></div>
+      <div><div class="ring"><span class="v" id="H">—</span></div><div class="k">Soat</div></div>
+      <div><div class="ring"><span class="v" id="M">—</span></div><div class="k">Daqiqa</div></div>
+      <div><div class="ring"><span class="v" id="S">—</span></div><div class="k">Soniya</div></div>
+    </div>
+  </section>
+
+  <section id="end">
+    <div class="lot rv" id="lotEnd" style="--ar:944/532;--lw:170px;margin:0 auto 18px"></div>
+    <p class="fin rv">Sizni kutamiz</p>
+    <svg class="rv d1" id="mono" viewBox="0 0 90 90" style="width:74px;margin:22px auto 0;display:block"></svg>
+    <p class="sign rv d2">Asadulloh &amp; Dilso‘zxon · 26.09.2026</p>
+  </section>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const C={emb:'#e6e0d4',embLine:'#d9d2c2',seal:'#e1dbcf',seal2:'#c9c1b1',
+         sealInk:'#8a8274',mono:'#8a8274',metal:'#b3ab9a',metalL:'#d5cfc1'};
+
+/* ── bo'rtma naqsh: har variantga o'ziniki ── */
+const MOTIF='vine', SEALK='rope', FRAMEK='box';
+const rot=(a,x,y)=>'rotate('+a.toFixed(1)+' '+x.toFixed(1)+' '+y.toFixed(1)+')';
+
+function motifTile(p,S,fill,stroke){
+  const h=S/2, g=el('g',{fill,stroke,'stroke-width':.7});
+  const st=el('g',{fill:'none',stroke,'stroke-width':.8,opacity:.7});
+  if(MOTIF==='rose'){
+    for(let r=3;r>=1;r--){
+      const R=6+r*5;
+      for(let i=0;i<6;i++)
+        g.appendChild(el('ellipse',{cx:h,cy:h-R*0.5,rx:R*0.62,ry:R*0.30,
+          transform:rot(i*60+r*20,h,h)}));
+    }
+    g.appendChild(el('circle',{cx:h,cy:h,r:3.4}));
+    [[0,0],[S,0],[0,S],[S,S]].forEach(function(c){
+      for(let i=0;i<3;i++) g.appendChild(el('ellipse',{cx:c[0],cy:c[1],rx:13,ry:6,
+        transform:rot(i*60,c[0],c[1])}));});
+  }
+  else if(MOTIF==='vine'){
+    st.appendChild(el('path',{d:'M0 '+S+' C '+(h*0.5)+' '+(S*0.72)+' '+(h*1.4)+' '+(S*0.34)+' '+S+' 0'}));
+    st.appendChild(el('path',{d:'M0 0 C '+(h*0.6)+' '+(S*0.3)+' '+(h*1.3)+' '+(S*0.66)+' '+S+' '+S}));
+    for(let k=0;k<7;k++){
+      const t=k/6, x=t*S, y=S-t*S, x2=t*S, y2=t*S;
+      g.appendChild(el('path',{d:'M'+x.toFixed(1)+' '+y.toFixed(1)+' c 9 -7 20 -5 25 1 c -8 5 -19 5 -25 -1 z',
+        transform:rot(-42,x,y)}));
+      g.appendChild(el('path',{d:'M'+x2.toFixed(1)+' '+y2.toFixed(1)+' c 9 -7 20 -5 25 1 c -8 5 -19 5 -25 -1 z',
+        transform:rot(42,x2,y2)}));
+    }
+    g.appendChild(el('circle',{cx:h,cy:h,r:4}));
+  }
+  else if(MOTIF==='lace'){
+    [26,18,10].forEach(function(R,i){
+      const n=12+i*2, pts=[];
+      for(let k=0;k<n;k++){const a=(k/n)*Math.PI*2;
+        pts.push([h+R*Math.cos(a),h+R*Math.sin(a)]);}
+      const ch=Math.hypot(pts[1][0]-pts[0][0],pts[1][1]-pts[0][1]);
+      let d='M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+      for(let k=1;k<=n;k++){const q=pts[k%n];
+        d+='A'+(ch*0.62).toFixed(1)+' '+(ch*0.62).toFixed(1)+' 0 0 1 '+q[0].toFixed(1)+' '+q[1].toFixed(1);}
+      g.appendChild(el('path',{d:d+'Z',fill:i%2?'none':fill}));
+    });
+    [[0,0],[S,0],[0,S],[S,S]].forEach(c=>g.appendChild(el('circle',{cx:c[0],cy:c[1],r:7})));
+    [[h,0],[0,h],[S,h],[h,S]].forEach(c=>g.appendChild(el('circle',{cx:c[0],cy:c[1],r:3})));
+  }
+  else if(MOTIF==='deco'){
+    for(let i=0;i<5;i++){
+      const R=8+i*7;
+      st.appendChild(el('path',{d:'M'+(h-R)+' '+(h+18)+' A '+R+' '+R+' 0 0 1 '+(h+R)+' '+(h+18)}));
+    }
+    g.appendChild(el('path',{d:'M'+h+' '+(h-30)+' L'+(h+9)+' '+(h-14)+' L'+h+' '+(h+2)+' L'+(h-9)+' '+(h-14)+' Z'}));
+    [[0,0],[S,0],[0,S],[S,S]].forEach(c=>
+      g.appendChild(el('path',{d:'M'+(c[0]-8)+' '+c[1]+' L'+c[0]+' '+(c[1]-8)+' L'+(c[0]+8)+' '+c[1]+' L'+c[0]+' '+(c[1]+8)+' Z'})));
+    st.appendChild(el('path',{d:'M0 '+h+' H'+S}));
+  }
+  else if(MOTIF==='star'){
+    const st8=function(cx,cy,R,r){const q=[];
+      for(let i=0;i<16;i++){const rad=i%2?r:R,a=(i*22.5)*Math.PI/180;
+        q.push((cx+rad*Math.cos(a)).toFixed(1)+','+(cy+rad*Math.sin(a)).toFixed(1));}
+      return q.join(' ');};
+    g.appendChild(el('polygon',{points:st8(h,h,24,10)}));
+    [[0,0],[S,0],[0,S],[S,S]].forEach(c=>g.appendChild(el('polygon',{points:st8(c[0],c[1],20,8)})));
+    [[h,0],[0,h],[S,h],[h,S]].forEach(c=>
+      g.appendChild(el('path',{d:'M'+(c[0]-7)+' '+c[1]+' L'+c[0]+' '+(c[1]-7)+' L'+(c[0]+7)+' '+c[1]+' L'+c[0]+' '+(c[1]+7)+' Z'})));
+  }
+  else {
+    st.appendChild(el('path',{d:'M'+h+' '+(S-4)+' C '+(h-16)+' '+(h+14)+' '+(h-16)+' '+(h-16)+' '+h+' 4'}));
+    st.appendChild(el('path',{d:'M'+h+' '+(S-4)+' C '+(h+16)+' '+(h+14)+' '+(h+16)+' '+(h-16)+' '+h+' 4'}));
+    for(let k=0;k<7;k++){
+      const y=8+k*(S-16)/6;
+      [-1,1].forEach(function(sd){
+        const x=h+sd*(9+Math.sin(k)*2)+sd*8;
+        g.appendChild(el('ellipse',{cx:x,cy:y,rx:9,ry:4,transform:rot(sd*32,x,y)}));
+      });
+    }
+    [[0,0],[S,0],[0,S],[S,S]].forEach(c=>g.appendChild(el('circle',{cx:c[0],cy:c[1],r:4})));
+  }
+  p.appendChild(st); p.appendChild(g);
+}
+
+function damask(svg,W,H){
+  const defs=el('defs'); svg.appendChild(defs);
+  const S=(MOTIF==='lace'||MOTIF==='star')?78:92;
+  const pat=el('pattern',{id:'dm'+svg.id,width:S,height:S,patternUnits:'userSpaceOnUse'});
+  pat.appendChild(el('rect',{width:S,height:S,fill:'transparent'}));
+  motifTile(pat,S,C.emb,C.embLine);
+  defs.appendChild(pat);
+  svg.appendChild(el('rect',{width:W,height:H,fill:'url(#dm'+svg.id+')'}));
+}
+damask(document.getElementById('texA'),400,860);
+damask(document.getElementById('texB'),400,500);
+const WM='#eeebe2';
+(function(){ // ichki sahifadagi yengil suv belgisi
+  const sv=document.getElementById('wm'); if(!sv)return;
+  const o={emb:C.emb,embLine:C.embLine};
+  C.emb=WM; C.embLine=WM;
+  damask(sv,400,860);
+  C.emb=o.emb; C.embLine=o.embLine;
+})();
+
+/* ── mum muhr: har variantga o'z shakli ── */
+function scallop(cx,cy,R,n,b){
+  const pts=[];
+  for(let i=0;i<n;i++){const a=(i/n)*Math.PI*2-Math.PI/2;
+    pts.push([cx+R*Math.cos(a),cy+R*Math.sin(a)]);}
+  const ch=Math.hypot(pts[1][0]-pts[0][0],pts[1][1]-pts[0][1]), r=(ch/2)*b;
+  let d='M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+  for(let i=1;i<=n;i++){const q=pts[i%n];
+    d+='A'+r.toFixed(1)+' '+r.toFixed(1)+' 0 0 1 '+q[0].toFixed(1)+' '+q[1].toFixed(1);}
+  return d+'Z';
+}
+function poly(cx,cy,R,n,r0){
+  const q=[];
+  for(let i=0;i<n;i++){const a=(i/n)*Math.PI*2+r0;
+    q.push((cx+R*Math.cos(a)).toFixed(1)+','+(cy+R*Math.sin(a)).toFixed(1));}
+  return q.join(' ');
+}
+(function(){
+  const s=document.getElementById('seal');
+  const defs=el('defs'); s.appendChild(defs);
+  const gr=el('radialGradient',{id:'wx',cx:'35%',cy:'28%',r:'78%'});
+  gr.appendChild(el('stop',{offset:'0','stop-color':C.seal}));
+  gr.appendChild(el('stop',{offset:'62%','stop-color':C.seal}));
+  gr.appendChild(el('stop',{offset:'100%','stop-color':C.seal2}));
+  defs.appendChild(gr);
+  const F={fill:'url(#wx)',stroke:C.seal2,'stroke-width':.9};
+
+  if(SEALK==='scallop'){
+    s.appendChild(el('path',Object.assign({d:scallop(70,70,57,14,1.3)},F)));
+    s.appendChild(el('path',{d:scallop(70,70,47,14,1.3),fill:'none',stroke:C.sealInk,'stroke-width':.8,opacity:.32}));
+  } else if(SEALK==='sun'){
+    s.appendChild(el('path',Object.assign({d:scallop(70,70,57,22,1.24)},F)));
+    s.appendChild(el('circle',{cx:70,cy:70,r:44,fill:'none',stroke:C.sealInk,'stroke-width':.9,opacity:.3}));
+  } else if(SEALK==='rope'){
+    s.appendChild(el('circle',Object.assign({cx:70,cy:70,r:55},F)));
+    s.appendChild(el('circle',{cx:70,cy:70,r:48,fill:'none',stroke:C.sealInk,'stroke-width':1,
+      opacity:.3,'stroke-dasharray':'3 4'}));
+    s.appendChild(el('circle',{cx:70,cy:70,r:42,fill:'none',stroke:C.sealInk,'stroke-width':.7,opacity:.22}));
+  } else if(SEALK==='oval'){
+    s.appendChild(el('ellipse',Object.assign({cx:70,cy:70,rx:48,ry:57},F)));
+    s.appendChild(el('ellipse',{cx:70,cy:70,rx:40,ry:48,fill:'none',stroke:C.sealInk,'stroke-width':.8,opacity:.3}));
+  } else if(SEALK==='shield'){
+    s.appendChild(el('polygon',Object.assign({points:poly(70,70,57,6,-Math.PI/2)},F)));
+    s.appendChild(el('polygon',{points:poly(70,70,46,6,-Math.PI/2),fill:'none',
+      stroke:C.sealInk,'stroke-width':.9,opacity:.32}));
+  } else {
+    s.appendChild(el('circle',Object.assign({cx:70,cy:70,r:54},F)));
+    const w=el('g',{fill:C.sealInk,opacity:.28});
+    for(let k=0;k<10;k++){
+      const a=-Math.PI/2+(k/9)*Math.PI*0.9+0.24;
+      [-1,1].forEach(function(sd){
+        const x=70+sd*(42*Math.cos(a)), y=70+42*Math.sin(a);
+        w.appendChild(el('ellipse',{cx:x,cy:y,rx:6.5,ry:2.8,
+          transform:'rotate('+((a*180/Math.PI)+(sd>0?90:-90)).toFixed(0)+' '+x.toFixed(1)+' '+y.toFixed(1)+')'}));
+      });
+    }
+    s.appendChild(w);
+  }
+  s.appendChild(el('ellipse',{cx:56,cy:48,rx:19,ry:11,fill:'rgba(255,255,255,.20)',transform:'rotate(-25 56 48)'}));
+  const t=el('text',{x:70,y:82,'text-anchor':'middle','font-family':"Cormorant Garamond,serif",
+    'font-size':'30','letter-spacing':'1',fill:C.sealInk});
+  t.textContent='A&D';
+  s.appendChild(t);
+})();
+
+/* ── nishon (crest) ── */
+(function(){
+  const s=document.getElementById('crest');
+  s.appendChild(el('path',{d:'M30 4 L34 24 L54 30 L34 36 L30 56 L26 36 L6 30 L26 24 Z',
+    fill:C.metal,opacity:'.85'}));
+  s.appendChild(el('circle',{cx:30,cy:30,r:26,fill:'none',stroke:C.metal,'stroke-width':.8,opacity:'.5'}));
+})();
+
+/* ── sana kartushi ── */
+(function(){
+  const s=document.getElementById('cartSvg'), cx=100, cy=100;
+  const pol=(r,a)=>[cx+Math.cos(a)*r, cy+Math.sin(a)*r];
+  s.appendChild(el('circle',{cx,cy,r:95,fill:'none',stroke:C.metal,'stroke-width':.7,opacity:.3}));
+  const ring=el('g',{id:'beadRing'});
+  for(let i=0;i<40;i++){
+    const a=i/40*Math.PI*2, [x,y]=pol(87,a);
+    ring.appendChild(el('circle',{cx:x.toFixed(2),cy:y.toFixed(2),
+      r:(i%5===0?2.1:1.05),fill:C.metal,opacity:(i%5===0?.7:.42)}));
+  }
+  s.appendChild(ring);
+  s.appendChild(el('circle',{cx,cy,r:76,fill:'none',stroke:C.metal,'stroke-width':1.05,opacity:.7}));
+  s.appendChild(el('circle',{cx,cy,r:71,fill:'none',stroke:C.metal,'stroke-width':.5,opacity:.33}));
+  [0,90,180,270].forEach(d=>{
+    const a=(d-90)*Math.PI/180, [x,y]=pol(95,a);
+    s.appendChild(el('path',{d:'M'+x+' '+(y-5.2)+' L'+(x+3.6)+' '+y+' L'+x+' '+(y+5.2)+' L'+(x-3.6)+' '+y+' Z',
+      fill:C.metalL,opacity:.9}));
+  });
+  [-1,0,1].forEach(k=>{
+    s.appendChild(el('circle',{cx:100+k*8,cy:cy+58,r:(k===0?1.9:1.2),fill:C.metal,opacity:(k===0?.7:.4)}));
+  });
+})();
+
+/* ── monogramma ── */
+(function(){
+  const s=document.getElementById('mono');
+  s.appendChild(el('circle',{cx:45,cy:45,r:40,fill:'none',stroke:C.metal,'stroke-width':.9,opacity:'.6'}));
+  s.appendChild(el('circle',{cx:45,cy:45,r:33,fill:'none',stroke:C.metal,'stroke-width':.6,opacity:'.35'}));
+  const t=el('text',{x:45,y:56,'text-anchor':'middle','font-family':"Cormorant Garamond,serif",
+    'font-size':'26',fill:C.metal});
+  t.textContent='A&D';
+  s.appendChild(t);
+})();
+
+/* ── sanoq ── */
+const T=new Date('2026-09-26T18:30:00+05:00').getTime();
+const p2=n=>String(n).padStart(2,'0');
+setInterval(()=>{const d=T-Date.now(); if(d<=0)return; const s=Math.floor(d/1000);
+  D.textContent=Math.floor(s/86400); H.textContent=p2(Math.floor(s%86400/3600));
+  M.textContent=p2(Math.floor(s%3600/60)); S.textContent=p2(s%60);},1000);
+
+/* ── ochish ── */
+const cover=document.getElementById('cover');
+function openIt(){
+  if(cover.classList.contains('open'))return;
+  cover.classList.add('open');
+  setTimeout(()=>cover.classList.add('up'),2100);
+  setTimeout(()=>cover.classList.add('rise'),3150);
+  setTimeout(()=>{document.body.classList.remove('locked');
+    document.querySelectorAll('#hero .rv').forEach(n=>n.classList.add('in'));},3500);
+  setTimeout(()=>cover.classList.add('gone'),4250);
+  setTimeout(()=>cover.style.display='none',5200);
+}
+
+/* ── film + lottie ── */
+(function(){
+  var vd=document.getElementById('clip');
+  if(vd){
+    var io=new IntersectionObserver(function(e){e.forEach(function(x){
+      if(x.isIntersecting){ var p=vd.play(); if(p&&p.catch) p.catch(function(){}); }
+      else vd.pause();
+    })},{threshold:.25});
+    io.observe(vd);
+  }
+  function mount(id,path){
+    var el=document.getElementById(id);
+    if(!el||!path||!window.lottie) return;
+    var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:path});
+    var ready=false,want=false,played=false;
+    an.addEventListener('DOMLoaded',function(){ready=true; if(want)go();});
+    function go(){ if(played)return; played=true; an.goToAndPlay(0,true); }
+    new IntersectionObserver(function(e){e.forEach(function(x){ if(x.isIntersecting){want=true; if(ready)go();} })},
+      {threshold:.35}).observe(el);
+  }
+  var el=document.getElementById('lotSlot')||document.getElementById('lotSay');
+  function initLot(){
+  mount('lotEnd','a3.json');
+  var SP='sp-oq.json';
+  mount('spSay',SP); mount('spWhen',SP); mount('spPlace',SP); mount('spCd',SP);
+  if(el&&window.lottie){
+    var an=window.lottie.loadAnimation({container:el,renderer:'svg',loop:false,autoplay:false,path:'a3.json'});
+    var played=false, ready=false, want=false;
+    an.addEventListener('DOMLoaded',function(){ready=true; if(want)go();});
+    function go(){ if(played)return; played=true; an.goToAndPlay(0,true); }
+    new IntersectionObserver(function(e){e.forEach(function(x){ if(x.isIntersecting){want=true; if(ready)go();} })},
+      {threshold:.4}).observe(el);
+  }}
+  if(window.lottie) initLot(); else addEventListener('load',initLot);
+})();
+
+document.getElementById('seal').addEventListener('click',openIt);
+document.querySelector('.tap').addEventListener('click',openIt);
+
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+<script src="lottie.min.js"></script>
+<!--ANM:start-->
+<style id="anm-css">
+:root{--anm-bg:#faf6ee;--anm-fg:#9a8455;--anm-p1:#efe3cd;--anm-p2:#dcc9a4;--anm-serif:'Cormorant Garamond',Georgia,serif}
+
+
+/* ── kirish pardasi ── */
+.anm-ov{position:fixed;inset:0;z-index:9998;display:grid;place-items:center;background:var(--anm-bg);
+  will-change:opacity,transform,clip-path}
+.anm-ov.x-fade{transition:opacity .85s ease}
+.anm-ov.x-fade.go{opacity:0}
+.anm-ov.x-up{transition:transform 1.05s cubic-bezier(.76,0,.24,1),opacity .8s .25s}
+.anm-ov.x-up.go{transform:translateY(-101%);opacity:.4}
+.anm-ov.x-iris{clip-path:circle(140% at 50% 46%);transition:clip-path 1.15s cubic-bezier(.7,0,.24,1),opacity .5s .7s}
+.anm-ov.x-iris.go{clip-path:circle(0% at 50% 46%);opacity:0}
+.anm-ov.x-cur{background:none;transition:opacity .3s .95s}
+.anm-ov.x-cur .cur{position:absolute;left:0;width:100%;height:50.6%;background:var(--anm-bg);
+  transition:transform 1.05s cubic-bezier(.76,0,.24,1) .28s}
+.anm-ov.x-cur .cur.t{top:0}.anm-ov.x-cur .cur.b{bottom:0}
+.anm-ov.x-cur.go .cur.t{transform:translateY(-101%)}
+.anm-ov.x-cur.go .cur.b{transform:translateY(101%)}
+.anm-ov.x-cur.go{opacity:0}
+.anm-ov.dead{display:none}
+
+.anm-mn{position:relative;z-index:2;text-align:center;color:var(--anm-fg);font-family:var(--anm-serif);
+  transition:opacity .45s ease,transform .6s ease}
+.anm-ov.go .anm-mn{opacity:0;transform:translateY(-8px)}
+.anm-mn .ini{display:block;font-size:clamp(38px,12vw,54px);letter-spacing:.2em;text-indent:.2em;
+  font-weight:400;opacity:0;transform:translateY(12px);animation:anmUp 1s .2s forwards cubic-bezier(.16,1,.3,1)}
+.anm-mn .ln{height:1px;width:0;background:currentColor;opacity:.5;margin:18px auto 0;
+  animation:anmLn 1.15s .55s forwards cubic-bezier(.16,1,.3,1)}
+.anm-mn .sb{display:block;font-family:inherit;font-size:9px;letter-spacing:.42em;text-transform:uppercase;
+  opacity:0;margin-top:16px;animation:anmUp .9s .95s forwards}
+.anm-mn .dots{display:block;margin-top:26px;opacity:0;animation:anmUp .8s 1.15s forwards}
+.anm-mn .dots b{display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;
+  margin:0 4px;opacity:.35;animation:anmDot 1.4s infinite}
+.anm-mn .dots b:nth-child(2){animation-delay:.18s}
+.anm-mn .dots b:nth-child(3){animation-delay:.36s}
+@keyframes anmUp{to{opacity:1;transform:none}}
+@keyframes anmLn{to{width:112px}}
+@keyframes anmDot{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+
+/* ── zarrachalar ── */
+.anm-p{position:fixed;top:0;left:50%;transform:translateX(-50%);height:100%;
+  pointer-events:none;z-index:6;overflow:hidden;contain:strict}
+.anm-p i{position:absolute;display:block;opacity:0;will-change:transform,opacity}
+.anm-p i.pt{border-radius:78% 22% 72% 28%/68% 62% 38% 32%;
+  background:linear-gradient(135deg,var(--anm-p1),var(--anm-p2));animation:anmFall linear infinite}
+.anm-p i.sn{border-radius:50%;background:var(--anm-p1);animation:anmFall linear infinite}
+.anm-p i.ds{border-radius:50%;background:var(--anm-p1);box-shadow:0 0 7px var(--anm-p1);
+  animation:anmRise linear infinite}
+.anm-p i.st{border-radius:50%;background:var(--anm-p1);box-shadow:0 0 9px 1px var(--anm-p1);
+  animation:anmTw ease-in-out infinite}
+.anm-p i.bk{border-radius:50%;background:radial-gradient(circle at 34% 30%,var(--anm-p1),transparent 72%);
+  filter:blur(.6px);animation:anmRise linear infinite}
+@keyframes anmFall{
+  0%{opacity:0;transform:translate3d(0,-10vh,0) rotate(0deg)}
+  9%{opacity:var(--o)}
+  50%{transform:translate3d(var(--dx),48vh,0) rotate(190deg)}
+  90%{opacity:var(--o)}
+  100%{opacity:0;transform:translate3d(0,110vh,0) rotate(380deg)}}
+@keyframes anmRise{
+  0%{opacity:0;transform:translate3d(0,108vh,0) scale(.85)}
+  12%{opacity:var(--o)}
+  88%{opacity:var(--o)}
+  100%{opacity:0;transform:translate3d(var(--dx),-12vh,0) scale(1.12)}}
+@keyframes anmTw{0%,100%{opacity:0;transform:scale(.35)}50%{opacity:var(--o);transform:scale(1)}}
+
+/* ── harflar ── */
+.anm-l{display:inline-block;opacity:0;transform:translateY(.5em) rotate(3deg);
+  animation:anmLt 1.05s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes anmLt{to{opacity:1;transform:none}}
+
+/* ── bosqichma-bosqich chiqish ── */
+.anm-s{opacity:0;transform:translateY(20px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.in .anm-s{opacity:1;transform:none}
+
+/* ── sanoq raqami ── */
+.anm-tk{display:inline-block;animation:anmTick .55s cubic-bezier(.16,1,.3,1)}
+@keyframes anmTick{
+  0%{transform:translateY(-34%) rotateX(52deg);opacity:.12;filter:blur(1.2px)}
+  100%{transform:none;opacity:1;filter:none}}
+
+/* ── tugma ── */
+.anm-btn{position:relative;overflow:hidden;transition:transform .18s ease}
+.anm-btn:active{transform:scale(.965)}
+.anm-btn.sh::after{content:'';position:absolute;top:-20%;left:-160%;width:55%;height:140%;
+  background:linear-gradient(100deg,transparent,var(--anm-sheen,rgba(255,255,255,.45)),transparent);
+  transform:skewX(-18deg);animation:anmSh 5.2s 2.4s infinite;pointer-events:none}
+@keyframes anmSh{0%{left:-160%}20%{left:170%}100%{left:170%}}
+.anm-rp{position:absolute;border-radius:50%;transform:translate(-50%,-50%) scale(0);
+  background:currentColor;opacity:.22;pointer-events:none;animation:anmRp .62s ease-out forwards}
+@keyframes anmRp{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+
+/* ── suzuvchi bezak ── */
+.anm-fl{animation:anmFl 7.5s ease-in-out infinite alternate}
+@keyframes anmFl{from{transform:translateY(-5px) rotate(-1.1deg)}to{transform:translateY(6px) rotate(1.1deg)}}
+.anm-fl2{animation:anmFl2 9s ease-in-out infinite alternate}
+@keyframes anmFl2{from{transform:translateY(5px) scale(.985)}to{transform:translateY(-6px) scale(1.015)}}
+
+/* ── rasm (ken burns) ── */
+.anm-kb{animation:anmKB 22s ease-in-out infinite alternate}
+@keyframes anmKB{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+
+/* ── pastga ishorasi ── */
+.anm-dn{animation:anmDn 2.1s ease-in-out infinite}
+@keyframes anmDn{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(7px);opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .anm-ov{display:none!important}
+  .anm-p{display:none!important}
+  .anm-l,.anm-s{opacity:1!important;transform:none!important;animation:none!important}
+  .anm-fl,.anm-fl2,.anm-kb,.anm-dn,.anm-btn.sh::after{animation:none!important}
+}
+</style>
+<script id="anm-js">
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var CFG={"intro":false,"exit":"fade","ini":"","sub":"","particles":"petal","pn":14,"po":0.34,"letters":null,"ld":1.9,"sheen":false,"sheenC":null,"float":null,"float2":null,"kb":null,"down":null,"heroFade":true,"stagger":true};
+var page=document.querySelector('.page')||document.body;
+
+/* 1 ── kirish pardasi */
+function intro(){
+  if(!CFG.intro||RM) return start();
+  var d=document.documentElement; d.classList.add('anm-lock');
+  var ov=document.createElement('div');
+  ov.className='anm-ov x-'+CFG.exit;
+  ov.innerHTML=(CFG.exit==='cur'?'<div class="cur t"></div><div class="cur b"></div>':'')+
+    '<div class="anm-mn"><span class="ini"></span><span class="ln"></span>'+
+    (CFG.sub?'<span class="sb"></span>':'')+
+    '<span class="dots"><b></b><b></b><b></b></span></div>';
+  ov.querySelector('.ini').textContent=CFG.ini;
+  if(CFG.sub) ov.querySelector('.sb').textContent=CFG.sub;
+  document.body.appendChild(ov);
+  var t=setTimeout(go,2350);
+  function go(){clearTimeout(t);ov.classList.add('go');d.classList.remove('anm-lock');
+    setTimeout(function(){ov.classList.add('dead')},1500);start();}
+  ov.addEventListener('click',go);
+}
+
+/* 2 ── zarrachalar */
+function particles(){
+  if(CFG.particles==='none'||RM) return;
+  var k={petal:'pt',snow:'sn',dust:'ds',star:'st',bokeh:'bk'}[CFG.particles];
+  if(!k) return;
+  var box=document.createElement('div'); box.className='anm-p';
+  var w=Math.round(page.getBoundingClientRect().width)||480;
+  box.style.width=w+'px';
+  for(var i=0;i<CFG.pn;i++){
+    var e=document.createElement('i'), s;
+    if(k==='pt'){s=6+Math.random()*8; e.style.width=s+'px'; e.style.height=(s*.72).toFixed(1)+'px';}
+    else if(k==='sn'){s=2.5+Math.random()*4; e.style.width=e.style.height=s.toFixed(1)+'px';}
+    else if(k==='bk'){s=14+Math.random()*30; e.style.width=e.style.height=s.toFixed(0)+'px';}
+    else {s=1.6+Math.random()*2.4; e.style.width=e.style.height=s.toFixed(1)+'px';}
+    e.className=k;
+    e.style.left=(Math.random()*100).toFixed(1)+'%';
+    e.style.setProperty('--dx',((Math.random()*2-1)*46).toFixed(0)+'px');
+    e.style.setProperty('--o',(CFG.po*(.55+Math.random()*.55)).toFixed(2));
+    var dur=(k==='st')?(2.2+Math.random()*3.4):(k==='ds'||k==='bk')?(13+Math.random()*16):(9+Math.random()*11);
+    e.style.animationDuration=dur.toFixed(1)+'s';
+    e.style.animationDelay=(-Math.random()*dur).toFixed(1)+'s';
+    if(k==='st') e.style.top=(Math.random()*100).toFixed(1)+'%';
+    box.appendChild(e);
+  }
+  document.body.appendChild(box);
+  addEventListener('resize',function(){box.style.width=Math.round(page.getBoundingClientRect().width)+'px'},{passive:true});
+}
+
+/* 3 ── harf-harf ism */
+function letters(){
+  if(!CFG.letters||RM) return;
+  var n=0;
+  document.querySelectorAll(CFG.letters).forEach(function(el){
+    if(el.dataset.anmL) return; el.dataset.anmL='1';
+    var txt=el.textContent, out='';
+    for(var i=0;i<txt.length;i++){
+      var ch=txt[i];
+      if(ch===' '){out+='<span class="anm-l" style="animation-delay:'+(CFG.ld+n*0.042).toFixed(3)+'s">&nbsp;</span>';}
+      else{out+='<span class="anm-l" style="animation-delay:'+(CFG.ld+n*0.042).toFixed(3)+'s">'+
+        ch.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span>';}
+      n++;
+    }
+    n+=3;
+    el.innerHTML=out;
+  });
+}
+
+/* 4 ── bosqichma-bosqich */
+function stagger(){
+  if(!CFG.stagger||RM) return;
+  var skip=/(^|\s)(rv|fade|rev|grow|anm-s)(\s|$)/;
+  document.querySelectorAll('section').forEach(function(sec){
+    var kids=sec.querySelectorAll('.row,.card,.cdrow>div,.item,.info');
+    var i=0;
+    kids.forEach(function(el){
+      if(skip.test(el.className)) return;
+      if(el.closest('.anm-s')) return;
+      var cs=getComputedStyle(el);
+      if(parseFloat(cs.opacity)<1) return;            /* bezak qatlami — tegmaymiz */
+      if(cs.position==='absolute'||cs.position==='fixed') return;
+      el.classList.add('anm-s');
+      el.style.transitionDelay=(0.06+i*0.085).toFixed(3)+'s';
+      i++;
+    });
+  });
+}
+
+/* 5 ── sanoq raqami */
+function ticker(){
+  if(RM) return;
+  ['D','H','M','S'].forEach(function(id){
+    var el=document.getElementById(id); if(!el) return;
+    var last=el.textContent;
+    new MutationObserver(function(){
+      var v=el.textContent;
+      if(v===last) return;          /* qiymat o'zgarmasa — qimirlamasin */
+      last=v;
+      el.classList.remove('anm-tk'); void el.offsetWidth; el.classList.add('anm-tk');
+    }).observe(el,{childList:true,characterData:true,subtree:true});
+  });
+}
+
+/* 6 ── tugmalar */
+function buttons(){
+  document.querySelectorAll('.btn,.cta,a[href*="google.com/maps"],a[href*="ig.me"]').forEach(function(b){
+    b.classList.add('anm-btn');
+    if(CFG.sheen&&!RM) b.classList.add('sh');
+    if(CFG.sheenC) b.style.setProperty('--anm-sheen',CFG.sheenC);
+    b.addEventListener('pointerdown',function(ev){
+      if(RM) return;
+      var r=b.getBoundingClientRect(), s=Math.max(r.width,r.height)*2.2;
+      var d=document.createElement('span'); d.className='anm-rp';
+      d.style.width=d.style.height=s+'px';
+      d.style.left=(ev.clientX-r.left)+'px'; d.style.top=(ev.clientY-r.top)+'px';
+      b.appendChild(d); setTimeout(function(){d.remove()},640);
+    },{passive:true});
+  });
+}
+
+/* 7 ── bezaklar */
+function decor(){
+  if(RM) return;
+  if(CFG.float) document.querySelectorAll(CFG.float).forEach(function(e,i){
+    e.classList.add('anm-fl'); e.style.animationDelay=(i*.7).toFixed(2)+'s';});
+  if(CFG.float2) document.querySelectorAll(CFG.float2).forEach(function(e,i){
+    e.classList.add('anm-fl2'); e.style.animationDelay=(i*.9).toFixed(2)+'s';});
+  if(CFG.kb) document.querySelectorAll(CFG.kb).forEach(function(e,i){
+    e.classList.add('anm-kb'); e.style.animationDelay=(i*2.5).toFixed(2)+'s';});
+  if(CFG.down) document.querySelectorAll(CFG.down).forEach(function(e){e.classList.add('anm-dn')});
+}
+
+/* 8 ── hero yo'qolishi */
+function heroFade(){
+  if(!CFG.heroFade||RM) return;
+  var h=document.querySelector('#hero'); if(!h) return;
+  h.style.willChange='opacity,transform';
+  var tick=false;
+  function upd(){
+    tick=false;
+    var y=scrollY, vh=innerHeight;
+    if(y>vh*1.05){ if(h.style.opacity!=='0'){h.style.opacity='0';} return; }
+    var k=Math.min(1,y/(vh*.82));
+    h.style.opacity=(1-k).toFixed(3);
+    h.style.transform='scale('+(1-k*.05).toFixed(4)+')';
+  }
+  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});
+}
+
+function start(){ letters(); }
+
+function boot(){
+  particles(); stagger(); ticker(); buttons(); decor(); heroFade(); intro();
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+else boot();
+})();
+</script>
+<!--ANM:end-->
+</body>
+</html>
