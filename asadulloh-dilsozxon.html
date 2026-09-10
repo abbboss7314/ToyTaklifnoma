@@ -108,11 +108,13 @@
   #cover.gone{opacity:0;pointer-events:none;transition:opacity .8s}
 
   /* ══════ MUSIQA ══════ */
-  #snd{position:fixed;right:14px;bottom:14px;z-index:80;width:44px;height:44px;border-radius:50%;
-    border:1px solid var(--line);background:var(--paper2);color:var(--metalL);
+  #snd{position:fixed;right:15px;bottom:15px;z-index:120;width:46px;height:46px;border-radius:50%;
+    border:1px solid var(--metal);background:var(--paper);color:var(--ink);
     display:none;place-items:center;cursor:pointer;padding:0;
-    box-shadow:0 8px 20px -10px rgba(0,0,0,.5);transition:transform .2s,opacity .3s}
+    box-shadow:0 10px 26px -10px rgba(0,0,0,.45),0 2px 6px -2px rgba(0,0,0,.25);
+    transition:transform .2s,opacity .3s}
   #snd.on{display:grid}
+  #snd.mute{color:var(--ink2);opacity:.72}
   #snd:active{transform:scale(.92)}
   #snd svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;
     stroke-linecap:round;stroke-linejoin:round}
@@ -222,7 +224,7 @@
   <div class="tap"><b>Muhrni bosing</b><i></i></div>
 </div>
 
-<audio id="bgm" loop preload="none" src="audio/asaduloh.m4a"></audio>
+<audio id="bgm" loop preload="metadata" playsinline src="audio/asaduloh.m4a"></audio>
 <button id="snd" aria-label="Musiqa">
   <svg class="w" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
   <svg class="x" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/><path d="M3 3l18 18"/></svg>
@@ -573,14 +575,19 @@ function openIt(){
 (function(){
   var a=document.getElementById('bgm'), b=document.getElementById('snd');
   if(!a||!b) return;
-  var ok=false, muted=false;
-  a.addEventListener('canplay',function(){ ok=true; b.classList.add('on'); });
-  a.addEventListener('error',function(){ b.style.display='none'; });   /* fayl yo'q — tugma chiqmaydi */
+  var dead=false, muted=false, started=false;
+  function show(){ if(!dead) b.classList.add('on'); }
+  ['loadstart','loadedmetadata','loadeddata','canplay','play','playing']
+    .forEach(function(e){ a.addEventListener(e,show); });
+  a.addEventListener('error',function(){        /* fayl yo'q — tugma chiqmaydi */
+    dead=true; b.classList.remove('on');
+  });
   window.__startMusic=function(){
-    a.load();
+    if(started) return; started=true;
+    a.volume=0;
     var p=a.play();
     if(p&&p.catch) p.catch(function(){ /* brauzer ruxsat bermadi */ });
-    a.volume=0;
+    show();                                     /* tugma har holda ko'rinsin */
     var t=0, iv=setInterval(function(){          /* yumshoq kirish */
       t+=0.04; a.volume=Math.min(0.55,t);
       if(a.volume>=0.55) clearInterval(iv);
@@ -589,7 +596,8 @@ function openIt(){
   b.addEventListener('click',function(){
     muted=!muted;
     b.classList.toggle('mute',muted);
-    if(muted){ a.pause(); } else { var p=a.play(); if(p&&p.catch) p.catch(function(){}); }
+    if(muted){ a.pause(); }
+    else { a.volume=0.55; var p2=a.play(); if(p2&&p2.catch) p2.catch(function(){}); }
   });
 })();
 
