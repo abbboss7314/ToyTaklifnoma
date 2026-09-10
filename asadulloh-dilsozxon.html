@@ -575,20 +575,37 @@ function openIt(){
 (function(){
   var a=document.getElementById('bgm'), b=document.getElementById('snd');
   if(!a||!b) return;
-  var dead=false, muted=false, started=false;
+  var dead=false, muted=false, started=false, tried=false, url=a.getAttribute('src');
   function show(){ if(!dead) b.classList.add('on'); }
+  function hide(){ dead=true; b.classList.remove('on'); }
+  function go(){ var p=a.play(); if(p&&p.catch) p.catch(function(){}); }
   ['loadstart','loadedmetadata','loadeddata','canplay','play','playing']
     .forEach(function(e){ a.addEventListener(e,show); });
-  a.addEventListener('error',function(){        /* fayl yo'q — tugma chiqmaydi */
-    dead=true; b.classList.remove('on');
+
+  /* Ba'zi .m4a/.mov fayllarda indeks (moov) fayl oxirida turadi —
+     bunday fayl oqim bilan ochilmaydi. Shunda faylni to'liq yuklab, so'ng qo'yamiz. */
+  function butun(){
+    if(tried||dead) return; tried=true;
+    fetch(url).then(function(r){ return r.ok?r.blob():null; }).then(function(bl){
+      if(!bl){ hide(); return; }
+      a.src=URL.createObjectURL(bl); a.load();
+      if(started){ a.volume=muted?0:0.55; go(); }
+    }).catch(hide);
+  }
+  a.addEventListener('error',function(){       /* to'g'ridan-to'g'ri ochilmadi */
+    if(!tried) butun(); else hide();           /* zaxira yo'l ham ishlamasa — tugma yo'q */
   });
+
   window.__startMusic=function(){
     if(started) return; started=true;
     a.volume=0;
-    var p=a.play();
-    if(p&&p.catch) p.catch(function(){ /* brauzer ruxsat bermadi */ });
+    go();
     show();                                     /* tugma har holda ko'rinsin */
+    setTimeout(function(){                      /* 2 s ichida ochilmasa — to'liq yuklaymiz */
+      if(a.readyState===0) butun();
+    },2000);
     var t=0, iv=setInterval(function(){          /* yumshoq kirish */
+      if(muted){ clearInterval(iv); return; }
       t+=0.04; a.volume=Math.min(0.55,t);
       if(a.volume>=0.55) clearInterval(iv);
     },90);
@@ -596,8 +613,7 @@ function openIt(){
   b.addEventListener('click',function(){
     muted=!muted;
     b.classList.toggle('mute',muted);
-    if(muted){ a.pause(); }
-    else { a.volume=0.55; var p2=a.play(); if(p2&&p2.catch) p2.catch(function(){}); }
+    if(muted){ a.pause(); } else { a.volume=0.55; go(); }
   });
 })();
 
