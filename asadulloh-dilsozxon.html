@@ -580,7 +580,9 @@ function openIt(){
   function hide(){ dead=true; b.classList.remove('on'); }
   function go(){                                /* brauzer ruxsat bermasa — tugma "o'chiq" holatda */
     var p=a.play();
-    if(p&&p.catch) p.catch(function(){ muted=true; b.classList.add('mute'); });
+    if(p&&p.catch) p.catch(function(){
+      if(a.paused){ muted=true; b.classList.add('mute'); }
+    });
   }
   ['loadstart','loadedmetadata','loadeddata','canplay','play','playing']
     .forEach(function(e){ a.addEventListener(e,show); });
