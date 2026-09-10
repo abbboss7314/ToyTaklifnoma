@@ -576,9 +576,12 @@ function openIt(){
   var a=document.getElementById('bgm'), b=document.getElementById('snd');
   if(!a||!b) return;
   var dead=false, muted=false, started=false, tried=false, url=a.getAttribute('src');
-  function show(){ if(!dead) b.classList.add('on'); }
+  function show(){ if(!dead&&started) b.classList.add('on'); }
   function hide(){ dead=true; b.classList.remove('on'); }
-  function go(){ var p=a.play(); if(p&&p.catch) p.catch(function(){}); }
+  function go(){                                /* brauzer ruxsat bermasa — tugma "o'chiq" holatda */
+    var p=a.play();
+    if(p&&p.catch) p.catch(function(){ muted=true; b.classList.add('mute'); });
+  }
   ['loadstart','loadedmetadata','loadeddata','canplay','play','playing']
     .forEach(function(e){ a.addEventListener(e,show); });
 
